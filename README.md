@@ -15,6 +15,18 @@ EBPhotoPages is a photo gallery library for displaying pages of photos and their
 
 The library was designed using a state pattern to control the behavior of the gallery, so that other developers can easily modify or add new states without having to understand too much of the original code.
 
+Usage
+---------
+Add the EBPhotoPagesController folder from this repo to your app.
+
+Implement the `EBPhotoPagesDataSource` and `EBPhotoPagesDelegate` protocols in an object(s) you plan to use as the datasource and delegate for your EBPhotoPagesController instance.
+
+Then, initialize and present the photoPagesController:
+
+`EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:aDataSource delegate:aDelegate];`
+`[self presentViewController:photoPagesController animated:YES completion:nil];`
+
+
 How State Objects work in EBPhotoPages
 ---------
 At any given time, the photo gallery has a state object assigned as it’s current state, when a user event is received, the photo gallery’s state object takes responsibility for how the photo gallery should respond.  
