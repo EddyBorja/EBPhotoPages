@@ -11,13 +11,9 @@
 
 About
 ---------
-EBPhotoPages is an implementation of a photo gallery that displays pages of photos and their meta data using UIPageViewController. The user is able to pinch and zoom in and out of photos as well as scroll them around. 
+EBPhotoPages is a photo gallery library for displaying pages of photos and their meta data in a scrollview. Users are able to zoom photos in and out, as well as create, edit or delete comments and tags, share or delete a photo, and report inappropriate photos. All photos and content are loaded asynchronously. User permissions for a photo are controlled through a delegate protocol. No graphic files are required for the gallery as icons are drawn in code.
 
-In addition to viewing content, the user can also generate, edit or delete comments, tags, and share or delete photos in the gallery if they have the proper permissions. Photos can also be reported as “inappropriate”. 
-
-EBPhotoPages can serve as a learning tool or a foundation for a social photo gallery within an app.
-
-The library was designed so that other developers could easily modify its behavior to suit their own application's custom features. Only time will tell if it has succeeded in this task.
+The library was designed using a state pattern to control the behavior of the gallery, so that other developers can easily modify or add new states without having to understand too much of the original code.
 
 How State Objects work in EBPhotoPages
 ---------
