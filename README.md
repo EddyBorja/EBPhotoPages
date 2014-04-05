@@ -4,6 +4,11 @@
 
 >”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code.”
 
+![Alt text](/1.png "Screenshot")|![Alt text](/2.png "Screenshot")|
+![Alt text](/3.png "Screenshot")|![Alt text](/4.png "Screenshot")
+![Alt text](/5.png "Screenshot")|![Alt text](/6.png "Screenshot")
+![Alt text](/7.png "Screenshot")
+
 About
 ---------
 EBPhotoPages is an implementation of a photo gallery that displays pages of photos and their meta data using UIPageViewController. The user is able to pinch and zoom in and out of photos as well as scroll them around. 
