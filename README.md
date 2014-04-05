@@ -17,6 +17,8 @@ In addition to viewing content, the user can also generate, edit or delete comme
 
 EBPhotoPages can serve as a learning tool or a foundation for a social photo gallery within an app.
 
+The library was designed so that other developers could easily modify its behavior to suit their own applications custom features. Only time will tell if it has succeeded in this task.
+
 How State Objects work in EBPhotoPages
 ---------
 At any given time, the photo gallery has a state object assigned as it’s current state, when a user event is received, the photo gallery’s state object takes responsibility for how the photo gallery should respond.  
