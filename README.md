@@ -50,7 +50,7 @@ To create a new custom State for your implementation of the photo gallery, you s
 
 
 
-Features
+Features in depth
 ---------
 
 + **Tags**: If you don’t already know, a tag is a point of interest at a certain spot within a photo (usually a person’s face). A tag’s coordinates in a photo are normalized between 0 and 1, so that the point is independent of the actual photo’s current resolution. For usability purposes, tags do not sit exactly on the pixel that was tagged, but rather they have padding that positions them a few pixels below it so the point of interest isn’t overly obscured by the tag. 
@@ -58,6 +58,10 @@ Features
 + **Comments**: As you can imagine, a comment is a user submitted text that accompanies a photo. The comment also includes meta data such as the user’s name, their avatar, and time of posting. The order of the comments appearance is determined by the order in which the datasource returns them.
 
 + **Zero Graphic Files**: Amazingly, the EBPhotoPages library requires no graphic files for its default toolbar icons because everything is drawn natively in code and converted to a UIImage. However, if you want to use actual graphic files for custom icons, you can always provide them directly by returning them through the appropriate methods as well. 
+
++ **Sharing**: The EBPhotoPages provide a default activity sheet for sharing a photo. You can customize what kind of sheet and services are displayed by returning a custom one from your datasource object. 
+
++ **Reporting Photos**: When a user comes across inappropriate content there needs to be a way to let them report it. The EBPhotoPages provides a report option that informs your datasource that a photo has to be marked as inappropriate. 
 
 
 Things to consider when implementing EBPhotoPages
@@ -90,6 +94,8 @@ Although this library has a lot of features and over 5,000 lines of code, there�
 + _Localization_: Every string used for the interface is ready for localization with NSLocalizedString. Currently, there are no localization files provided with the library so only English is represented. If you want your language for your culture represented, you should consider adding and sharing localization files to the project!
 
 + _Comment Pagination_: When a photo amasses an staggering number of comments, it would be impractical to make a web request for all of them at once. A system for allowing pagination of comments is needed, as currently the EBPhotoPages does not allow for new comments to be loaded in by user request.
+
++ _Presentation Transitions_: Originally the EBPhotoPages was intendend to expand from a thumbnail into a full gallery, then shrink back to an image thumbnail when the user exited the gallery. This was never implemented, however, there are other variations of transitions that would be interesting to see as well.
 
 
 Known Issues
