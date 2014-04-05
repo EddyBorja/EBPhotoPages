@@ -17,7 +17,7 @@ In addition to viewing content, the user can also generate, edit or delete comme
 
 EBPhotoPages can serve as a learning tool or a foundation for a social photo gallery within an app.
 
-The library was designed so that other developers could easily modify its behavior to suit their own applications custom features. Only time will tell if it has succeeded in this task.
+The library was designed so that other developers could easily modify its behavior to suit their own application's custom features. Only time will tell if it has succeeded in this task.
 
 How State Objects work in EBPhotoPages
 ---------
@@ -59,6 +59,8 @@ Things to consider when implementing EBPhotoPages
 + _User Permission_: When a user takes some action on a photo such as commenting or tagging or deleting (and others), the EBPhotoPages will ask it’s delegate if the user has permission to do that. This approach creates flexibility in controlling what a user can and can’t do on a per-photo basis. This means you should think about how to organize user permissions on your end. 
 
 + _Creating/Destroying content_:  Prepare your backend for the ability to post new content or delete existing content when the EBPhotoPages notifies your delegate that the user has initiated such an action. It would not be a good idea to let the EBPhotoPages itself be responsible for actual removing or posting the data to your servers directly. 
+
++ _EBPhotoPagesFactory_: This factory class is the one-stop shop for all UI objects. This class is responsible for instantiaing UI Elements and returning them to the EBPhotoPagesController. If you wish to customize the look of your photo gallery implementation, this is the first place you should check. Some other UI elements are not yet created by this class, but the plan is to eventually move them into it. 
 
 
 Opportunities for Contribution
