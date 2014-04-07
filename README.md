@@ -135,6 +135,7 @@ Known Issues
 + Tag deletion has no animation
 + Creating tags while in landscape mode is a bit messed up.
 + Editing a tag doesn't work at the moment.
++ Toolbar icons disappear after deleting a tag, have to tap photo twice to return them.
 
 
 License
