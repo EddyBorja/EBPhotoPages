@@ -32,6 +32,7 @@ The library was designed using a state pattern to control the behavior of the ga
 + Full landscape/portrait orientation support
 + Resolution independent support (iPad/iPhone)
 + Touch and hold comments to copy or delete
++ Flat UI Design
 + Other stuff
 
 Usage
