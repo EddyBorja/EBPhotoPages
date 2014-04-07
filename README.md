@@ -114,7 +114,7 @@ Although this library has a lot of features and over 5,000 lines of code, thereâ
 
 + _Alternative toolbar layouts_: The current toolbars work fine, but thereâ€™s always better or different ways of doing things. If a developer could simply set a toolbar to adopt a different layout style by just setting an enumerated property to a new value that would be sweet. The more variety the better.
 
-+ _iOS 7 features_: This project was started way before iOS 7. Having the option to include some of the physics based features or parallax into the gallery would be awesome. Remember to add a property to toggle these on and off. 
++ _iOS 7 features_: This project was started a bit before iOS 7. Having the option to include some of the physics based features or parallax into the gallery would be awesome. Remember to add a property to toggle these on and off. 
 
 + _Networking_: The code related to loading content is made to run asynchronously, but it has not been thoroughly tested on a consumer web scale application of any sort. Someone with more experience here may want to try offering some improvements from practical experience.  
 
