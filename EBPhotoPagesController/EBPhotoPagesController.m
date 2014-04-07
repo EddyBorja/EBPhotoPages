@@ -90,8 +90,31 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return [self initWithDataSource:dataSource delegate:aDelegate photoAtIndex:0];
 }
 
+
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+       photoPagesFactory:(EBPhotoPagesFactory *)factory
+{
+    return [self initWithDataSource:dataSource delegate:nil photoPagesFactory:factory photoAtIndex:0];
+}
+
 - (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
                 delegate:(id<EBPhotoPagesDelegate>)aDelegate
+       photoPagesFactory:(EBPhotoPagesFactory *)factory
+{
+    return [self initWithDataSource:dataSource delegate:aDelegate photoPagesFactory:factory photoAtIndex:0];
+}
+
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+                delegate:(id<EBPhotoPagesDelegate>)aDelegate
+            photoAtIndex:(NSInteger)index
+{
+    return [self initWithDataSource:dataSource delegate:aDelegate photoPagesFactory:nil photoAtIndex:index];
+}
+
+
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+                delegate:(id<EBPhotoPagesDelegate>)aDelegate
+       photoPagesFactory:(EBPhotoPagesFactory *)factory
             photoAtIndex:(NSInteger)index
 {
     NSDictionary *photoPageViewOptions = @{ UIPageViewControllerOptionInterPageSpacingKey : @20.0 };
@@ -99,6 +122,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     if (self) {
         [self setPhotoPagesDelegate:aDelegate];
         [self setPhotosDataSource:dataSource];
+        [self setPhotoPagesFactory:factory];
         [self initialize];
         [self setCurrentPhotoIndex:index];
         [self setOriginalStatusBarVisibility:[[UIApplication sharedApplication] isStatusBarHidden]];
@@ -391,8 +415,10 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)loadPhotoPagesFactory
 {
-    EBPhotoPagesFactory *newFactory = [EBPhotoPagesFactory new];
-    [self setPhotoPagesFactory:newFactory];
+    if(self.photoPagesFactory == nil){
+        EBPhotoPagesFactory *newFactory = [EBPhotoPagesFactory new];
+        [self setPhotoPagesFactory:newFactory];
+    }
 }
 
 - (void)loadOperationsQueue

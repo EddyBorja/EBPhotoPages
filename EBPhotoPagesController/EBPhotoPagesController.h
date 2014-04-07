@@ -54,6 +54,18 @@
                 delegate:(id<EBPhotoPagesDelegate>)aDelegate
             photoAtIndex:(NSInteger)index;
 
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+       photoPagesFactory:(EBPhotoPagesFactory *)factory;
+
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+                delegate:(id<EBPhotoPagesDelegate>)aDelegate
+       photoPagesFactory:(EBPhotoPagesFactory *)factory;
+
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource
+                delegate:(id<EBPhotoPagesDelegate>)aDelegate
+       photoPagesFactory:(EBPhotoPagesFactory *)factory
+            photoAtIndex:(NSInteger)index;
+
 - (void)dismiss;
 
 - (void)setInterfaceHidden:(BOOL)hidden; //private
