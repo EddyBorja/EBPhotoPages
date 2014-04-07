@@ -22,6 +22,7 @@ The library was designed using a state pattern to control the behavior of the ga
 + Photo Reporting:
 + Speficy User Permissions per Photo:
 + Page Based Scrolling
++ Photos give immediate bounce feedback when single tapped, for a juicy interface feel. 
 + Toggle Tags On/Off
 + Pinch, Zoom, Pan Photos with gestures.
 + Scrollable captions, variable lengths with auto-dimming background
@@ -126,9 +127,11 @@ Known Issues
 + sizeWithFont: is deprecated in iOS7, needs to be replaced.
 + The loading indicator has a tendency to not show up sometimes. 
 + Deleting comments doesn’t animate too smoothly. 
++ (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data.
++ (!)Deleting a photo at the end of the gallery is causing a crash perhaps due to scrolling beyond index?
++ Tag deletion has no animation
 + Creating tags while in landscape mode is a bit messed up.
-+ (!) Tags cause the app to crash after you edit or delete them at the moment.
-
++ Editing a tag doesn't work at the moment.
 
 
 License
