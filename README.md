@@ -15,13 +15,35 @@ EBPhotoPages is a photo gallery library for displaying pages of photos and their
 
 The library was designed using a state pattern to control the behavior of the gallery, so that other developers can easily modify or add new states without having to understand too much of the original code.
 
+**Quick Feature list:**
++ Photo Tagging: Create/Edit/Delete
++ Photo Commenting: Create/Edit/Delete
++ Photo Sharing:
++ Photo Reporting:
++ Speficy User Permissions per Photo:
++ Page Based Scrolling
++ Toggle Tags On/Off
++ Pinch, Zoom, Pan Photos with gestures.
++ Scrollable captions, variable lengths with auto-dimming background
++ Show/Hide UI elements with a single tap gesture
++ Asynchronous loading of data (through _NSOperationQueue_)
++ Activity Indicator per Photo.
++ Content Mode AspectFit/Center auto detection (prevent photos smaller than the screen from blowing up)
++ Full landscape/portrait orientation support
++ Resolution independent support (iPad/iPhone)
++ Touch and hold comments to copy or delete
++ Other stuff
+
 Usage
 ---------
-Add the EBPhotoPagesController folder from this repo to your app.
 
-Implement the `EBPhotoPagesDataSource` and `EBPhotoPagesDelegate` protocols in an object(s) you plan to use as the datasource and delegate for your EBPhotoPagesController instance.
+0) Add the QuartzCore.framework and AVFoundation.framework to your project.
 
-Then, initialize and present the photoPagesController:
+1) Add the EBPhotoPagesController folder from this repo to your app.
+
+2) Implement the `EBPhotoPagesDataSource`(required) and `EBPhotoPagesDelegate`(optional) protocols in an object(s) you plan to use as the datasource and delegate for your EBPhotoPagesController instance.
+
+3) Then, initialize and present the photoPagesController:
 
 `EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:aDataSource delegate:aDelegate];`
 `[self presentViewController:photoPagesController animated:YES completion:nil];`
