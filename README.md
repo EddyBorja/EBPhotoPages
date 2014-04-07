@@ -20,7 +20,7 @@ The library was designed using a state pattern to control the behavior of the ga
 + Photo Commenting: Create/Edit/Delete
 + Photo Sharing:
 + Photo Reporting:
-+ Speficy User Permissions per Photo:
++ Speficy User Permissions per Photo for commenting, tagging, deletion, reporting, etc.
 + Page Based Scrolling
 + Photos give immediate bounce feedback when single tapped, for a juicy interface feel. 
 + Toggle Tags On/Off
@@ -34,6 +34,7 @@ The library was designed using a state pattern to control the behavior of the ga
 + Resolution independent support (iPad/iPhone)
 + Touch and hold comments to copy or delete
 + Flat UI Design
++ Comments icon shows the number of comments posted (if there are any)
 + Other stuff
 
 Usage
@@ -117,7 +118,7 @@ Although this library has a lot of features and over 5,000 lines of code, thereâ
 
 + _Localization_: Every string used for the interface is ready for localization with NSLocalizedString. Currently, there are no localization files provided with the library so only English is represented. If you want your language for your culture represented, you should consider adding and sharing localization files to the project!
 
-+ _Comment Pagination_: When a photo amasses an staggering number of comments, it would be impractical to make a web request for all of them at once. A system for allowing pagination of comments is needed, as currently the EBPhotoPages does not allow for new comments to be loaded in by user request.
++ _Comment Pagination_: When a photo amasses an staggering number of comments, it would be impractical to make a web request for all of them at once. A system for allowing pagination of comments is needed, as currently the EBPhotoPages does not allow for new comments to be loaded in by user request. Another alternative is to implement an infinite scroll, by informing the datasource what cell a user has scrolled to in the comments so that it may download more comments as needed. 
 
 + _Presentation Transitions_: Originally the EBPhotoPages was intendend to expand from a thumbnail into a full gallery, then shrink back to an image thumbnail when the user exited the gallery. This was never implemented, however, there are other variations of transitions that would be interesting to see as well.
 
