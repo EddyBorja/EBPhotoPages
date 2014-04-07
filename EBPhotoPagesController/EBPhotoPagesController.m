@@ -1078,6 +1078,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     NSAssert([aNotification.object isKindOfClass:[EBPhotoViewController class]],
              @"Expected notification from EBPhotoViewController kind of class.");
     EBPhotoViewController *photoViewController = aNotification.object;
+    
     if(self.currentPhotoIndex == photoViewController.photoIndex){
         [self setCaptionWithPhotoIndex:photoViewController.photoIndex];
     }
@@ -1099,6 +1100,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     NSAssert([aNotification.object isKindOfClass:[EBPhotoViewController class]],
              @"Expected notification from EBPhotoViewController kind of class.");
     EBPhotoViewController *photoViewController = aNotification.object;
+    
     if(photoViewController.photoIndex == self.currentPhotoIndex){
         [self updateToolbarsWithPhotoAtIndex:self.currentPhotoIndex];
     }
@@ -1109,6 +1111,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     NSAssert([aNotification.object isKindOfClass:[EBPhotoViewController class]],
              @"Expected notification from EBPhotoViewController kind of class.");
     EBPhotoViewController *photoViewController = aNotification.object;
+    
     if(photoViewController.photoIndex == self.currentPhotoIndex){
         [self updateToolbarsWithPhotoAtIndex:self.currentPhotoIndex];
     }
@@ -1215,6 +1218,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController
 {
+    NSAssert([photoViewController isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
+    
     UIImage *image = [photoViewController image];
     
     NSString *caption =
@@ -1310,13 +1315,14 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [self setLowerBarAlpha:0];
 }
 
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(actionSheet.tag == [self.photoPagesFactory tagIdForTagActionSheet]){
         [self tagActionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
-    } //else if (actionSheet.tag == [self.photoPagesFactory tagIdForPhotoActionSheet]) {
-       // [self photoActionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
-    //}
+    } else if (actionSheet.tag == [self.photoPagesFactory tagIdForPhotoActionSheet]) {
+        [self photoActionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
+    }
 }
 
 - (void)tagActionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1331,11 +1337,35 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     }
 }
 
+- (void)photoActionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //blank
+}
+
+
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
+    if(actionSheet.tag == [self.photoPagesFactory tagIdForTagActionSheet]){
+        [self tagActionSheet:actionSheet didDismissWithButtonAtIndex:buttonIndex];
+    } else if (actionSheet.tag == [self.photoPagesFactory tagIdForPhotoActionSheet]) {
+        [self photoActionSheet:actionSheet didDismissWithButtonAtIndex:buttonIndex];
+    }
+}
+
+- (void)tagActionSheet:(UIActionSheet *)actionSheet didDismissWithButtonAtIndex:(NSInteger)buttonIndex
+{
+    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
+    NSAssert([tagPopover isKindOfClass:[EBTagPopover class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
+    
+}
+
+- (void)photoActionSheet:(UIActionSheet *)actionSheet didDismissWithButtonAtIndex:(NSInteger)buttonIndex
+{
     NSAssert([self.actionSheetTargetInfo isKindOfClass:[NSDictionary class]],
-             @"Expected action sheet target for photoActionSheet to be an EBPhotoViewController kind of class!");
+             @"Expected action sheet target for photoActionSheet to be an NSDictionary kind of class!");
+    
     EBPhotoViewController *photoViewController = self.actionSheetTargetInfo[kActionSheetTargetKey];
+    NSAssert([photoViewController isKindOfClass:[EBPhotoViewController class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
     
     if(buttonIndex == actionSheet.destructiveButtonIndex){
         [self deletePhotoAtIndex:photoViewController.photoIndex];
@@ -1415,10 +1445,11 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (BOOL)photoViewController:(EBPhotoViewController *)controller
            canDeleteComment:(id<EBPhotoCommentProtocol>)comment
 {
+    NSAssert([controller isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     BOOL result = NO;
-    if([self.photosDataSource respondsToSelector:@selector(photoPagesController:canDeleteComment:forPhotoAtIndex:)]){
+    if([self.photosDataSource respondsToSelector:@selector(photoPagesController:shouldAllowDeleteForComment:forPhotoAtIndex:)]){
         result = [self.photosDataSource photoPagesController:self
-                                            canDeleteComment:comment
+                                            shouldAllowDeleteForComment:comment
                                              forPhotoAtIndex:controller.photoIndex];
     }
     
@@ -1428,6 +1459,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)photoViewController:(EBPhotoViewController *)controller
            didDeleteComment:(id<EBPhotoCommentProtocol>)comment
 {
+    NSAssert([controller isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     [self.photosDataSource photoPagesController:self
                                didDeleteComment:comment
                                 forPhotoAtIndex:controller.photoIndex];
@@ -1436,6 +1468,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (EBTagPopover *)photoViewController:(EBPhotoViewController *)controller
                       tagPopoverForTag:(id<EBPhotoTagProtocol>)tag
 {
+    NSAssert([controller isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     return [self.photoPagesFactory photoPagesController:self
                                        tagPopoverForTag:tag
                                          inPhotoAtIndex:controller.photoIndex];
@@ -1443,6 +1476,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)photoViewController:(EBPhotoViewController *)controller didPostNewComment:(NSString *)comment
 {
+    
+    NSAssert([controller isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     if([self.photosDataSource respondsToSelector:@selector(photoPagesController:didPostComment:forPhotoAtIndex:)]){
         [self.photosDataSource photoPagesController:self
                                      didPostComment:comment
@@ -1456,6 +1491,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)photoViewController:(EBPhotoViewController *)controller
         didSelectTagPopover:(EBTagPopover *)tagPopover
 {
+    NSAssert([controller isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     [self.currentState photoPagesController:self
                         didSelectTagPopover:tagPopover
                              inPhotoAtIndex:controller.photoIndex];

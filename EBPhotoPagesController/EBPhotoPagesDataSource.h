@@ -195,7 +195,7 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
 
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)controller
-            canDeleteComment:(id<EBPhotoCommentProtocol>)comment
+            shouldAllowDeleteForComment:(id<EBPhotoCommentProtocol>)comment
              forPhotoAtIndex:(NSInteger)index;
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller

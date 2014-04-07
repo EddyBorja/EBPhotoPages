@@ -57,7 +57,7 @@
     
     NSArray *photo13Tags = @[
                             [DEMOTag tagWithProperties:@{@"tagPosition" : [NSValue valueWithCGPoint:CGPointMake(0.6874, 0.74)],
-                                                         @"tagText" : @"Eddy Borja"}],
+                                                         @"tagText" : @"Eddy Borja (爱迪)"}],
                             ];
     
     NSArray *photo0Tags = @[
@@ -340,7 +340,7 @@
 
 
 
-#pragma mark - EBPhotoPagesController
+#pragma mark - EBPhotoPagesDataSource
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
     shouldExpectPhotoAtIndex:(NSInteger)index
@@ -448,7 +448,47 @@
     handler(photo.comments.count);
 }
 
-#pragma mark - EBPPhotoPagesDelegate
+
+- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
+       didReportPhotoAtIndex:(NSInteger)index
+{
+    NSLog(@"Reported photo at index %li", (long)index);
+    //Do something about this image someone reported.
+}
+
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+            didDeleteComment:(id<EBPhotoCommentProtocol>)deletedComment
+             forPhotoAtIndex:(NSInteger)index
+{
+    DEMOPhoto *photo = self.photos[index];
+    NSMutableArray *remainingComments = [NSMutableArray arrayWithArray:photo.comments];
+    [remainingComments removeObject:deletedComment];
+    [photo setComments:[NSArray arrayWithArray:remainingComments]];
+}
+
+
+- (void)photoPagesController:(EBPhotoPagesController *)controller
+         didDeleteTagPopover:(EBTagPopover *)tagPopover
+              inPhotoAtIndex:(NSInteger)index
+{
+    DEMOPhoto *photo = self.photos[index];
+    NSMutableArray *remainingTags = [NSMutableArray arrayWithArray:photo.tags];
+    id<EBPhotoTagProtocol> tagData = [tagPopover dataSource];
+    [remainingTags removeObject:tagData];
+    [photo setTags:[NSArray arrayWithArray:remainingTags]];
+}
+
+- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
+       didDeletePhotoAtIndex:(NSInteger)index
+{
+    NSLog(@"Delete photo at index %li", (long)index);
+    DEMOPhoto *deletedPhoto = self.photos[index];
+    NSMutableArray *remainingPhotos = [NSMutableArray arrayWithArray:self.photos];
+    [remainingPhotos removeObject:deletedPhoto];
+    [self setPhotos:remainingPhotos];
+}
 
 - (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
          didAddNewTagAtPoint:(CGPoint)tagLocation
@@ -461,8 +501,8 @@
     DEMOPhoto *photo = self.photos[index];
     
     DEMOTag *newTag = [DEMOTag tagWithProperties:@{
-                       @"tagPosition" : [NSValue valueWithCGPoint:tagLocation],
-                       @"tagText" : tagText}];
+                                                   @"tagPosition" : [NSValue valueWithCGPoint:tagLocation],
+                                                   @"tagText" : tagText}];
     
     NSMutableArray *mutableTags = [NSMutableArray arrayWithArray:photo.tags];
     [mutableTags addObject:newTag];
@@ -477,10 +517,10 @@
              forPhotoAtIndex:(NSInteger)index
 {
     DEMOComment *newComment = [DEMOComment
-                     commentWithProperties:@{@"commentText": comment,
-                            @"commentDate": [NSDate date],
-                            @"authorImage": [UIImage imageNamed:@"guestAv.png"],
-                            @"authorName" : @"Guest User"}];
+                               commentWithProperties:@{@"commentText": comment,
+                                                       @"commentDate": [NSDate date],
+                                                       @"authorImage": [UIImage imageNamed:@"guestAv.png"],
+                                                       @"authorName" : @"Guest User"}];
     [newComment setUserCreated:YES];
     
     DEMOPhoto *photo = self.photos[index];
@@ -489,10 +529,6 @@
     [controller setComments:photo.comments forPhotoAtIndex:index];
 }
 
-- (void)photoPagesControllerDidDismiss:(EBPhotoPagesController *)photoPagesController
-{
-    NSLog(@"Finished using %@", photoPagesController);
-}
 
 
 #pragma mark - User Permissions
@@ -510,6 +546,22 @@
     
     return YES;
 }
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)controller
+            shouldAllowDeleteForComment:(id<EBPhotoCommentProtocol>)comment
+             forPhotoAtIndex:(NSInteger)index
+{
+    //We assume all comment objects used in the demo are of type DEMOComment
+    DEMOComment *demoComment = (DEMOComment *)comment;
+    
+    if(demoComment.isUserCreated){
+        //Demo user can only delete his or her own comments.
+        return YES;
+    }
+    
+    return NO;
+}
+
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowCommentingForPhotoAtIndex:(NSInteger)index
 {
@@ -554,27 +606,9 @@
     }
 }
 
-- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
-       didDeletePhotoAtIndex:(NSInteger)index
-{
-    NSLog(@"Delete photo at index %li", (long)index);
-    DEMOPhoto *deletedPhoto = self.photos[index];
-    NSMutableArray *remainingPhotos = [NSMutableArray arrayWithArray:self.photos];
-    [remainingPhotos removeObject:deletedPhoto];
-    [self setPhotos:remainingPhotos];
-}
 
-- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowReportForPhotoAtIndex:(NSInteger)index
-{
-    return YES;
-}
 
-- (void)photoPagesController:(EBPhotoPagesController *)photoPagesController
-       didReportPhotoAtIndex:(NSInteger)index
-{
-    NSLog(@"Reported photo at index %li", (long)index);
-    //Do something about this image someone reported.
-}
+
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
      shouldAllowDeleteForTag:(EBTagPopover *)tagPopover
@@ -611,42 +645,18 @@
 }
 
 
-- (BOOL)photoPagesController:(EBPhotoPagesController *)controller
-            canDeleteComment:(id<EBPhotoCommentProtocol>)comment
-             forPhotoAtIndex:(NSInteger)index
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowReportForPhotoAtIndex:(NSInteger)index
 {
-    //We assume all comment objects used in the demo are of type DEMOComment
-    DEMOComment *demoComment = (DEMOComment *)comment;
-    
-    if(demoComment.isUserCreated){
-        //Demo user can only delete his or her own comments.
-        return YES;
-    }
-    
-    return NO;
+    return YES;
 }
 
 
-- (void)photoPagesController:(EBPhotoPagesController *)controller
-            didDeleteComment:(id<EBPhotoCommentProtocol>)deletedComment
-             forPhotoAtIndex:(NSInteger)index
-{
-    DEMOPhoto *photo = self.photos[index];
-    NSMutableArray *remainingComments = [NSMutableArray arrayWithArray:photo.comments];
-    [remainingComments removeObject:deletedComment];
-    [photo setComments:[NSArray arrayWithArray:remainingComments]];
-}
+#pragma mark - EBPPhotoPagesDelegate
 
 
-- (void)photoPagesController:(EBPhotoPagesController *)controller
-         didDeleteTagPopover:(EBTagPopover *)tagPopover
-              inPhotoAtIndex:(NSInteger)index
+- (void)photoPagesControllerDidDismiss:(EBPhotoPagesController *)photoPagesController
 {
-    DEMOPhoto *photo = self.photos[index];
-    NSMutableArray *remainingTags = [NSMutableArray arrayWithArray:photo.tags];
-    id<EBPhotoTagProtocol> tagData = [tagPopover dataSource];
-    [remainingTags removeObject:tagData];
-    [photo setTags:[NSArray arrayWithArray:remainingTags]];
+    NSLog(@"Finished using %@", photoPagesController);
 }
 
 
