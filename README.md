@@ -136,7 +136,7 @@ Known Issues
 + Creating tags while in landscape mode is a bit messed up.
 + Editing a tag doesn't work at the moment.
 + Toolbar icons disappear after deleting a tag, have to tap photo twice to return them.
-
++ When long pressing a comment to view Copy and Delete options, only the relevant comment should stay highlighted.
 
 License
 --------
