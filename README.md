@@ -39,7 +39,7 @@ The library was designed using a state pattern to control the behavior of the ga
 Usage
 ---------
 
-0) Add the QuartzCore.framework and AVFoundation.framework to your project.
+0) Add the QuartzCore.framework, CoreGraphics.framework and AVFoundation.framework to your project.
 
 1) Add the EBPhotoPagesController folder from this repo to your app.
 
