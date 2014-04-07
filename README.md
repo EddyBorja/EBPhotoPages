@@ -2,7 +2,7 @@
 
 
 
->”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code.”
+>”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code. The goal was to design a photo gallery class that would support whatever use cases would be required in the future.”
 
 ![Alt text](/1.png "Screenshot")|![Alt text](/2.png "Screenshot")|
 ![Alt text](/3.png "Screenshot")|![Alt text](/4.png "Screenshot")
