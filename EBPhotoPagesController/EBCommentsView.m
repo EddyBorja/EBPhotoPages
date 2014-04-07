@@ -249,9 +249,10 @@
     [self.commentTextView resignFirstResponder];
 }
 
+
+
 //Leave this blank to prevent UITextView from scrolling the UIPageViewController when it becomes first responder.
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated{}
-
 
 
 @end

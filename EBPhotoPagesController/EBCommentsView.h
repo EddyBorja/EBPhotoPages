@@ -20,6 +20,7 @@
 @property (weak, readonly) EBCommentsTableView *tableView;
 @property (weak, readonly) UIButton *postButton;
 @property (weak, readonly) UITextView *commentTextView;
+@property (strong) UIColor *commentCellHighlightColor;
 @property (nonatomic, assign, getter = isInputPlaceholderEnabled) BOOL inputPlaceholderEnabled;
 
 - (void)reloadComments;

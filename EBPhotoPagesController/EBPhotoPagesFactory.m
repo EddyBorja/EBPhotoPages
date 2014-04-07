@@ -681,6 +681,7 @@
     
     [commentsView.tableView setDataSource:photoViewController];
     [commentsView.tableView setDelegate:photoViewController];
+    [commentsView setCommentCellHighlightColor:[self commentCellTintColor]];
     
     static NSString *CellReuseIdentifier= @"Cell";
     UINib *commentCellNib = [self commentCellNib];
@@ -918,6 +919,12 @@
 - (UIColor *)lowerToolbarTintColor
 {
     return [self photoPagesTintColor];
+}
+
+- (UIColor *)commentCellTintColor
+{
+    UIColor *photoPagesColor = [self photoPagesTintColor];
+    return [photoPagesColor colorWithAlphaComponent:0.35];
 }
 
 - (UIColor *)photoPagesTintColor

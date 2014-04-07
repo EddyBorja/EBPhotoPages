@@ -152,6 +152,27 @@
                                                          @"tagText" : @"Team GoThriftGo"}],
                             ];
     
+    NSArray *photo11Comments = @[
+                                
+                                [DEMOComment commentWithProperties:@{@"commentText": @"Congrats!",
+                                                                     @"commentDate": [NSDate dateWithTimeInterval:-2446500 sinceDate:[NSDate date]],
+                                                                     @"authorImage": [UIImage imageNamed:@"adellecharles.jpg"],
+                                                                     @"authorName" : @"Adelle Charles"}],
+                                [DEMOComment commentWithProperties:@{@"commentText": @"follow up Series A round $2.2 million USD!",
+                                                                     @"commentDate": [NSDate dateWithTimeInterval:-2346500 sinceDate:[NSDate date]],
+                                                                     @"authorImage": [UIImage imageNamed:@"billskenney.jpg"],
+                                                                     @"authorName" : @"Bill S. Kenney"}],
+                                
+                                ];
+    
+    NSArray *photo13Comments = @[
+                                 
+                                 [DEMOComment commentWithProperties:@{@"commentText": @"走在街上",
+                                                                      @"commentDate": [NSDate dateWithTimeInterval:-4446500 sinceDate:[NSDate date]],
+                                                                      @"authorImage": [UIImage imageNamed:@"eddyborja.jpg"],
+                                                                      @"authorName" : @"Eddy Borja"}],
+                                 
+                                 ];
     
     NSArray *photo0Comments = @[
                                 
@@ -192,7 +213,7 @@
     [self setPhotos:@[
      [DEMOPhoto photoWithProperties:
       @{@"imageFile": @"photo1.jpg",
-      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPagesController."],
+      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPages."],
         @"tags": photo1Tags,
         @"comments" : photo1Comments,
       }],
@@ -250,8 +271,9 @@
      
      [DEMOPhoto photoWithProperties:
       @{@"imageFile": @"photo11.jpg",
-        @"caption": @"Startup Weekend trophy",
+        @"caption": @"Startup Weekend Trophy - 1st place",
         @"tags" : photo11Tags,
+        @"comments" : photo11Comments,
         }],
      
      [DEMOPhoto photoWithProperties:
@@ -266,6 +288,7 @@
       @{@"imageFile": @"photo13.jpg",
         @"caption": @"IBM China",
         @"tags" : photo13Tags,
+        @"comments" : photo13Comments,
         }],
      
      [DEMOPhoto photoWithProperties:

@@ -23,7 +23,6 @@
 #import "EBPhotoPagesController.h"
 #import "EBCommentCell.h"
 #import "EBCommentsTableView.h"
-#import "EBPhotoPagesFactory.h"
 
 static NSString *TagPopoversKeyPath = @"tagPopovers";
 
@@ -561,11 +560,14 @@ static NSString *TagPopoversKeyPath = @"tagPopovers";
        atRowIndexPath:(NSIndexPath *)indexPath
           withComment:(id<EBPhotoCommentProtocol>)comment
 {
+    EBCommentsView *commentsView = [self.delegate commentsViewForPhotoViewController:self];
+    
     BOOL configureCell = [self.delegate respondsToSelector:@selector(photoViewController:shouldConfigureCommentCell:forRowAtIndexPath:withComment:)] ?
             [self.delegate photoViewController:self shouldConfigureCommentCell:cell forRowAtIndexPath:indexPath withComment:comment] : YES;
     
     if([cell isKindOfClass:[EBCommentCell class]] && configureCell){
         [cell setComment:comment];
+        [cell setHighlightColor:commentsView.commentCellHighlightColor];
     }
 }
 

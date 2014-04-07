@@ -20,6 +20,7 @@
 @property (weak) UIButton *authorNameButton;
 @property (weak) UILabel *commentTextLabel;
 @property (weak) UILabel *dateLabel;
+@property (strong, nonatomic) UIColor *highlightColor;
 
 - (void)setComment:(id<EBPhotoCommentProtocol>)comment;
 

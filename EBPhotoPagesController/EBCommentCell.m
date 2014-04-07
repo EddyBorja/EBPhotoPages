@@ -174,6 +174,15 @@
     
 }
 
+- (void)setHighlightColor:(UIColor *)highlightColor
+{
+    _highlightColor = highlightColor;
+    
+    UIView *selectedBackground = [[UIView alloc] initWithFrame:self.frame];
+    [selectedBackground setBackgroundColor:self.highlightColor];
+    [self setSelectedBackgroundView:selectedBackground];
+}
+
 - (void)resizeTextLabel
 {
     NSString *textForRow = self.commentTextLabel.attributedText ?
