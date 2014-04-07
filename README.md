@@ -175,6 +175,8 @@ Credits
 
 _EBPhotoPages_ and its components were created by Eddy Borja.
 
+iPhone PSD Template by Mikael Eidenberg.
+
 
 More Stuff
 ---------
