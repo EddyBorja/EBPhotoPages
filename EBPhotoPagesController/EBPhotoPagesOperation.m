@@ -87,7 +87,7 @@
 
 @end
 
-
+#pragma mark - Image Loading
 
 @implementation EBImageLoadOperation
 
@@ -98,6 +98,7 @@
         [self performSelectorOnMainThread:@selector(loadImageOnMainThread)
                                withObject:nil
                             waitUntilDone:NO];
+        
     } else if ([self.dataSource respondsToSelector:
                 @selector(photoPagesController:imageAtIndex:completionHandler:)]){
         
@@ -124,6 +125,8 @@
 
 @end
 
+#pragma mark - Caption Loading
+
 @implementation EBCaptionLoadOperation
 
 -(void)loadData
@@ -133,7 +136,19 @@
     NSAttributedString *attributedCaption = nil;
     NSString *caption = nil;
     
+    //Attributed Captions first (takes priority over regular captions)
     if([self.dataSource respondsToSelector:
+        @selector(photoPagesController:attributedCaptionForPhotoAtIndex:completionHandler:)]){
+        [self.dataSource photoPagesController:self.photoPagesController
+             attributedCaptionForPhotoAtIndex:self.photoViewController.photoIndex
+                            completionHandler:^(NSAttributedString *attributedCaption){
+                                
+                [self.photoViewController performSelectorOnMainThread:@selector(setAttributedCaption:)
+                                                           withObject:attributedCaption
+                                                        waitUntilDone:NO];
+        }];
+        
+    } else if([self.dataSource respondsToSelector:
         @selector(photoPagesController:attributedCaptionForPhotoAtIndex:)]){
         
         attributedCaption = [self.dataSource photoPagesController:self.photoPagesController
@@ -147,8 +162,20 @@
         }
     }
     
-    
+    //Regular captions second.
     if([self.dataSource respondsToSelector:
+        @selector(photoPagesController:captionForPhotoAtIndex:completionHandler:)]){
+        [self.dataSource photoPagesController:self.photoPagesController
+                       captionForPhotoAtIndex:self.photoViewController.photoIndex
+                            completionHandler:^(NSString *caption){
+                                
+                                [self.photoViewController performSelectorOnMainThread:@selector(setCaption:)
+                                                                           withObject:caption
+                                                                        waitUntilDone:NO];
+                            }];
+        
+        
+    } else if([self.dataSource respondsToSelector:
         @selector(photoPagesController:captionForPhotoAtIndex:)]){
         
         caption = [self.dataSource photoPagesController:self.photoPagesController
@@ -164,6 +191,9 @@
 }
 
 @end
+
+
+#pragma mark - Meta Data Loading
 
 @implementation EBMetaDataLoadOperation
 
@@ -203,6 +233,8 @@
 
 @end
 
+#pragma mark - Tags Loading
+
 @implementation EBTagsLoadOperation
 
 - (void)loadData
@@ -236,6 +268,9 @@
 
 
 @end
+
+
+#pragma mark - Comments Loading
 
 @implementation EBCommentsLoadOperation
 

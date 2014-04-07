@@ -397,24 +397,34 @@
 }
 
 
-- (NSAttributedString *)photoPagesController:(EBPhotoPagesController *)controller
+- (void)photoPagesController:(EBPhotoPagesController *)controller
             attributedCaptionForPhotoAtIndex:(NSInteger)index
+                           completionHandler:(void (^)(NSAttributedString *))handler
 {
-    DEMOPhoto *photo = self.photos[index];
-    if(self.simulateLatency){
-        sleep(arc4random_uniform(2)+arc4random_uniform(2));
-    }
-    return photo.attributedCaption;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        DEMOPhoto *photo = self.photos[index];
+        if(self.simulateLatency){
+            sleep(arc4random_uniform(2)+arc4random_uniform(2));
+        }
+        
+        handler(photo.attributedCaption);
+    });
 }
 
-- (NSString *)photoPagesController:(EBPhotoPagesController *)controller
+- (void)photoPagesController:(EBPhotoPagesController *)controller
             captionForPhotoAtIndex:(NSInteger)index
+                 completionHandler:(void (^)(NSString *))handler
 {
-    DEMOPhoto *photo = self.photos[index];
-    if(self.simulateLatency){
-        sleep(arc4random_uniform(2)+arc4random_uniform(2));
-    }
-    return photo.caption;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        DEMOPhoto *photo = self.photos[index];
+        if(self.simulateLatency){
+            sleep(arc4random_uniform(2)+arc4random_uniform(2));
+        }
+        
+        handler(photo.caption);
+    });
 }
 
 
