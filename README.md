@@ -110,7 +110,7 @@ Although this library has a lot of features and over 5,000 lines of code, there�
 
 + _TagPopovers_: Bless the tag popovers, they do their best to stay within the photo boundaries so they are not cut off screen, but this behavior could still be improved. Right now, the implementation is a bit simplistic, the arrow points need to be drawn closer to where the actual tagged pixel is, not just shoved along. Consideration of a photo’s zoom scale should also be taken into account.
 
-+ _Deleting stuff_: Once upon a time deleting photos worked flawlessly, but somewhere along the way there was an update and something broke and now it’s kind of buggy (though photos do appear to delete). Guess we should have unit tested this after all…
++ _Deleting stuff_: Once upon a time deleting photos worked flawlessly, but somewhere along the way there was an update and something broke and now it’s kind of buggy (though photos do delete from the datasource). The main problem is that the UIPageViewController doesn't discard the old view controller of the deleted photo until you scroll it out of existence. 
 
 + _Alternative toolbar layouts_: The current toolbars work fine, but there’s always better or different ways of doing things. If a developer could simply set a toolbar to adopt a different layout style by just setting an enumerated property to a new value that would be sweet. The more variety the better.
 
