@@ -20,8 +20,9 @@ The library was designed using a state pattern to control the behavior of the ga
 + Photo Commenting: Create/Edit/Delete
 + Photo Sharing:
 + Photo Reporting:
-+ Speficy User Permissions per Photo:
++ Speficy User Permissions per Photo for commenting, tagging, deletion, reporting, etc.
 + Page Based Scrolling
++ Photos give immediate bounce feedback when single tapped, for a juicy interface feel. 
 + Toggle Tags On/Off
 + Pinch, Zoom, Pan Photos with gestures.
 + Scrollable captions, variable lengths with auto-dimming background
@@ -33,12 +34,13 @@ The library was designed using a state pattern to control the behavior of the ga
 + Resolution independent support (iPad/iPhone)
 + Touch and hold comments to copy or delete
 + Flat UI Design
++ Comments icon shows the number of comments posted (if there are any)
 + Other stuff
 
 Usage
 ---------
 
-0) Add the QuartzCore.framework and AVFoundation.framework to your project.
+0) Add the QuartzCore.framework, CoreGraphics.framework and AVFoundation.framework to your project.
 
 1) Add the EBPhotoPagesController folder from this repo to your app.
 
@@ -102,6 +104,8 @@ Opportunities for Contribution
 ---------
 Although this library has a lot of features and over 5,000 lines of code, there’s still some challenges to solve. Feel free to improve on the library and submit pull requests. In particular, these areas need some attention:
 
++ _More Caption Content_: The caption block might be a good place to show the number of likes a photo has, along with the author, date of posting, location and whether the photo is private or public. Bonus if these things are tappable.
+
 + _TagPopovers_: Bless the tag popovers, they do their best to stay within the photo boundaries so they are not cut off screen, but this behavior could still be improved. Right now, the implementation is a bit simplistic, the arrow points need to be drawn closer to where the actual tagged pixel is, not just shoved along. Consideration of a photo’s zoom scale should also be taken into account.
 
 + _Deleting stuff_: Once upon a time deleting photos worked flawlessly, but somewhere along the way there was an update and something broke and now it’s kind of buggy (though photos do appear to delete). Guess we should have unit tested this after all…
@@ -116,7 +120,7 @@ Although this library has a lot of features and over 5,000 lines of code, there�
 
 + _Localization_: Every string used for the interface is ready for localization with NSLocalizedString. Currently, there are no localization files provided with the library so only English is represented. If you want your language for your culture represented, you should consider adding and sharing localization files to the project!
 
-+ _Comment Pagination_: When a photo amasses an staggering number of comments, it would be impractical to make a web request for all of them at once. A system for allowing pagination of comments is needed, as currently the EBPhotoPages does not allow for new comments to be loaded in by user request.
++ _Comment Pagination_: When a photo amasses an staggering number of comments, it would be impractical to make a web request for all of them at once. A system for allowing pagination of comments is needed, as currently the EBPhotoPages does not allow for new comments to be loaded in by user request. Another alternative is to implement an infinite scroll, by informing the datasource what cell a user has scrolled to in the comments so that it may download more comments as needed. 
 
 + _Presentation Transitions_: Originally the EBPhotoPages was intendend to expand from a thumbnail into a full gallery, then shrink back to an image thumbnail when the user exited the gallery. This was never implemented, however, there are other variations of transitions that would be interesting to see as well.
 
@@ -126,9 +130,12 @@ Known Issues
 + sizeWithFont: is deprecated in iOS7, needs to be replaced.
 + The loading indicator has a tendency to not show up sometimes. 
 + Deleting comments doesn’t animate too smoothly. 
++ (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data.
++ (!)Deleting a photo at the end of the gallery is causing a crash perhaps due to scrolling beyond index?
++ Tag deletion has no animation
 + Creating tags while in landscape mode is a bit messed up.
-+ (!) Tags cause the app to crash after you edit or delete them at the moment.
-
++ Editing a tag doesn't work at the moment.
++ Toolbar icons disappear after deleting a tag, have to tap photo twice to return them.
 
 
 License
