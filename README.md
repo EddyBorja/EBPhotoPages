@@ -1,6 +1,6 @@
 EBPhotoPages
 ===================
->”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code. The goal was to design a photo gallery class that would smoothly support whatever use cases would be required in the future.”
+>”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the [State Pattern](http://en.wikipedia.org/wiki/State_pattern) to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code. The goal was to design a photo gallery class that would smoothly support whatever use cases would be required in the future.”
 
 ![Alt text](/1.png "Screenshot")|![Alt text](/2.png "Screenshot")
 ![Alt text](/EBPhotoPages@1x.png "Screenshot")
@@ -72,7 +72,7 @@ If you are going to create a custom EBPhotoPagesFactory subclass, you will have 
 
 How State Objects work in EBPhotoPages
 ---------
-At any given time, the photo gallery has a state object assigned as it’s current state, when a user event is received, the photo gallery’s state object takes responsibility for how the photo gallery should respond.  
+At any given time, the photo gallery has a state object assigned as its current state, when a user event is received, the photo gallery’s state object takes responsibility for how the photo gallery should respond.  
 
 By convention, state objects are decoupled from each other. This means they are completely unaware of other state objects, and they also hold no data of their own. You can freely create and destroy them without fear (or guilt…). 
 
@@ -111,7 +111,7 @@ Things to consider when implementing EBPhotoPages
 ---------
 + _Caching_: The EBPhotoPages do not implement their own caching system for photo content. That responsibility is passed on to whatever you decide to use as the datasource for the EBPhotoPages. You should probably pre-fetch content ahead of time and save it for faster loading if speed is a concern (which is usually the case…). 
 
-+ _User Permission_: When a user takes some action on a photo such as commenting or tagging or deleting (and others), the EBPhotoPages will ask it’s delegate if the user has permission to do that. This approach creates flexibility in controlling what a user can and can’t do on a per-photo basis. This means you should think about how to organize user permissions on your end. 
++ _User Permission_: When a user takes some action on a photo such as commenting or tagging or deleting (and others), the EBPhotoPages will ask its delegate if the user has permission to do that. This approach creates flexibility in controlling what a user can and can’t do on a per-photo basis. This means you should think about how to organize user permissions on your end. 
 
 + _Creating/Destroying content_:  Prepare your backend for the ability to post new content or delete existing content when the EBPhotoPages notifies your delegate that the user has initiated such an action. It would not be a good idea to let the EBPhotoPages itself be responsible for actual removing or posting the data to your servers directly. 
 
