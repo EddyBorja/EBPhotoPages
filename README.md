@@ -2,7 +2,7 @@
 
 
 
->”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code.”
+>”A photo gallery can become a pretty complex component of an app very quickly. The EBPhotoPages project demonstrates how a developer could use the State Pattern to control the behavior of an interface with numerous features. This pattern grants the ability to create new behaviors for a custom implementation of the EBPhotoPages photo gallery without having to modify or understand much of the original source code. The goal was to design a photo gallery class that would smoothly support whatever use cases would be required in the future.”
 
 ![Alt text](/1.png "Screenshot")|![Alt text](/2.png "Screenshot")|
 ![Alt text](/3.png "Screenshot")|![Alt text](/4.png "Screenshot")
@@ -48,8 +48,27 @@ Usage
 
 3) Then, initialize and present the photoPagesController:
 
-`EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:aDataSource delegate:aDelegate];`
-`[self presentViewController:photoPagesController animated:YES completion:nil];`
+```
+EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] 
+                                               initWithDataSource:aDataSource delegate:aDelegate];
+
+[self presentViewController:photoPagesController animated:YES completion:nil];
+```
+
+Usage with a Custom Appearance
+----------
+
+The EBPhotoPagesFactory class is meant to be the one-stop shop for all UI objects. This class is responsible for instantiaing UI Elements and returning them to the EBPhotoPagesController. If you wish to customize the look of your photo gallery implementation, this is the first place you should check for whatever you want to customize. Some other UI elements are not yet created by this class, but the plan is to eventually move them into it. 
+
+By subclassing this class and overriding relevant methods, you can control how the UI objects will look before they get sent back to the EBPhotoPagesController to be used.
+
+If you are going to create a custom EBPhotoPagesFactory subclass, you will have to init your EBPhotoPagesController with one of the init methods that lets you pass an EBPhotoPagesFactory instance, such as this one:
+```
+- (id)initWithDataSource:(id<EBPhotoPagesDataSource>)dataSource 
+                delegate:(id<EBPhotoPagesDelegate>)aDelegate 
+       photoPagesFactory:(EBPhotoPagesFactory *)factory 
+            photoAtIndex:(NSInteger)index
+```
 
 
 How State Objects work in EBPhotoPages
@@ -97,7 +116,6 @@ Things to consider when implementing EBPhotoPages
 
 + _Creating/Destroying content_:  Prepare your backend for the ability to post new content or delete existing content when the EBPhotoPages notifies your delegate that the user has initiated such an action. It would not be a good idea to let the EBPhotoPages itself be responsible for actual removing or posting the data to your servers directly. 
 
-+ _EBPhotoPagesFactory_: This factory class is the one-stop shop for all UI objects. This class is responsible for instantiaing UI Elements and returning them to the EBPhotoPagesController. If you wish to customize the look of your photo gallery implementation, this is the first place you should check. Some other UI elements are not yet created by this class, but the plan is to eventually move them into it. 
 
 
 Opportunities for Contribution
