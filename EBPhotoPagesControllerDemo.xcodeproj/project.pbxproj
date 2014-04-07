@@ -22,6 +22,9 @@
 		641E9D2C18EC3DF700763096 /* kaelifa.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 641E9D1D18EC3DF700763096 /* kaelifa.jpg */; };
 		641E9D2D18EC3DF700763096 /* iqonicd.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 641E9D1E18EC3DF700763096 /* iqonicd.jpg */; };
 		641E9D2E18EC3DF700763096 /* kerem.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 641E9D1F18EC3DF700763096 /* kerem.jpg */; };
+		646D7A9618F2F3C300679568 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9518F2F3C300679568 /* icon@2x.png */; };
+		646D7A9818F2F3D500679568 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9718F2F3D500679568 /* Images.xcassets */; };
+		646D7A9C18F2F55300679568 /* iconipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9B18F2F55300679568 /* iconipad@2x.png */; };
 		64AD0B2418EEDD5C00DDF91C /* photo4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1718EEDD5C00DDF91C /* photo4.jpg */; };
 		64AD0B2518EEDD5C00DDF91C /* photo7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1818EEDD5C00DDF91C /* photo7.jpg */; };
 		64AD0B2618EEDD5C00DDF91C /* photo8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1918EEDD5C00DDF91C /* photo8.jpg */; };
@@ -105,6 +108,9 @@
 		641E9D1D18EC3DF700763096 /* kaelifa.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kaelifa.jpg; sourceTree = "<group>"; };
 		641E9D1E18EC3DF700763096 /* iqonicd.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = iqonicd.jpg; sourceTree = "<group>"; };
 		641E9D1F18EC3DF700763096 /* kerem.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = kerem.jpg; sourceTree = "<group>"; };
+		646D7A9518F2F3C300679568 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		646D7A9718F2F3D500679568 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		646D7A9B18F2F55300679568 /* iconipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconipad@2x.png"; sourceTree = "<group>"; };
 		64AD0B1718EEDD5C00DDF91C /* photo4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo4.jpg; sourceTree = "<group>"; };
 		64AD0B1818EEDD5C00DDF91C /* photo7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo7.jpg; sourceTree = "<group>"; };
 		64AD0B1918EEDD5C00DDF91C /* photo8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo8.jpg; sourceTree = "<group>"; };
@@ -290,6 +296,7 @@
 				8583A53E18022D3800D694A5 /* DEMOComment.m */,
 				8583A53F18022D3800D694A5 /* DEMOViewController_iPhone.xib */,
 				8583A54018022D3800D694A5 /* DEMOViewController_iPad.xib */,
+				646D7A9718F2F3D500679568 /* Images.xcassets */,
 				8583A50D18022CE600D694A5 /* Supporting Files */,
 			);
 			path = EBPhotoPagesControllerDemo;
@@ -301,6 +308,8 @@
 				8583A55D18022D8700D694A5 /* EBPhotoPagesControllerDemo-Info.plist */,
 				8583A55E18022D8700D694A5 /* InfoPlist.strings */,
 				8583A55718022D6D00D694A5 /* Default.png */,
+				646D7A9518F2F3C300679568 /* icon@2x.png */,
+				646D7A9B18F2F55300679568 /* iconipad@2x.png */,
 				8583A55818022D6D00D694A5 /* Default-568h@2x.png */,
 				8583A55918022D6D00D694A5 /* Default@2x.png */,
 				8583A54818022D5300D694A5 /* Demo Photos */,
@@ -535,6 +544,7 @@
 				64AD0B3218EEEA2200DDF91C /* photo0.jpg in Resources */,
 				8583A55C18022D6D00D694A5 /* Default@2x.png in Resources */,
 				641E9D2B18EC3DF700763096 /* tjrus.jpg in Resources */,
+				646D7A9C18F2F55300679568 /* iconipad@2x.png in Resources */,
 				8583A55518022D5F00D694A5 /* photo5.jpg in Resources */,
 				641E9D2D18EC3DF700763096 /* iqonicd.jpg in Resources */,
 				64AD0B3018EEDD5C00DDF91C /* photo17.jpg in Resources */,
@@ -544,6 +554,7 @@
 				64AD0B2518EEDD5C00DDF91C /* photo7.jpg in Resources */,
 				8583A55618022D5F00D694A5 /* photo6.png in Resources */,
 				8583A55018022D5F00D694A5 /* eddyborja.jpg in Resources */,
+				646D7A9818F2F3D500679568 /* Images.xcassets in Resources */,
 				641E9D2118EC3DF700763096 /* karsh.jpg in Resources */,
 				641E9D2018EC3DF700763096 /* megdraws.jpg in Resources */,
 				64AD0B3418EF314A00DDF91C /* guestAv@2x.png in Resources */,
@@ -555,6 +566,7 @@
 				641E9D2518EC3DF700763096 /* amandabuzard.jpg in Resources */,
 				641E9D2418EC3DF700763096 /* adellecharles.jpg in Resources */,
 				64AD0B2618EEDD5C00DDF91C /* photo8.jpg in Resources */,
+				646D7A9618F2F3C300679568 /* icon@2x.png in Resources */,
 				64AD0B2A18EEDD5C00DDF91C /* photo11.jpg in Resources */,
 				641E9D2718EC3DF700763096 /* aaronalfred.jpg in Resources */,
 				641E9D2818EC3DF700763096 /* g3d.jpg in Resources */,
@@ -706,6 +718,8 @@
 		8583A53018022CE700D694A5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
@@ -718,6 +732,8 @@
 		8583A53118022CE700D694A5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
