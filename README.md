@@ -130,7 +130,7 @@ Known Issues
 + sizeWithFont: is deprecated in iOS7, needs to be replaced.
 + The loading indicator has a tendency to not show up sometimes. 
 + Deleting comments doesn’t animate too smoothly. 
-+ (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data.
++ (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data. (However, the photo is still deleted from the data model)
 + (!)Deleting a photo at the end of the gallery is causing a crash perhaps due to scrolling beyond index?
 + Tag deletion has no animation
 + Creating tags while in landscape mode is a bit messed up.
