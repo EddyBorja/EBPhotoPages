@@ -24,6 +24,7 @@
 @property (strong) NSArray *photos;
 
 - (IBAction)didSelectViewPhotos:(id)sender;
+- (IBAction)didToggleLatency:(id)sender;
 
 
 @end

@@ -33,7 +33,7 @@
 {
     [super loadView];
     
-    [self setSimulateLatency:YES];
+    [self setSimulateLatency:NO];
    
     
     NSArray *photo1Comments = @[
@@ -338,6 +338,12 @@
 }
 
 
+- (IBAction)didToggleLatency:(id)sender
+{
+    UISwitch *toggle = sender;
+    
+    [self setSimulateLatency:toggle.on];
+}
 
 
 #pragma mark - EBPhotoPagesDataSource
