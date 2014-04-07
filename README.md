@@ -139,6 +139,7 @@ Known Issues
 + Editing a tag doesn't work at the moment.
 + Toolbar icons disappear after deleting a tag, have to tap photo twice to return them.
 + When long pressing a comment to view Copy and Delete options, only the relevant comment should stay highlighted.
++ Long pressing a photo then selecting the Tag Photo option should start a new tag at the location of the longpress, instead of just entering the tagging mode. 
 
 License
 --------
