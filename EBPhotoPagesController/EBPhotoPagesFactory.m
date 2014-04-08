@@ -634,7 +634,7 @@
     NSString *fontName = [self photoPagesDefaultFontName];
     UIFont *labelFont = [UIFont fontWithName:fontName size:18];
     NSString *tagModeText = [self taggingLabelString];
-    CGSize messageSize = [tagModeText sizeWithFont:labelFont];
+    CGSize messageSize = [tagModeText sizeWithAttributes:@{NSFontAttributeName: labelFont}];
     CGRect messageFrame = CGRectMake(0, 0, messageSize.width, messageSize.height);
     UILabel *label = [[UILabel alloc] initWithFrame:messageFrame];
     [label setFont:labelFont];

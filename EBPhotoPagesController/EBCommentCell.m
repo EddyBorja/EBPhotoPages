@@ -193,11 +193,9 @@
     //OR better, from reference cells dequeued from the table
     //http://stackoverflow.com/questions/10239040/dynamic-uilabel-heights-widths-in-uitableviewcell-in-all-orientations
     
-    CGSize textViewSize = [textForRow sizeWithFont:self.commentTextLabel.font
-                                 constrainedToSize:CGSizeMake(self.commentTextLabel.frame.size.width,
-                                                              1000)];
+    CGRect textViewSize = [textForRow boundingRectWithSize:CGSizeMake(self.commentTextLabel.frame.size.width, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: self.commentTextLabel.font} context:nil];
     CGRect textLabelFrame = self.commentTextLabel.frame;
-    textLabelFrame.size.height = textViewSize.height;
+    textLabelFrame.size.height = textViewSize.size.height;
     
     [self.commentTextLabel setFrame:textLabelFrame];
 }
