@@ -88,14 +88,15 @@
 
 - (void)loadCommentTextView
 {
-    CGRect commentViewFrame = CGRectMake(0,
-                                         self.tableView.frame.size.height,
-                                         self.frame.size.width-72,
-                                         self.frame.size.height-self.tableView.frame.size.height);
+    CGPoint textViewOrigin = CGPointMake(5, self.tableView.frame.size.height);
+    CGRect textViewFrame = CGRectMake(textViewOrigin.x,
+                                      textViewOrigin.y,
+                                      self.frame.size.width-(72+textViewOrigin.x),
+                                      self.frame.size.height-self.tableView.frame.size.height);
     
     
     
-    UITextView *textView = [[UITextView alloc] initWithFrame:commentViewFrame];
+    UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
     [textView setBackgroundColor:[UIColor clearColor]];
     [textView setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
     [textView setKeyboardAppearance:UIKeyboardAppearanceAlert];
@@ -116,14 +117,11 @@
     [label setTextColor:[UIColor colorWithWhite:0.5 alpha:1]];
     [textView.superview insertSubview:label belowSubview:textView];
     [label setText:[self commentInputPlaceholderText]];
-    [label setFrame:CGRectOffset(label.frame, 8, -1)];
+    [label setFrame:CGRectOffset(label.frame, 5, -3)];
     [self setCommentTextViewPlaceholder:label];
 }
 
-- (NSString *)commentInputPlaceholderText
-{
-    return NSLocalizedString(@"Write a comment...", @"Appears in a textbox where a user can write a comment.");
-}
+
 
 - (void)loadKeyboardFillerView
 {
@@ -167,11 +165,6 @@
     [button setTitleColor:[UIColor colorWithWhite:0.25 alpha:1]
                  forState:UIControlStateHighlighted];
     
-}
-
-- (UIColor *)postButtonColor
-{
-    return [UIColor colorWithRed:0 green:118/255.0 blue:1.0 alpha:1.0];
 }
 
 - (void)setNeedsLayout
@@ -228,14 +221,16 @@
 - (void)enableCommenting
 {
     [self.commentTextView setHidden:NO];
-    [self.commentTextViewPlaceholder setHidden:NO];
+    //[self.commentTextViewPlaceholder setHidden:NO];
+    [self.commentTextViewPlaceholder setText:[self commentInputPlaceholderText]];
     [self.tableView setDrawsDividerLine:YES];
 }
 
 - (void)disableCommenting
 {
     [self.commentTextView setHidden:YES];
-    [self.commentTextViewPlaceholder setHidden:YES];
+    //[self.commentTextViewPlaceholder setHidden:YES];
+    [self.commentTextViewPlaceholder setText:[self disabledInputPlaceholderText]];
     [self.tableView setDrawsDividerLine:NO];
 }
 
@@ -250,7 +245,27 @@
 }
 
 
+#pragma mark - Colors and Text
 
+
+- (UIColor *)postButtonColor
+{
+    return [UIColor colorWithRed:0 green:118/255.0 blue:1.0 alpha:1.0];
+}
+
+- (NSString *)commentInputPlaceholderText
+{
+    return NSLocalizedString(@"Write a comment...", @"Appears in a textbox where a user can write a comment.");
+}
+
+- (NSString *)disabledInputPlaceholderText
+{
+    return NSLocalizedString(@"Commenting is disabled.", @"Appears in a text box to informa a user no new comments are being accepted for a photo.");
+}
+
+
+
+#pragma mark -
 //Leave this blank to prevent UITextView from scrolling the UIPageViewController when it becomes first responder.
 - (void)scrollRectToVisible:(CGRect)rect animated:(BOOL)animated{}
 
