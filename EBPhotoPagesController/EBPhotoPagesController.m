@@ -1463,10 +1463,12 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)deleteTagPopover:(EBTagPopover *)tagPopover inPhotoAtIndex:(NSInteger)index
 {
     [UIView animateWithDuration:0.5f
+                          delay:0.05f
+                        options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
-                         tagPopover.transform = CGAffineTransformMakeScale(0.0, 0.0);
-//                         tagPopover.transform = CGAffineTransformMakeTranslation(50.0f, 500.0f);
-//                         tagPopover.alpha = 0.0f;
+//                         tagPopover.transform = CGAffineTransformMakeScale(0.0, 0.0);
+                         [tagPopover setTransform:CGAffineTransformMakeTranslation(0.0f, 400.0f)];
+                         [tagPopover setAlpha:0.0f];
                      } completion:^(BOOL finished) {
                              [tagPopover removeFromSuperview];
                      }];
