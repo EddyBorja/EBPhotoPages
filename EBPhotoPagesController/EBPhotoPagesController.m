@@ -737,6 +737,10 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [self setUpperGradientAlpha:alpha];
     [self setLowerGradientAlpha:alpha];
     [self setTaggingLabelHidden:YES];
+    
+    if(hidden){
+        [self setTagsHidden:YES];
+    }
 }
 
 
