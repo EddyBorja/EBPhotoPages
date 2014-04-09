@@ -545,13 +545,11 @@ static NSString *TagPopoversKeyPath = @"tagPopovers";
      CGSize textViewSize = textViewRect.size;
      */
     
-    CGSize textViewSize = [textForRow sizeWithFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]
-                                 constrainedToSize:CGSizeMake(285, 1000)];
-    
+    CGRect textViewSize = [textForRow boundingRectWithSize:CGSizeMake(285, 1000) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:16]} context:nil];
     CGFloat textViewHeight = 25;
     const CGFloat additionalSpace = MinimumRowHeight - textViewHeight + 10;
     
-    rowHeight = textViewSize.height + additionalSpace;
+    rowHeight = textViewSize.size.height + additionalSpace;
     
     return rowHeight;
 }

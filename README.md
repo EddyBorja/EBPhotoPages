@@ -151,7 +151,6 @@ Known Issues
 + Deleting comments doesn’t animate too smoothly. 
 + (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data. (However, the photo is still deleted from the data model)
 + (!)Deleting a photo at the end of the gallery is causing a crash perhaps due to scrolling beyond index?
-+ Tag deletion has no animation
 + Creating tags while in landscape mode is a bit messed up.
 + Editing a tag doesn't work at the moment.
 + Toolbar icons disappear after deleting a tag, have to tap photo twice to return them.

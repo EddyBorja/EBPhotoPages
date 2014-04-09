@@ -215,13 +215,10 @@ static NSString *FrameKeyPath = @"frame";
               withString:(NSString *)string
              maximumSize:(CGSize)maximumSize
 {
-    CGSize expectedLabelSize = [string sizeWithFont:label.font
-                                  constrainedToSize:maximumSize
-                                      lineBreakMode:label.lineBreakMode];
-    
+    CGRect expectedLabelSize = [string boundingRectWithSize:maximumSize options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName: label.font} context:nil];
     
     CGRect newFrame = label.frame;
-    newFrame.size.height = expectedLabelSize.height;
+    newFrame.size.height = expectedLabelSize.size.height;
     newFrame.size.width = maximumSize.width;
     [label setFrame:newFrame];
 }

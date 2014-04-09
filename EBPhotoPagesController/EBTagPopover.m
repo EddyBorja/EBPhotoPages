@@ -116,7 +116,7 @@
     NSString *placeholderText = NSLocalizedString(@"New Tag",
                                                   @"Appears as placeholder text before a user enters text for a photo tag.");
     UIFont *textFieldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
-    CGSize tagSize = [placeholderText sizeWithFont:textFieldFont];
+    CGSize tagSize = [placeholderText sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:12]}];
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, tagSize.width, tagSize.height)];
     [textField setFont:textFieldFont];
     [textField setBackgroundColor:[UIColor clearColor]];
@@ -452,9 +452,9 @@
 {
     CGSize newTagSize = CGSizeZero;
     if(self.tagTextField.text && ![self.tagTextField.text isEqualToString:@""]){
-        newTagSize = [self.tagTextField.text sizeWithFont:self.tagTextField.font];
+        newTagSize = [self.tagTextField.text sizeWithAttributes:@{NSFontAttributeName: self.tagTextField.font}];
     } else if (self.tagTextField.placeholder && ![self.tagTextField.placeholder isEqualToString:@""]){
-        newTagSize = [self.tagTextField.placeholder sizeWithFont:self.tagTextField.font];
+        newTagSize = [self.tagTextField.text sizeWithAttributes:@{NSFontAttributeName: self.tagTextField.font}];
     }
     
     if(self.tagTextField.isFirstResponder){
