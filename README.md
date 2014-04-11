@@ -183,6 +183,8 @@ _EBPhotoPages_ and its components were created by Eddy Borja.
 
 iPhone PSD Template by Mikael Eidenberg.
 
+Contributors can always be found [here](https://github.com/EddyBorja/EBPhotoPages/graphs/contributors).
+
 
 What else?
 ---------
