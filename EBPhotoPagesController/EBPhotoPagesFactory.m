@@ -131,6 +131,8 @@
         items = [self upperItemsForTaggingNewStateInPhotoPagesController:controller];
     } else if ([state isKindOfClass:[EBPhotoPagesStateCommentingNew class]]){
         items = [self upperItemsForCommentingNewStateInPhotoPagesController:controller];
+    } else if ([state isKindOfClass:[EBPhotoPagesStateCommentingIdle class]]){
+        items = [self upperItemsForCommentingIdleStateInPhotoPagesController:controller];
     }
     
     return items;
@@ -166,6 +168,14 @@
     UIBarButtonItem *flexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *cancel = [controller cancelBarButtonItem];
     NSArray *items = @[flexibleSpace,cancel];
+    return items;
+}
+
+- (NSArray *)upperItemsForCommentingIdleStateInPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    UIBarButtonItem *flexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
+    UIBarButtonItem *hideCommentsButton = [controller hideCommentsBarButtonItem];
+    NSArray *items = @[flexibleSpace,hideCommentsButton];
     return items;
 }
 
@@ -210,29 +220,6 @@
     return flexibleSpaceItem;
 }
 
-
-- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
-{
-    return NSLocalizedString(@"Done", @"Appears on a button that exits you from a photo browser.");
-}
-
-- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
-{
-    return NSLocalizedString(@"Cancel", @"Appears on a button that cancels an action in progress.");
-}
-
-
-- (NSString *)tagBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
-{
-    return NSLocalizedString(@"Tag", @"Appears on a button that allows you to tag a photo.");
-}
-
-- (NSString *)doneTaggingBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
-{
-    return NSLocalizedString(@"Finish Tagging", @"Appears on a button that exits you from tagging mode in a photo browser.");
-}
-
-
 - (UIBarButtonItem *)activityBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     UIBarButtonItem *item = [[UIBarButtonItem alloc]
@@ -263,6 +250,15 @@
     return item;
 }
 
+- (UIBarButtonItem *)hideCommentsBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    NSString *hideCommentsTitle = [self hideCommentsBarButtonTitleForPhotoPagesController:controller];
+    UIBarButtonItem *hideCommentsButton =[self barButtonItemWithTitle:hideCommentsTitle
+                                                                style:UIBarButtonItemStyleDone
+                                                               target:controller
+                                                             selector:@selector(didSelectCancelButton:)];
+    return hideCommentsButton;
+}
 
 - (UIBarButtonItem *)commentsBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller count:(NSInteger)numberOfComments
 {
@@ -419,6 +415,34 @@
     const CGFloat DefaultHeightPadding = 0;
     return CGSizeMake(DefaultWidthPadding, DefaultHeightPadding);
 }
+
+
+
+- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+{
+    return NSLocalizedString(@"Done", @"Appears on a button that exits you from a photo browser.");
+}
+
+- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+{
+    return NSLocalizedString(@"Cancel", @"Appears on a button that cancels an action in progress.");
+}
+
+- (NSString *)hideCommentsBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return NSLocalizedString(@"Hide Comments", @"Appears on a button that removes user comments from the screen.");
+}
+
+- (NSString *)tagBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+{
+    return NSLocalizedString(@"Tag", @"Appears on a button that allows you to tag a photo.");
+}
+
+- (NSString *)doneTaggingBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+{
+    return NSLocalizedString(@"Finish Tagging", @"Appears on a button that exits you from tagging mode in a photo browser.");
+}
+
 
 
 #pragma mark - Shading
@@ -827,9 +851,92 @@
     return image;
 }
 
+
+- (UIImage *)iconForLikesBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
+                                                     forState:(UIControlState)state
+                                                    withCount:(NSInteger)count
+{
+    CGSize iconSize = CGSizeMake(27, 30);
+    
+    UIGraphicsBeginImageContextWithOptions(iconSize, NO, 0.0);
+    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetStrokeColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+    
+    CGRect heartRect = CGRectMake(1, 1, iconSize.width-2, iconSize.height-2);
+    
+    CGFloat minx = CGRectGetMinX(heartRect), midx = CGRectGetMidX(heartRect), maxx = CGRectGetMaxX(heartRect);
+    CGFloat miny = CGRectGetMinY(heartRect), midy = CGRectGetMidY(heartRect)-3, maxy = CGRectGetMaxY(heartRect)-3;
+    
+    // Start at 1
+    CGContextMoveToPoint(context, minx, midy);
+    // Add an arc through 2 to 3
+    CGFloat centerPlunge = 0.3;
+    CGFloat top_Y_Anchor = 0.225;
+    CGFloat top_X_Anchor = 0.3;
+    CGContextAddCurveToPoint(context,
+                             minx, maxy*top_Y_Anchor,
+                             maxx*top_X_Anchor, miny,
+                             midx, maxy*centerPlunge);
+    
+    CGContextAddCurveToPoint(context,
+                             maxx*(1-top_X_Anchor), miny,
+                             maxx, maxy*top_Y_Anchor,
+                             maxx, midy);
+    
+    CGFloat bottom_Y_Anchor = 0.885;
+    CGFloat mid_Y_Anchor = 0.66;
+    CGContextAddCurveToPoint(context,
+                             maxx, maxy*mid_Y_Anchor,
+                             maxx*0.8, maxy*bottom_Y_Anchor,
+                             midx, maxy);
+    
+    CGContextAddCurveToPoint(context,
+                             maxx*0.2, maxy*bottom_Y_Anchor,
+                             minx, maxy*mid_Y_Anchor,
+                             minx, midy);
+
+    CGContextClosePath(context);
+    
+    // Fill & stroke the path
+    CGRect countLabelRect = CGRectOffset(heartRect, 0, -1);
+    UILabel *countLabel = [[UILabel alloc] initWithFrame:countLabelRect];
+    NSString *fontName = [self photoPagesBoldFontName];
+    [countLabel setFont:[UIFont fontWithName:fontName size:12]];
+    NSString *labelString;
+    
+    if(count == 0){
+        labelString = @"";
+    } else if (count > 99) {
+        labelString = @"99+";
+    } else {
+        labelString = [NSString stringWithFormat:@"%li", (long)count];
+    }
+    
+    [countLabel setText:labelString];
+    [countLabel setTextAlignment:NSTextAlignmentCenter];
+    if(state == UIControlStateSelected){
+        CGContextFillPath(context);
+        CGContextSaveGState(context);
+        CGContextSetBlendMode(context, kCGBlendModeSourceOut);
+        [countLabel drawTextInRect:countLabelRect];
+        CGContextRestoreGState(context);
+    } else {
+        CGContextStrokePath(context);
+        [countLabel drawTextInRect:countLabelRect];
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 - (UIImage *)iconForCommentsBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
                                                         forState:(UIControlState)state
-                                                        withCount:(NSInteger)count
+                                                       withCount:(NSInteger)count
 {
     CGSize iconSize = CGSizeMake(25, 27);
     

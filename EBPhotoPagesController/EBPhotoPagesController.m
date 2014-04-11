@@ -43,6 +43,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 @property (nonatomic, strong) UIBarButtonItem *commentsBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *miscBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *commentsExitBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *hideCommentsBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *toggleTagsBarButtonItem;
 
 @property (weak) UIToolbar *upperToolbar;
@@ -1011,6 +1012,17 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     
     return _commentsExitBarButtonItem;
 }
+
+- (UIBarButtonItem *)hideCommentsBarButtonItem
+{
+    if(_hideCommentsBarButtonItem == nil){
+        UIBarButtonItem *hideCommentsButton = [self.photoPagesFactory hideCommentsBarButtonItemForPhotoPagesController:self];
+        [self setHideCommentsBarButtonItem:hideCommentsButton];
+    }
+    
+    return _hideCommentsBarButtonItem;
+}
+
 
 - (UIBarButtonItem *)toggleTagsBarButtonItem
 {
