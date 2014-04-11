@@ -74,7 +74,8 @@ What about Cocoapods?
 CocoaPods are the best way to manage library dependencies in Objective-C projects, if you're into that sort of thing. 
 Learn more at http://cocoapods.org
 
-Add this to your **podfile** to add the EBPhotoPages files to your project. 
+Add this to your **podfile** to add the EBPhotoPages files to your project:
+
 `pod 'EBPhotoPages', '~> 0.9.1'`
 
 
