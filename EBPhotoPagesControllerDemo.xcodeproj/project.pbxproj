@@ -25,6 +25,12 @@
 		646D7A9618F2F3C300679568 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9518F2F3C300679568 /* icon@2x.png */; };
 		646D7A9818F2F3D500679568 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9718F2F3D500679568 /* Images.xcassets */; };
 		646D7A9C18F2F55300679568 /* iconipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 646D7A9B18F2F55300679568 /* iconipad@2x.png */; };
+		646D7BAF18F85FE600679568 /* libAdIdAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BAD18F85FE600679568 /* libAdIdAccess.a */; };
+		646D7BB018F85FE600679568 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BAE18F85FE600679568 /* libGoogleAnalyticsServices.a */; };
+		646D7BB218F8616600679568 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BB118F8616600679568 /* CoreData.framework */; };
+		646D7BB418F8618D00679568 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BB318F8618D00679568 /* AdSupport.framework */; };
+		646D7BB618F861AD00679568 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BB518F861AD00679568 /* libz.dylib */; };
+		646D7BB818F861BC00679568 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 646D7BB718F861BC00679568 /* SystemConfiguration.framework */; };
 		64AD0B2418EEDD5C00DDF91C /* photo4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1718EEDD5C00DDF91C /* photo4.jpg */; };
 		64AD0B2518EEDD5C00DDF91C /* photo7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1818EEDD5C00DDF91C /* photo7.jpg */; };
 		64AD0B2618EEDD5C00DDF91C /* photo8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 64AD0B1918EEDD5C00DDF91C /* photo8.jpg */; };
@@ -111,6 +117,18 @@
 		646D7A9518F2F3C300679568 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		646D7A9718F2F3D500679568 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		646D7A9B18F2F55300679568 /* iconipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconipad@2x.png"; sourceTree = "<group>"; };
+		646D7BA718F85FDC00679568 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		646D7BA818F85FDC00679568 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		646D7BA918F85FDC00679568 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		646D7BAA18F85FDC00679568 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		646D7BAB18F85FDC00679568 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		646D7BAC18F85FDC00679568 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		646D7BAD18F85FE600679568 /* libAdIdAccess.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdIdAccess.a; sourceTree = "<group>"; };
+		646D7BAE18F85FE600679568 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		646D7BB118F8616600679568 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		646D7BB318F8618D00679568 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		646D7BB518F861AD00679568 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		646D7BB718F861BC00679568 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		64AD0B1718EEDD5C00DDF91C /* photo4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo4.jpg; sourceTree = "<group>"; };
 		64AD0B1818EEDD5C00DDF91C /* photo7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo7.jpg; sourceTree = "<group>"; };
 		64AD0B1918EEDD5C00DDF91C /* photo8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo8.jpg; sourceTree = "<group>"; };
@@ -203,8 +221,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				646D7BB818F861BC00679568 /* SystemConfiguration.framework in Frameworks */,
+				646D7BB618F861AD00679568 /* libz.dylib in Frameworks */,
 				8583A59A18022FF400D694A5 /* QuartzCore.framework in Frameworks */,
+				646D7BB218F8616600679568 /* CoreData.framework in Frameworks */,
+				646D7BB418F8618D00679568 /* AdSupport.framework in Frameworks */,
+				646D7BAF18F85FE600679568 /* libAdIdAccess.a in Frameworks */,
 				8583A59818022FE500D694A5 /* AVFoundation.framework in Frameworks */,
+				646D7BB018F85FE600679568 /* libGoogleAnalyticsServices.a in Frameworks */,
 				8583A50918022CE600D694A5 /* CoreGraphics.framework in Frameworks */,
 				8583A50B18022CE600D694A5 /* UIKit.framework in Frameworks */,
 				8583A50718022CE600D694A5 /* Foundation.framework in Frameworks */,
@@ -248,6 +272,21 @@
 			name = SampleUsers;
 			sourceTree = "<group>";
 		};
+		646D7B9418F85F2900679568 /* GAI */ = {
+			isa = PBXGroup;
+			children = (
+				646D7BA718F85FDC00679568 /* GAI.h */,
+				646D7BA818F85FDC00679568 /* GAIDictionaryBuilder.h */,
+				646D7BA918F85FDC00679568 /* GAIFields.h */,
+				646D7BAA18F85FDC00679568 /* GAILogger.h */,
+				646D7BAB18F85FDC00679568 /* GAITrackedViewController.h */,
+				646D7BAC18F85FDC00679568 /* GAITracker.h */,
+				646D7BAD18F85FE600679568 /* libAdIdAccess.a */,
+				646D7BAE18F85FE600679568 /* libGoogleAnalyticsServices.a */,
+			);
+			name = GAI;
+			sourceTree = "<group>";
+		};
 		8583A4FA18022CE600D694A5 = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +310,10 @@
 		8583A50518022CE600D694A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				646D7BB718F861BC00679568 /* SystemConfiguration.framework */,
+				646D7BB518F861AD00679568 /* libz.dylib */,
+				646D7BB318F8618D00679568 /* AdSupport.framework */,
+				646D7BB118F8616600679568 /* CoreData.framework */,
 				8583A59918022FF400D694A5 /* QuartzCore.framework */,
 				8583A59718022FE500D694A5 /* AVFoundation.framework */,
 				8583A50618022CE600D694A5 /* Foundation.framework */,
@@ -305,6 +348,7 @@
 		8583A50D18022CE600D694A5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				646D7B9418F85F2900679568 /* GAI */,
 				8583A55D18022D8700D694A5 /* EBPhotoPagesControllerDemo-Info.plist */,
 				8583A55E18022D8700D694A5 /* InfoPlist.strings */,
 				8583A55718022D6D00D694A5 /* Default.png */,
@@ -724,6 +768,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -738,6 +786,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

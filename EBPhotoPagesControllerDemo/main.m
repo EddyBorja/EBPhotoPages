@@ -16,10 +16,32 @@
 #import <UIKit/UIKit.h>
 
 #import "DEMOAppDelegate.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+#import <sys/utsname.h>
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
+        NSUUID *device =
+        [[UIDevice currentDevice] respondsToSelector:@selector(identifierForVendor)] ?
+        [[UIDevice currentDevice] performSelector:@selector(identifierForVendor)] :
+        nil;
+        
+        struct utsname systemInfo;
+        uname(&systemInfo);
+        NSString *model = [NSString stringWithCString:systemInfo.machine
+                                             encoding:NSUTF8StringEncoding];
+        NSString *deviceString = [device UUIDString];
+        [GAI sharedInstance].trackUncaughtExceptions = YES;
+        [GAI sharedInstance].dispatchInterval = 10;
+        [[GAI sharedInstance] trackerWithTrackingId:@"UA-41220983-5"];
+        [[GAI sharedInstance].defaultTracker
+         send:[[GAIDictionaryBuilder createEventWithCategory:model
+                                                      action:@"Demo Launch"
+                                                       label:deviceString
+                                                       value:nil] build]];
+        
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([DEMOAppDelegate class]));
     }
 }
