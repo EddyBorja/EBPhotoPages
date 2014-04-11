@@ -8,7 +8,7 @@ EBPhotoPages
 ![Alt text](/5.png "Screenshot")|![Alt text](/6.png "Screenshot")
 ![Alt text](/7.png "Screenshot")
 
-About
+What is this?
 ---------
 EBPhotoPages is a photo gallery library for displaying pages of photos and their meta data in a scrollview. Users are able to zoom photos in and out, as well as create, edit or delete comments and tags, share or delete a photo, and report inappropriate photos. All photos and content are loaded asynchronously. User permissions for a photo are controlled through a delegate protocol. No graphic files are required for the gallery as icons are drawn in code.
 
@@ -36,7 +36,7 @@ The library was designed using a state pattern to control the behavior of the ga
 + Comments icon shows the number of comments posted (if there are any)
 + Other stuff
 
-Usage
+How do I use it?
 ---------
 
 0) Add the QuartzCore.framework, CoreGraphics.framework and AVFoundation.framework to your project.
@@ -54,7 +54,7 @@ EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc]
 [self presentViewController:photoPagesController animated:YES completion:nil];
 ```
 
-Usage with a Custom Appearance
+How do I customize this?
 ----------
 
 The EBPhotoPagesFactory class is meant to be the one-stop shop for all UI objects. This class is responsible for instantiaing UI Elements and returning them to the EBPhotoPagesController. If you wish to customize the look of your photo gallery implementation, this is the first place you should check for whatever you want to customize. Some other UI elements are not yet created by this class, but the plan is to eventually move them into it. 
@@ -69,8 +69,15 @@ If you are going to create a custom EBPhotoPagesFactory subclass, you will have 
             photoAtIndex:(NSInteger)index
 ```
 
+What about Cocoapods?
+---------
+CocoaPods are the best way to manage library dependencies in Objective-C projects, if you're into that sort of thing. 
+Learn more at http://cocoapods.org
 
-How State Objects work in EBPhotoPages
+Add this to your podfile to add the EBPhotoPages files to your project. pod 'EBPhotoPages', '~> 0.9.1'
+
+
+How do State Objects work in EBPhotoPages?
 ---------
 At any given time, the photo gallery has a state object assigned as its current state, when a user event is received, the photo gallery’s state object takes responsibility for how the photo gallery should respond.  
 
@@ -92,8 +99,7 @@ To create a new custom State for your implementation of the photo gallery, you s
 
 
 
-
-Features in depth
+Tell me more about the features.
 ---------
 
 + **Tags**: If you don’t already know, a tag is a point of interest at a certain spot within a photo (usually a person’s face). A tag’s coordinates in a photo are normalized between 0 and 1, so that the point is independent of the actual photo’s current resolution. For usability purposes, tags do not sit exactly on the pixel that was tagged, but rather they have padding that positions them a few pixels below it so the point of interest isn’t overly obscured by the tag. 
@@ -107,7 +113,7 @@ Features in depth
 + **Reporting Photos**: When a user comes across inappropriate content there needs to be a way to let them report it. The EBPhotoPages provides a report option that informs your datasource that a photo has to be marked as inappropriate. 
 
 
-Things to consider when implementing EBPhotoPages
+What are some things to consider when implementing EBPhotoPages?
 ---------
 + _Caching_: The EBPhotoPages do not implement their own caching system for photo content. That responsibility is passed on to whatever you decide to use as the datasource for the EBPhotoPages. You should probably pre-fetch content ahead of time and save it for faster loading if speed is a concern (which is usually the case…). 
 
@@ -117,7 +123,7 @@ Things to consider when implementing EBPhotoPages
 
 
 
-Opportunities for Contribution
+How can I help?
 ---------
 Although this library has a lot of features and over 5,000 lines of code, there’s still some challenges to solve. Feel free to improve on the library and submit pull requests. In particular, these areas need some attention:
 
@@ -144,9 +150,8 @@ Although this library has a lot of features and over 5,000 lines of code, there�
 + _Presentation Transitions_: Originally the EBPhotoPages was intendend to expand from a thumbnail into a full gallery, then shrink back to an image thumbnail when the user exited the gallery. This was never implemented, however, there are other variations of transitions that would be interesting to see as well.
 
 
-Known Issues
+Any issues or bugs?
 ---------
-+ sizeWithFont: is deprecated in iOS7, needs to be replaced.
 + The loading indicator has a tendency to not show up sometimes. 
 + Deleting comments doesn’t animate too smoothly. 
 + (!)Deleting a photo doesn't remove it immediately from the gallery, scrolling backward shows old data. (However, the photo is still deleted from the data model)
@@ -157,7 +162,7 @@ Known Issues
 + When long pressing a comment to view Copy and Delete options, only the relevant comment should stay highlighted.
 + Long pressing a photo then selecting the Tag Photo option should start a new tag at the location of the longpress, instead of just entering the tagging mode. 
 
-License
+Got a License?
 --------
 _EBPhotoPages_ uses the MIT License:
 
@@ -169,7 +174,7 @@ _EBPhotoPages_ uses the MIT License:
 
 >THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-Credits
+Who made this?
 ---------
 
 _EBPhotoPages_ and its components were created by Eddy Borja.
@@ -177,7 +182,7 @@ _EBPhotoPages_ and its components were created by Eddy Borja.
 iPhone PSD Template by Mikael Eidenberg.
 
 
-More Stuff
+What else?
 ---------
 Be sure to check out these other libraries:
 
