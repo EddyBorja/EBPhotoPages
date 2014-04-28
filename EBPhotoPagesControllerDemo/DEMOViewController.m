@@ -316,7 +316,12 @@
     
     photo = self.photos[0];
     //[photo setDisabledDelete:YES];
-    [photo setDisabledTagging:YES];
+    
+    photo = self.photos[12];
+    [photo setDisabledActivities:YES];
+    [photo setDisabledCommenting:YES];
+    [photo setDisabledMiscActions:YES];
+
     
     photo = self.photos[3];
     [photo setDisabledCommenting:YES];
@@ -625,6 +630,20 @@
     
     DEMOPhoto *photo = (DEMOPhoto *)self.photos[index];
     if(photo.disabledActivities){
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowMiscActionsForPhotoAtIndex:(NSInteger)index
+{
+    if(!self.photos.count){
+        return NO;
+    }
+    
+    DEMOPhoto *photo = (DEMOPhoto *)self.photos[index];
+    if(photo.disabledMiscActions){
         return NO;
     } else {
         return YES;

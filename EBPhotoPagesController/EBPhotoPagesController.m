@@ -244,6 +244,9 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [self.photosDataSource photoPagesController:self
            shouldAllowActivitiesForPhotoAtIndex:index] : YES;
     
+    BOOL miscActionsAllowed = [self.photosDataSource respondsToSelector:@selector(photoPagesController:shouldAllowMiscActionsForPhotoAtIndex:)] ?
+    [self.photosDataSource photoPagesController:self shouldAllowMiscActionsForPhotoAtIndex:index] : YES;
+    
     BOOL commentsAreViewable = [self.photosDataSource respondsToSelector:@selector(photoPagesController:shouldShowCommentsForPhotoAtIndex:)] ?
     [self.photosDataSource photoPagesController:self
               shouldShowCommentsForPhotoAtIndex:index] : YES;
@@ -262,6 +265,11 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     if(activitiesAllowed == NO){
         [mutableUpperItems removeObject:self.activityBarButtonItem];
         [mutableLowerItems removeObject:self.activityBarButtonItem];
+    }
+    
+    if(miscActionsAllowed == NO){
+        [mutableUpperItems removeObject:self.miscBarButtonItem];
+        [mutableLowerItems removeObject:self.miscBarButtonItem];
     }
     
     if(commentsAreViewable == NO){

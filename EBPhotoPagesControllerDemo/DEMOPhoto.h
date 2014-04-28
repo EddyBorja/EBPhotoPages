@@ -34,6 +34,7 @@
 @property (assign) BOOL disabledDelete;
 @property (assign) BOOL disabledDeleteForTags;
 @property (assign) BOOL disabledDeleteForComments;
+@property (assign) BOOL disabledMiscActions;
 
 
 + (instancetype)photoWithProperties:(NSDictionary *)photoInfo;
