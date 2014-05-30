@@ -1279,7 +1279,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     UIActivityViewController *activityViewController;
     
     if([self.photosDataSource
-        respondsToSelector:@selector(activityViewControllerForImage:withCaption:atIndex:)]){
+        respondsToSelector:@selector(photoPagesController:activityViewControllerForImage:withCaption:atIndex:)]){
         activityViewController =  [self.photosDataSource
                                    photoPagesController:self
                                    activityViewControllerForImage:image
