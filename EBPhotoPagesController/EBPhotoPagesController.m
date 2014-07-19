@@ -274,7 +274,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     
     if(commentsAreViewable == NO){
         [mutableUpperItems removeObject:self.commentsBarButtonItem];
-        [mutableUpperItems removeObject:self.commentsBarButtonItem];
+        [mutableLowerItems removeObject:self.commentsBarButtonItem];
     }
     
     EBPhotoViewController *photoViewController = [self photoViewControllerWithIndex:index];
