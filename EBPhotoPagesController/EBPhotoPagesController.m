@@ -1266,7 +1266,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 }
 
 
-- (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController
+- (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController fromBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     NSAssert([photoViewController isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
     
@@ -1300,6 +1300,10 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         [self setLowerBarAlpha:1.0];
     }];
     
+    if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
+        activityViewController.popoverPresentationController.barButtonItem = barButtonItem;
+    }
+
     [self presentViewController:activityViewController
                              animated:YES
                            completion:nil];

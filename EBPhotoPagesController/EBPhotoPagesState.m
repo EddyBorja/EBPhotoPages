@@ -195,10 +195,13 @@
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller didSelectActivityButton:(id)sender
 {
-    EBPhotoViewController *photoViewController = [controller currentPhotoViewController];    
-    [controller presentActivitiesForPhotoViewController:photoViewController];
+    EBPhotoViewController *photoViewController = [controller currentPhotoViewController];
+    id senderItem = nil;
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        senderItem = sender;
+    }
+    [controller presentActivitiesForPhotoViewController:photoViewController fromBarButtonItem:senderItem];
 }
-
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
    didSelectToggleTagsButton:(id)sender
