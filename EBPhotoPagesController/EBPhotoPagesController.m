@@ -906,10 +906,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)setComments:(NSArray *)comments forPhotoAtIndex:(NSInteger)index
 {
-    for(NSObject *comment in comments){
-        NSAssert([comment conformsToProtocol:@protocol(EBPhotoCommentProtocol)],
-                 @"Comment objects must conform to EBPhotoCommentProtocol");
-    }
     
     EBPhotoViewController *photoViewController = [self photoViewControllerWithIndex:index];
     if(photoViewController){
@@ -1408,8 +1404,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)tagActionSheet:(UIActionSheet *)actionSheet didDismissWithButtonAtIndex:(NSInteger)buttonIndex
 {
-    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
-    NSAssert([tagPopover isKindOfClass:[EBTagPopover class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
+    //EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
+    //NSAssert([tagPopover isKindOfClass:[EBTagPopover class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
     
 }
 
