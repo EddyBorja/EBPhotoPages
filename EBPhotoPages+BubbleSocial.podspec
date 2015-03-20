@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "EBPhotoPages"
+  s.name         = "EBPhotoPages+BubbleSocial"
   s.version      = "1.0.0"
   s.summary      = "A photo gallery for iOS with a modern feature set. Similar features as the Facebook photo browser."
   s.description  = "EBPhotoPages is a photo gallery library for displaying pages of photos and their meta data in a scrollview. Users are able to zoom photos in and out, as well as create, edit or delete comments and tags, share or delete a photo, and report inappropriate photos. All photos and content are loaded asynchronously. User permissions for a photo are controlled through a delegate protocol. No graphic files are required for the gallery as icons are drawn in code.
