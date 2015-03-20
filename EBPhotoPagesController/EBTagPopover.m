@@ -73,9 +73,9 @@
     
     [self setFrame:tagBounds];
     
-    [self setMinimumTextFieldSize:CGSizeMake(25, 14)];
-    [self setMinimumTextFieldSizeWhileEditing:CGSizeMake(54, 14)];
-    [self setMaximumTextLength:40];
+    [self setMinimumTextFieldSize:CGSizeMake(55, 14)];
+    [self setMinimumTextFieldSizeWhileEditing:CGSizeMake(60, 14)];
+    [self setMaximumTextLength:20];
     
     [self setNormalizedArrowOffset:CGPointMake(0.0, 0.02)];
     
@@ -105,7 +105,7 @@
 {
     UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]
                                                 initWithTarget:self
-                                                        action:@selector(didRecognizeSingleTap:)];
+                                                action:@selector(didRecognizeSingleTap:)];
     [singleTapGesture setNumberOfTapsRequired:1];
     
     [self addGestureRecognizer:singleTapGesture];
@@ -147,7 +147,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didReceiveCancelNotification:)
-                                                name:EBPhotoPagesControllerDidCancelTaggingNotification object:nil];
+                                                 name:EBPhotoPagesControllerDidCancelTaggingNotification object:nil];
 }
 
 
@@ -156,7 +156,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void)tagTextFieldDidChangeWithNotification:(NSNotification *)aNotification
 {
@@ -248,19 +248,19 @@
                                     point.y - yOffset);
     
     [self setCenter:newCenter];
-
     
-/*
-    CGRect newFrame = self.frame;
-    newFrame.origin.x = point.x;
-    newFrame.origin.y = point.y;
-    //[self setFrame:newFrame];
     
-    [self setTransform:CGAffineTransformMakeScale(0.3, 0.3)];
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        [self setTransform:CGAffineTransformMakeScale(1,1)];
-    }completion:nil];
-*/
+    /*
+     CGRect newFrame = self.frame;
+     newFrame.origin.x = point.x;
+     newFrame.origin.y = point.y;
+     //[self setFrame:newFrame];
+     
+     [self setTransform:CGAffineTransformMakeScale(0.3, 0.3)];
+     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+     [self setTransform:CGAffineTransformMakeScale(1,1)];
+     }completion:nil];
+     */
     
 }
 
@@ -270,16 +270,16 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     
-	float radius = 4.0f;
+    float radius = 4.0f;
     float arrowHeight =  10.0f; //this is how far the arrow extends from the rect
     float arrowWidth = 20.0;
     
     fullRect = CGRectInset(fullRect, 1, 1);
     
     CGRect containerRect = CGRectMake(fullRect.origin.x,
-                      fullRect.origin.y+arrowHeight,
-                      fullRect.size.width,
-                      fullRect.size.height-arrowHeight);
+                                      fullRect.origin.y+arrowHeight,
+                                      fullRect.size.width,
+                                      fullRect.size.height-arrowHeight);
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     
@@ -310,7 +310,7 @@
     CGPathCloseSubpath(tagPath);
     
     
-                                                                               
+    
     CGContextAddPath(context, tagPath);
     //CGContextSetShadowWithColor(context, CGSizeMake(0, 2), 1.5, [[UIColor colorWithRed:0 green:0 blue:20/255.0 alpha:0.35] CGColor]);
     CGContextSetFillColorWithColor(context, [[UIColor colorWithWhite:0.11 alpha:0.75] CGColor]);
@@ -328,7 +328,7 @@
     
     
     //CGContextAddPath(context, tagPath);
- 
+    
     
     //CGPathRelease(arrowPath);
     CGPathRelease(tagPath);
@@ -380,8 +380,8 @@
 
 
 - (BOOL)textField:(UITextField *)textField
-    shouldChangeCharactersInRange:(NSRange)range
-                replacementString:(NSString *)string {
+shouldChangeCharactersInRange:(NSRange)range
+replacementString:(NSString *)string {
     BOOL result = NO;
     
     if(textField == self.tagTextField){
@@ -464,7 +464,7 @@
     
     CGRect newTextFieldFrame = self.tagTextField.frame;
     CGSize minimumSize = self.tagTextField.isFirstResponder ? self.minimumTextFieldSizeWhileEditing :
-                                                              self.minimumTextFieldSize;
+    self.minimumTextFieldSize;
     
     newTextFieldFrame.size.width = MAX(newTagSize.width, minimumSize.width);
     newTextFieldFrame.size.height = MAX(newTagSize.height, minimumSize.height);
@@ -477,7 +477,7 @@
     tagBounds.origin.x = 0;
     tagBounds.origin.y = 0;
     
-
+    
     CGPoint originalCenter = self.center;
     [self setFrame:tagBounds];
     [self setCenter:originalCenter];
