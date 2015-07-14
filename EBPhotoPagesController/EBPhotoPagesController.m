@@ -739,9 +739,9 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     CGFloat alpha = hidden ? 0.0 : 1.0;
     
-    [self setUpperBarAlpha:alpha];
+    [self setUpperBarAlpha:hidden ? 0.0 : [self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
+    [self setLowerBarAlpha:hidden ? 0.0 : [self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
     [self setCaptionAlpha:alpha];
-    [self setLowerBarAlpha:alpha];
     [self setPhotoDimLevel:0.0];
     [self setUpperGradientAlpha:alpha];
     [self setLowerGradientAlpha:alpha];
@@ -1295,9 +1295,15 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     }
     
     
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
-        [self setUpperBarAlpha:1.0];
-        [self setLowerBarAlpha:1.0];
+            
+#else
+    [activityViewController setCompletionWithItemsHandler:
+         ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+#endif
+        [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
+        [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
     }];
     
     if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
@@ -1431,8 +1437,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     
     [self setActionSheetTargetInfo:nil];
     
-    [self setUpperBarAlpha:1.0];
-    [self setLowerBarAlpha:1.0];
+    [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
+    [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
 }
 
 - (void)performActionOnPhotoAtIndex:(NSInteger)index forButtonTitle:(NSString *)buttonTitle
