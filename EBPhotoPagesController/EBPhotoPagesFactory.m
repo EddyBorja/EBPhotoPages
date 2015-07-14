@@ -59,6 +59,7 @@
     [upperToolbar setBackgroundImage:toolbarBackground
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
+    [upperToolbar setAlpha:[self upperToolbarAlphaForPhotoPagesController:nil]];
     return upperToolbar;
 }
 
@@ -82,7 +83,7 @@
     [lowerToolbar setBackgroundImage:toolbarBackground
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
-    
+    [lowerToolbar setAlpha:[self lowerToolbarAlphaForPhotoPagesController:nil]];
     return lowerToolbar;
 }
 
@@ -90,7 +91,7 @@
 - (UIImage *)upperToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
                                                    inState:(EBPhotoPagesState *)state
 {
-    return [self defaultLowerToolbarBackgroundForPhotoPagesController:controller];
+    return [self defaultUpperToolbarBackgroundForPhotoPagesController:controller];
 }
 - (UIImage *)lowerToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
                                                    inState:(EBPhotoPagesState *)state
@@ -98,6 +99,15 @@
     return [self defaultLowerToolbarBackgroundForPhotoPagesController:controller];
 }
 
+- (CGFloat)upperToolbarAlphaForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return [self defaultToolbarAlphaForPhotoPagesController:controller];
+}
+
+- (CGFloat)lowerToolbarAlphaForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return [self defaultToolbarAlphaForPhotoPagesController:controller];
+}
 
 
 - (UIImage *)defaultUpperToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
@@ -108,6 +118,11 @@
 - (UIImage *)defaultLowerToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     return [self defaulToolbarBackgroundForPhotoPagesController:controller];
+}
+
+- (CGFloat)defaultToolbarAlphaForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return 1.0f;
 }
 
 - (UIImage *)defaulToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
