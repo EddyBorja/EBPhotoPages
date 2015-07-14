@@ -1295,7 +1295,13 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     }
     
     
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
+            
+#else
+    [activityViewController setCompletionWithItemsHandler:
+         ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+#endif
         [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
         [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
     }];
