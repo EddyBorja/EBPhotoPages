@@ -51,7 +51,7 @@
 #pragma mark -
 @interface EBPhotoViewController (Image)
 - (UIImage *)image;
-- (void)setImage:(UIImage *)image;
+- (void)setImage:(id)image;
 @end
 
 

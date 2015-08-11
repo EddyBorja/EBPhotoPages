@@ -73,7 +73,7 @@ shouldHandleLongPressGesture:(UILongPressGestureRecognizer *)recognizer
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
                 imageAtIndex:(NSInteger)index
-           completionHandler:(void(^)(UIImage *image))handler;
+           completionHandler:(void(^)(id image))handler;
 
 //Default value is FALSE
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController

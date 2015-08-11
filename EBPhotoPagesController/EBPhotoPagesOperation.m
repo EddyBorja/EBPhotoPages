@@ -104,7 +104,7 @@
         
         [self.dataSource photoPagesController:self.photoPagesController
                                  imageAtIndex:self.photoViewController.photoIndex
-                            completionHandler:^(UIImage *image){
+                            completionHandler:^(id image){
             
             [self.photoViewController performSelectorOnMainThread:@selector(setImage:)
                                                        withObject:image
