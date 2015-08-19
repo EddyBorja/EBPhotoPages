@@ -502,11 +502,13 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self setStatusBarDisabled:YES withAnimation:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self setStatusBarDisabled:NO withAnimation:animated];
 }
 
