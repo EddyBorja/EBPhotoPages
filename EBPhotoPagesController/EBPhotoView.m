@@ -321,6 +321,7 @@ static NSString *ImageKeyPath = @"image";
         [self.imageView addConstraint:myConstraint];
         [self.imageView addConstraint:myConstraint2];
         [self.imageView setUserInteractionEnabled:YES];
+        //[self.imageView setContentMode:UIViewContentModeCenter];
     }
 }
 

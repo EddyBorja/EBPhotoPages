@@ -84,6 +84,7 @@
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
     [lowerToolbar setAlpha:[self lowerToolbarAlphaForPhotoPagesController:nil]];
+    [lowerToolbar setHidden:YES];
     return lowerToolbar;
 }
 
@@ -158,7 +159,8 @@
 {
     UIBarButtonItem *upperFlexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *done = [controller doneBarButtonItem];
-    NSArray *items = @[upperFlexibleSpace,done];
+    UIBarButtonItem *activityBarButtonItem = [controller activityBarButtonItem];
+    NSArray *items = @[done, upperFlexibleSpace, activityBarButtonItem];
     return items;
 }
 
@@ -211,10 +213,9 @@
 {
     UIBarButtonItem *lowerFlexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *toggleTagsBarButtonItem = [controller toggleTagsBarButtonItem];
-    UIBarButtonItem *activityBarButtonItem = [controller activityBarButtonItem];
     UIBarButtonItem *miscBarButtonItem = [controller miscBarButtonItem];
     UIBarButtonItem *commentsBarButtonItem = [controller commentsBarButtonItem];
-    NSArray *items = @[activityBarButtonItem, toggleTagsBarButtonItem, miscBarButtonItem, lowerFlexibleSpace, commentsBarButtonItem, ];
+    NSArray *items = @[toggleTagsBarButtonItem, miscBarButtonItem, lowerFlexibleSpace, commentsBarButtonItem, ];
     return items;
 }
 
@@ -512,7 +513,7 @@
 - (EBCaptionView *)captionViewForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     CGRect bounds = controller.view.bounds;
-    CGRect frame = CGRectMake(20, 0, bounds.size.width-40, bounds.size.height-44+1);
+    CGRect frame = CGRectMake(20, 0, bounds.size.width-40, bounds.size.height+1);
     EBCaptionView *captionView = [[EBCaptionView alloc] initWithFrame:frame];
     [captionView setContentOffset:CGPointMake(0, -captionView.contentInset.top) animated:NO];
     return captionView;
