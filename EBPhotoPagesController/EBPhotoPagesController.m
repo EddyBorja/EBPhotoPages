@@ -615,19 +615,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if(object == self.captionView && [keyPath isEqualToString:ContentOffsetKeyPath]){
-        if(self.captionView.hidden || self.captionView.alpha == 0){
-            [self setPhotoDimLevel:0.0];
-            return;
-        }
-        
-        if(self.captionView.contentOffset.y + self.captionView.contentInset.top > 10){
-            [self setPhotoDimLevel:0.5];
-        } else {
-            [self setPhotoDimLevel:0.0];
-        }
-    }
-    
     if(object == self && [keyPath isEqualToString:CurrentPhotoIndexKeyPath]){
         [self setCaptionWithPhotoIndex:self.currentPhotoIndex];
         [self setMetaDataWithPhotoIndex:self.currentPhotoIndex];
@@ -658,11 +645,13 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)enterBrowsingMode
 {
     [self setCurrentState:[EBPhotoPagesStateBrowsing new]];
+    [self setPhotoDimLevel:0.5];
 }
 
 - (void)enterBrowsingModeWithInterfaceHidden
 {
     [self setCurrentState:[EBPhotoPagesStateBrowsingInterfaceHidden new]];
+    [self setPhotoDimLevel:0.0];
 }
 
 - (void)enterTaggingMode
