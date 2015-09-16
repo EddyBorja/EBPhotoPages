@@ -335,7 +335,10 @@ static NSString *FrameKeyPath = @"frame";
         [self resetContentSize];
     }
     else {
+        [UIView animateWithDuration:0.2 animations:^
+         {
         [self setMaxContentSize];
+         }];
     }
     [self resetContentOffset];
 }
