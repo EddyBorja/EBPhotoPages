@@ -101,10 +101,6 @@ static NSString *FrameKeyPath = @"frame";
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    [self setFrameForLabel:self.textLabel
-                withString:self.textLabel.text?:self.textLabel.attributedText
-               maximumSize:CGSizeMake(self.frame.size.width,
-                                      MaximumCaptionTextHeight)];
     [self resetContentSize];
 }
 
@@ -234,9 +230,9 @@ static NSString *FrameKeyPath = @"frame";
         subviewsRect = CGRectUnion(subviewsRect, view.frame);
     }
     
-    CGFloat contentHeight = subviewsRect.size.height + 20;
+    CGFloat contentHeight = subviewsRect.size.height + 10;
     [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - contentHeight;
+    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 65);
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
