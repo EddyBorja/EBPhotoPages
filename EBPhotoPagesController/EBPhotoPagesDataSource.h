@@ -213,10 +213,4 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
     shouldShowCommentsForPhotoAtIndex:(NSInteger)index;
 
-
-
-
-
-
-
 @end

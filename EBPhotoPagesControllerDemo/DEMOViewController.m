@@ -363,6 +363,7 @@
 - (IBAction)didSelectViewPhotos:(id)sender
 {    
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    photoPagesController.totalCount = 12;
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
@@ -397,7 +398,6 @@
         if(self.simulateLatency){
             sleep(arc4random_uniform(2)+arc4random_uniform(2));
         }
-        
         handler(photo.image);
     });
 }
@@ -444,7 +444,6 @@
         if(self.simulateLatency){
             sleep(arc4random_uniform(2)+arc4random_uniform(2));
         }
-        
         handler(photo.metaData);
     });
 }

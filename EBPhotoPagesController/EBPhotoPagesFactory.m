@@ -159,8 +159,9 @@
 {
     UIBarButtonItem *upperFlexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *done = [controller doneBarButtonItem];
+    UIBarButtonItem *counter = [controller counterBarButtonItem];
     UIBarButtonItem *activityBarButtonItem = [controller activityBarButtonItem];
-    NSArray *items = @[done, upperFlexibleSpace, activityBarButtonItem];
+    NSArray *items = @[done, upperFlexibleSpace, counter, upperFlexibleSpace, activityBarButtonItem];
     return items;
 }
 
@@ -321,6 +322,15 @@
     return doneButton;
 }
 
+- (UIBarButtonItem *)counterBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    NSString *counterTitle = [self counterBarButtonTitleForPhotoPagesController:controller];
+    UIBarButtonItem *counterButton = [[UIBarButtonItem alloc] initWithTitle:@"1/?"
+                                                                      style:UIBarButtonItemStylePlain
+                                                                     target:nil
+                                                                     action:nil];
+    return counterButton;
+}
 - (UIBarButtonItem *)cancelBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     NSString *cancelTitle = [self cancelBarButtonTitleForPhotoPagesController:controller];
@@ -371,6 +381,15 @@
     
     
     return barButton;
+}
+
+- (UIBarButtonItem *)counterButtonItemWithTitle:(EBPhotoPagesController *)controller
+{
+    UIBarButtonItem *counterButton = [self barButtonItemWithTitle:@""
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:nil
+                                                             selector:nil];
+    return counterButton;
 }
 
 - (void)sizeButtonToFitTitle:(UIButton *)button withMinimumSize:(CGSize)minimumSize withPadding:(CGSize)textPadding
@@ -434,12 +453,17 @@
 
 
 
-- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     return NSLocalizedString(@"Done", @"Appears on a button that exits you from a photo browser.");
 }
 
-- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (NSString *)counterBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return NSLocalizedString(@"Counter", @"Appears on a button used as counter.");
+}
+
+- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     return NSLocalizedString(@"Cancel", @"Appears on a button that cancels an action in progress.");
 }
