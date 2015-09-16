@@ -21,6 +21,7 @@
 @interface EBPhotoPagesController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UITextFieldDelegate, UIActionSheetDelegate, EBPhotoViewControllerDelegate>
 
 @property (readonly) NSInteger currentPhotoIndex;
+@property (nonatomic, assign) NSInteger totalCount;
 
 @property (nonatomic, strong) id<EBPhotoPagesStateDelegate> currentState;
 @property (weak) id<EBPhotoPagesDelegate> photoPagesDelegate;
@@ -37,6 +38,7 @@
 @property (nonatomic, readonly) UIBarButtonItem *commentsExitBarButtonItem;
 @property (nonatomic, readonly) UIBarButtonItem *hideCommentsBarButtonItem;
 @property (nonatomic, readonly) UIBarButtonItem *toggleTagsBarButtonItem;
+@property (nonatomic, readonly) UIBarButtonItem *counterBarButtonItem;
 
 
 //Set to NO to prevent tags from showing on photos
@@ -106,8 +108,6 @@
 - (void)startCommenting;
 - (void)cancelCommenting;
 
-
-
 - (void)didSelectActivityButton:(id)sender;
 - (void)didSelectMiscButton:(id)sender;
 - (void)didSelectCommentsButton:(id)sender;
@@ -116,9 +116,4 @@
 - (void)didSelectTagButton:(id)sender;
 - (void)didSelectTagDoneButton:(id)sender;
 - (void)didSelectToggleTagsButton:(id)sender;
-
-
-
 @end
-
-

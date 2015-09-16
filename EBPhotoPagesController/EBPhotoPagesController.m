@@ -45,6 +45,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 @property (nonatomic, strong) UIBarButtonItem *commentsExitBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *hideCommentsBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *toggleTagsBarButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *counterBarButtonItem;
 
 @property (weak) UIToolbar *upperToolbar;
 @property (weak) UIToolbar *lowerToolbar;
@@ -736,7 +737,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)setMetaDataWithPhotoIndex:(NSInteger)photoIndex
 {
     NSLog(@"update meta data %li", (long)photoIndex);
-    
+    [self changeTitle:[NSString stringWithFormat:@"%d/%d",photoIndex+1,_totalCount]];
 }
 
 - (void)setInterfaceHidden:(BOOL)hidden
@@ -947,6 +948,16 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     }
     
     return _doneBarButtonItem;
+}
+
+- (UIBarButtonItem *)counterBarButtonItem
+{
+    if(_counterBarButtonItem == nil){
+        UIBarButtonItem *newDoneButton = [self.photoPagesFactory counterBarButtonItemForPhotoPagesController:self];
+        [self setCounterBarButtonItem:newDoneButton];
+    }
+
+    return _counterBarButtonItem;
 }
 
 - (UIBarButtonItem *)cancelBarButtonItem
@@ -1589,6 +1600,10 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return [self.photoPagesFactory photoPagesController:self commentsViewForPhotoViewController:controller];
 }
 
+- (void) changeTitle:(NSString *) counter
+{
+    self.counterBarButtonItem.title = counter;
+}
 
 #pragma mark -
 #pragma mark -
