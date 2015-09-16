@@ -64,16 +64,23 @@ static NSString *FrameKeyPath = @"frame";
     [self setAlwaysBounceVertical:YES];
     [self setShowsHorizontalScrollIndicator:NO];
     [self setShowsVerticalScrollIndicator:NO];
-    [self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|
-     UIViewAutoresizingFlexibleWidth];
+    [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
+     UIViewAutoresizingFlexibleHeight];
     [self beginObservations];
     [self loadContentViews];
     UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self addGestureRecognizer:singleTap];
+    UIDevice *device = [UIDevice currentDevice];
+    [device beginGeneratingDeviceOrientationNotifications];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(orientationChanged:)        name:UIDeviceOrientationDidChangeNotification
+             object:device];
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [self stopObservations];
 }
 
@@ -330,6 +337,16 @@ static NSString *FrameKeyPath = @"frame";
     else {
         [self setMaxContentSize];
     }
+    [self resetContentOffset];
+}
+
+- (void)orientationChanged:(NSNotification *)note
+{
+    [self setFrameForLabel:self.textLabel
+                withString:self.textLabel.text
+               maximumSize:CGSizeMake(self.frame.size.width,
+                                      MaximumCaptionTextHeight)];
+    [self resetContentSize];
     [self resetContentOffset];
 }
 @end
