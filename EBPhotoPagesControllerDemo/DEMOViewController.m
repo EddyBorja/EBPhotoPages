@@ -213,7 +213,7 @@
     [self setPhotos:@[
      [DEMOPhoto photoWithProperties:
       @{@"imageFile": @"photo1.jpg",
-      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPages."],
+      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPages. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated."],
         @"tags": photo1Tags,
         @"comments" : photo1Comments,
       }],
