@@ -54,7 +54,7 @@ static NSString *FrameKeyPath = @"frame";
 
 - (void)initialize
 {
-    
+    _expanded = NO;
     UILabel *captionLabel = [self newCaptionLabel];
     [self setTextLabel:captionLabel];
     [self setDelegate:self];
@@ -64,10 +64,12 @@ static NSString *FrameKeyPath = @"frame";
     [self setAlwaysBounceVertical:YES];
     [self setShowsHorizontalScrollIndicator:NO];
     [self setShowsVerticalScrollIndicator:NO];
-    [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-                              UIViewAutoresizingFlexibleHeight];
+    [self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|
+     UIViewAutoresizingFlexibleWidth];
     [self beginObservations];
     [self loadContentViews];
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
+    [self addGestureRecognizer:singleTap];
 }
 
 - (void)dealloc
@@ -236,6 +238,19 @@ static NSString *FrameKeyPath = @"frame";
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
+- (void)setMaxContentSize
+{
+    CGRect subviewsRect = CGRectZero;
+    for(UIView *view in self.subviews){
+        subviewsRect = CGRectUnion(subviewsRect, view.frame);
+    }
+
+    CGFloat contentHeight = subviewsRect.size.height + 10;
+    [self setContentSize:CGSizeMake(1, contentHeight)];
+    CGFloat topInset = self.bounds.size.height - contentHeight;
+    [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
+}
+
 - (void)resetContentOffset
 {
     [self setContentOffset:
@@ -289,9 +304,6 @@ static NSString *FrameKeyPath = @"frame";
             }
         }
     }
-    
-    
-    
     return NO;
 }
 
@@ -308,5 +320,16 @@ static NSString *FrameKeyPath = @"frame";
     [label setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [label setShadowOffset:CGSizeMake(0, 1)];
     return label;
+}
+
+- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+{
+    if (_expanded) {
+        [self resetContentSize];
+    }
+    else {
+        [self setMaxContentSize];
+    }
+    [self resetContentOffset];
 }
 @end
