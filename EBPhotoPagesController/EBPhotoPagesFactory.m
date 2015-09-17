@@ -314,9 +314,9 @@
 
 - (UIBarButtonItem *)doneBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
 {
-    NSString *doneTitle = [self doneBarButtonTitleForPhotoPagesController:controller];
+    NSString *doneTitle = [self backBarButtonTitleForPhotoPagesController:controller];
     UIBarButtonItem *doneButton = [self barButtonItemWithTitle:doneTitle
-                                                         style:UIBarButtonItemStyleDone
+                                                         style:UIBarButtonItemStylePlain
                                                         target:controller
                                                       selector:@selector(didSelectDoneButton:)];
     return doneButton;
@@ -452,6 +452,10 @@
 }
 
 
+- (NSString *)backBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return NSLocalizedString(@"Back", @"Appears on a button that exits you from a photo browser.");
+}
 
 - (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
 {
