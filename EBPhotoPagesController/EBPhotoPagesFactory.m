@@ -325,7 +325,7 @@
 - (UIBarButtonItem *)counterBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     NSString *counterTitle = [self counterBarButtonTitleForPhotoPagesController:controller];
-    UIBarButtonItem *counterButton = [[UIBarButtonItem alloc] initWithTitle:@"1/?"
+    UIBarButtonItem *counterButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"1/%d",controller.totalCount]
                                                                       style:UIBarButtonItemStylePlain
                                                                      target:nil
                                                                      action:nil];
