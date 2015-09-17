@@ -239,9 +239,9 @@ static NSString *FrameKeyPath = @"frame";
         subviewsRect = CGRectUnion(subviewsRect, view.frame);
     }
     
-    CGFloat contentHeight = subviewsRect.size.height + 20;
+    CGFloat contentHeight = subviewsRect.size.height + 30;
     [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 65);
+    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 75);
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
@@ -258,36 +258,11 @@ static NSString *FrameKeyPath = @"frame";
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
-- (void)setMidContentSize
-{
-    CGRect subviewsRect = CGRectZero;
-    for(UIView *view in self.subviews){
-        subviewsRect = CGRectUnion(subviewsRect, view.frame);
-    }
-
-    CGFloat contentHeight = subviewsRect.size.height + 10;
-    [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 70);
-    [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
-}
-
 - (void)resetContentOffset
 {
     [self setContentOffset:
      CGPointMake(-self.contentInset.left,
                  -self.contentInset.top)];
-    [UIView animateWithDuration:0.2 animations:^{
-        [self setMidContentSize];
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.2 animations:^{
-            [self resetContentSize];
-            [self setContentOffset:
-             CGPointMake(-self.contentInset.left,
-                         -self.contentInset.top)];
-        } completion:^(BOOL finished) {
-
-        }];
-    }];
 }
 
 #pragma mark - Getters
