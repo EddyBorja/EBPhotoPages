@@ -143,7 +143,7 @@ static NSString *FrameKeyPath = @"frame";
         [self setHidden:NO];
     }
     
-    CGFloat totalFadeDuration = 0.3;
+    CGFloat totalFadeDuration = 0.2;
     [UIView animateWithDuration:totalFadeDuration/2.0
                           delay:0
                         options:UIViewAnimationCurveEaseOut|
@@ -166,16 +166,6 @@ static NSString *FrameKeyPath = @"frame";
                                                      UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
                              [self.textLabel setAlpha:1];
-                                              [UIView animateWithDuration:totalFadeDuration animations:^{
-                                                  [self setMidContentSize];
-                                              } completion:^(BOOL finished) {
-                                                  [UIView animateWithDuration:totalFadeDuration animations:^{
-                                                      [self resetContentSize];
-                                                      [self resetContentOffset];
-                                                  } completion:^(BOOL finished) {
-
-                                                  }];
-                                              }];
                                           }
                                           completion:nil];
                      }];
@@ -202,7 +192,7 @@ static NSString *FrameKeyPath = @"frame";
         [self setHidden:NO];
     }
     
-    CGFloat totalFadeDuration = 0.3;
+    CGFloat totalFadeDuration = 0.2;
     [UIView animateWithDuration:totalFadeDuration/2.0
                           delay:0
                         options:UIViewAnimationCurveEaseOut|
@@ -225,16 +215,6 @@ static NSString *FrameKeyPath = @"frame";
                           UIViewAnimationOptionBeginFromCurrentState
                                           animations:^{
                                               [self.textLabel setAlpha:1];
-                                              [UIView animateWithDuration:totalFadeDuration animations:^{
-                                                   [self setMidContentSize];
-                                              } completion:^(BOOL finished) {
-                                                  [UIView animateWithDuration:totalFadeDuration animations:^{
-                                                      [self resetContentSize];
-                                                      [self resetContentOffset];
-                                                  } completion:^(BOOL finished) {
-
-                                                  }];
-                                              }];
                                           }
                                           completion:nil];
                      }];
@@ -262,19 +242,6 @@ static NSString *FrameKeyPath = @"frame";
     CGFloat contentHeight = subviewsRect.size.height + 30;
     [self setContentSize:CGSizeMake(1, contentHeight)];
     CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 75);
-    [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
-}
-
-- (void)setMidContentSize
-{
-    CGRect subviewsRect = CGRectZero;
-    for(UIView *view in self.subviews){
-        subviewsRect = CGRectUnion(subviewsRect, view.frame);
-    }
-
-    CGFloat contentHeight = subviewsRect.size.height + 10;
-    [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - MIN(contentHeight,100);
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
