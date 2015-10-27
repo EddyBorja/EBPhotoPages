@@ -105,7 +105,10 @@ shouldAllowReportForPhotoAtIndex:(NSInteger)index;
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
       captionForPhotoAtIndex:(NSInteger)index
-           completionHandler:(void(^)(NSString *caption))handler;
+           completionHandler:(void (^)(NSString *caption))handler;
+
+- (NSString *)photoPagesController:(EBPhotoPagesController *)controller
+            counterForPhotoAtIndex:(NSInteger)index;
 
 
 #pragma mark - Metadata Datasource methods
