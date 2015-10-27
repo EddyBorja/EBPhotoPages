@@ -737,7 +737,15 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)setMetaDataWithPhotoIndex:(NSInteger)photoIndex
 {
     NSLog(@"update meta data %li", (long)photoIndex);
-    [self changeTitle:[NSString stringWithFormat:@"%d/%d",photoIndex+1,_totalCount]];
+    NSString *counterTitle = nil;
+
+    if ([self.photosDataSource respondsToSelector:@selector(photoPagesController:counterForPhotoAtIndex:)]) {
+        counterTitle = [self.photosDataSource photoPagesController:self counterForPhotoAtIndex:photoIndex];
+    } else {
+        counterTitle = [NSString stringWithFormat:@"%ld/%ld", photoIndex+1, (long)_totalCount];
+    }
+
+    self.counterBarButtonItem.title = counterTitle;
 }
 
 - (void)setInterfaceHidden:(BOOL)hidden
@@ -952,9 +960,9 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (UIBarButtonItem *)counterBarButtonItem
 {
-    if(_counterBarButtonItem == nil){
-        UIBarButtonItem *newDoneButton = [self.photoPagesFactory counterBarButtonItemForPhotoPagesController:self];
-        [self setCounterBarButtonItem:newDoneButton];
+    if (_counterBarButtonItem == nil) {
+        self.counterBarButtonItem = [self.photoPagesFactory counterBarButtonItemForPhotoPagesController:self];
+        [self setMetaDataWithPhotoIndex:0];
     }
 
     return _counterBarButtonItem;
@@ -1600,10 +1608,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return [self.photoPagesFactory photoPagesController:self commentsViewForPhotoViewController:controller];
 }
 
-- (void) changeTitle:(NSString *) counter
-{
-    self.counterBarButtonItem.title = counter;
-}
 
 #pragma mark -
 #pragma mark -
