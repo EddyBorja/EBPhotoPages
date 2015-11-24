@@ -69,6 +69,9 @@ If you are going to create a custom EBPhotoPagesFactory subclass, you will have 
             photoAtIndex:(NSInteger)index
 ```
 
+<!---
+Remove comments when carthage support is ready
+
 Carthage
 -------
 Carthage is the simplest way to include frameworks in your Cocoa applications.
@@ -80,7 +83,7 @@ To use the latest version of this library, add this to your Cartfile.
 # Use the latest version
 github "EddyBorja/EBPhotoPages"
 ```
-
+-->
 
 
 How do State Objects work in EBPhotoPages?
@@ -186,6 +189,8 @@ Who made this?
 _EBPhotoPages_ and its components were created by Eddy Borja.
 
 iPhone PSD Template by Mikael Eidenberg.
+
+These days I'm unable to continue working on this project due to other obligations, but I'm always open to pull requests. 
 
 Contributors can always be found [here](https://github.com/EddyBorja/EBPhotoPages/graphs/contributors).
 
