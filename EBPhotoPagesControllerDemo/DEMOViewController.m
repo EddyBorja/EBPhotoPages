@@ -638,6 +638,8 @@
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowMiscActionsForPhotoAtIndex:(NSInteger)index
 {
+    return NO;
+    
     if(!self.photos.count){
         return NO;
     }

@@ -1279,7 +1279,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     UIActivityViewController *activityViewController;
     
     if([self.photosDataSource
-        respondsToSelector:@selector(activityViewControllerForImage:withCaption:atIndex:)]){
+        respondsToSelector:@selector(photoPagesController:activityViewControllerForImage:withCaption:atIndex:)]){
         activityViewController =  [self.photosDataSource
                                    photoPagesController:self
                                    activityViewControllerForImage:image
@@ -1294,8 +1294,9 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
                                                                     caption:caption];
     }
     
+
     
-    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
+    [activityViewController setCompletionWithItemsHandler:^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError){
         [self setUpperBarAlpha:1.0];
         [self setLowerBarAlpha:1.0];
     }];
