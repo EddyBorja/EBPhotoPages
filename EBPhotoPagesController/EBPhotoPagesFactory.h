@@ -104,6 +104,8 @@
                                                    inState:(EBPhotoPagesState *)state;
 - (UIImage *)lowerToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller
                                                    inState:(EBPhotoPagesState *)state;
+- (CGFloat)upperToolbarAlphaForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (CGFloat)lowerToolbarAlphaForPhotoPagesController:(EBPhotoPagesController *)controller;
 
 - (UIImage *)defaultUpperToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller;
 - (UIImage *)defaultLowerToolbarBackgroundForPhotoPagesController:(EBPhotoPagesController *)controller;

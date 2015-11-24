@@ -100,7 +100,7 @@
 - (void)deletePhotoAtIndex:(NSInteger)index;
 - (void)deleteTagPopover:(EBTagPopover *)tagPopover inPhotoAtIndex:(NSInteger)index;
 
-- (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController;
+- (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController fromBarButtonItem:(UIBarButtonItem *)barButtonItem;
 - (void)cancelCurrentTagging;
 
 - (void)startCommenting;
