@@ -69,14 +69,18 @@ If you are going to create a custom EBPhotoPagesFactory subclass, you will have 
             photoAtIndex:(NSInteger)index
 ```
 
-What about Cocoapods?
----------
-CocoaPods are the best way to manage library dependencies in Objective-C projects, if you're into that sort of thing. 
-Learn more at http://cocoapods.org
+Carthage
+-------
+Carthage is the simplest way to include frameworks in your Cocoa applications.
 
-Add this to your **podfile** to add the EBPhotoPages files to your project:
+Learn more at https://github.com/Carthage/Carthage
 
-`pod 'EBPhotoPages', '~> 0.9.1'`
+To use the latest version of this library, add this to your Cartfile.
+```
+# Use the latest version
+github "EddyBorja/EBPhotoPages"
+```
+
 
 
 How do State Objects work in EBPhotoPages?
