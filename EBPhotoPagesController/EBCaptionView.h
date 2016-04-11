@@ -18,7 +18,6 @@
  The EBCaptionView has a large top contentInset so that content starts
  toward the bottom of the scrollview's frame.*/
 @interface EBCaptionView : UIScrollView <UIScrollViewDelegate>
-@property (nonatomic,assign) BOOL expanded;
 @property (readonly) UILabel *textLabel;
 - (void)setCaption:(NSString *)string;
 - (void)setAttributedCaption:(NSAttributedString *)attributedString;

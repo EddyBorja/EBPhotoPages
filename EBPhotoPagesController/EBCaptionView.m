@@ -54,7 +54,6 @@ static NSString *FrameKeyPath = @"frame";
 
 - (void)initialize
 {
-    _expanded = NO;
     UILabel *captionLabel = [self newCaptionLabel];
     [self setTextLabel:captionLabel];
     [self setDelegate:self];
@@ -68,8 +67,6 @@ static NSString *FrameKeyPath = @"frame";
      UIViewAutoresizingFlexibleHeight];
     [self beginObservations];
     [self loadContentViews];
-    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [self addGestureRecognizer:singleTap];
     UIDevice *device = [UIDevice currentDevice];
     [device beginGeneratingDeviceOrientationNotifications];
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -241,7 +238,7 @@ static NSString *FrameKeyPath = @"frame";
     
     CGFloat contentHeight = subviewsRect.size.height + 30;
     [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 75);
+    CGFloat topInset = self.bounds.size.height - contentHeight;
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
@@ -327,20 +324,6 @@ static NSString *FrameKeyPath = @"frame";
     [label setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [label setShadowOffset:CGSizeMake(0, 1)];
     return label;
-}
-
-- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
-{
-    if (_expanded) {
-        [self resetContentSize];
-    }
-    else {
-        [UIView animateWithDuration:0.2 animations:^
-         {
-        [self setMaxContentSize];
-         }];
-    }
-    [self resetContentOffset];
 }
 
 - (void)orientationChanged:(NSNotification *)note

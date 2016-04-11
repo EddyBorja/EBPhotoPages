@@ -184,6 +184,9 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     NSAssert([viewController isKindOfClass:[EBPhotoViewController class]], @"EBPhotoPageViewController requires the use of EBPhotoViewController kind of classes.");
     EBPhotoViewController *photoViewController = (EBPhotoViewController *)viewController;
     NSInteger nextIndex = photoViewController.photoIndex + 1;
+    if (nextIndex > _totalCount) {
+        nextIndex = 1;
+    }
     UIViewController *newController = [self pageViewController:pageViewController viewControllerAtIndex:nextIndex];
     return newController;
 }
@@ -620,14 +623,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         if(self.captionView.hidden || self.captionView.alpha == 0){
             [self setPhotoDimLevel:0.0];
             return;
-        }
-        
-        if(self.captionView.contentOffset.y + self.captionView.contentInset.top > 10){
-            [self setPhotoDimLevel:0.5];
-            self.captionView.expanded = YES;
-        } else {
-            [self setPhotoDimLevel:0.0];
-            self.captionView.expanded = NO;
         }
     }
     
