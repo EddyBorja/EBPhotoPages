@@ -84,6 +84,7 @@
                   forToolbarPosition:UIToolbarPositionAny
                           barMetrics:UIBarMetricsDefault];
     [lowerToolbar setAlpha:[self lowerToolbarAlphaForPhotoPagesController:nil]];
+    [lowerToolbar setHidden:YES];
     return lowerToolbar;
 }
 
@@ -158,7 +159,9 @@
 {
     UIBarButtonItem *upperFlexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *done = [controller doneBarButtonItem];
-    NSArray *items = @[upperFlexibleSpace,done];
+    UIBarButtonItem *counter = [controller counterBarButtonItem];
+    UIBarButtonItem *activityBarButtonItem = [controller activityBarButtonItem];
+    NSArray *items = @[done, upperFlexibleSpace, counter, upperFlexibleSpace, activityBarButtonItem];
     return items;
 }
 
@@ -211,10 +214,9 @@
 {
     UIBarButtonItem *lowerFlexibleSpace = [self flexibleSpaceItemForPhotoPagesController:controller];
     UIBarButtonItem *toggleTagsBarButtonItem = [controller toggleTagsBarButtonItem];
-    UIBarButtonItem *activityBarButtonItem = [controller activityBarButtonItem];
     UIBarButtonItem *miscBarButtonItem = [controller miscBarButtonItem];
     UIBarButtonItem *commentsBarButtonItem = [controller commentsBarButtonItem];
-    NSArray *items = @[activityBarButtonItem, toggleTagsBarButtonItem, miscBarButtonItem, lowerFlexibleSpace, commentsBarButtonItem, ];
+    NSArray *items = @[toggleTagsBarButtonItem, miscBarButtonItem, lowerFlexibleSpace, commentsBarButtonItem, ];
     return items;
 }
 
@@ -320,6 +322,15 @@
     return doneButton;
 }
 
+- (UIBarButtonItem *)counterBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    NSString *counterTitle = [self counterBarButtonTitleForPhotoPagesController:controller];
+    UIBarButtonItem *counterButton = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"1/%d",controller.totalCount]
+                                                                      style:UIBarButtonItemStylePlain
+                                                                     target:nil
+                                                                     action:nil];
+    return counterButton;
+}
 - (UIBarButtonItem *)cancelBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     NSString *cancelTitle = [self cancelBarButtonTitleForPhotoPagesController:controller];
@@ -370,6 +381,15 @@
     
     
     return barButton;
+}
+
+- (UIBarButtonItem *)counterButtonItemWithTitle:(EBPhotoPagesController *)controller
+{
+    UIBarButtonItem *counterButton = [self barButtonItemWithTitle:@""
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:nil
+                                                             selector:nil];
+    return counterButton;
 }
 
 - (void)sizeButtonToFitTitle:(UIButton *)button withMinimumSize:(CGSize)minimumSize withPadding:(CGSize)textPadding
@@ -433,12 +453,17 @@
 
 
 
-- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (NSString *)doneBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     return NSLocalizedString(@"Done", @"Appears on a button that exits you from a photo browser.");
 }
 
-- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (NSString *)counterBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
+{
+    return NSLocalizedString(@"Counter", @"Appears on a button used as counter.");
+}
+
+- (NSString *)cancelBarButtonTitleForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     return NSLocalizedString(@"Cancel", @"Appears on a button that cancels an action in progress.");
 }
@@ -512,7 +537,7 @@
 - (EBCaptionView *)captionViewForPhotoPagesController:(EBPhotoPagesController *)controller
 {
     CGRect bounds = controller.view.bounds;
-    CGRect frame = CGRectMake(20, 0, bounds.size.width-40, bounds.size.height-44+1);
+    CGRect frame = CGRectMake(20, 0, bounds.size.width-40, bounds.size.height+1);
     EBCaptionView *captionView = [[EBCaptionView alloc] initWithFrame:frame];
     [captionView setContentOffset:CGPointMake(0, -captionView.contentInset.top) animated:NO];
     return captionView;

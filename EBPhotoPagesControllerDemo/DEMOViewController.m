@@ -213,7 +213,7 @@
     [self setPhotos:@[
      [DEMOPhoto photoWithProperties:
       @{@"imageFile": @"photo1.jpg",
-      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPages."],
+      @"attributedCaption" : [[NSAttributedString alloc] initWithString:@"The author of EBPhotoPages. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated. That's a cool feature, it's always annoying when small images get blown up and pixelated."],
         @"tags": photo1Tags,
         @"comments" : photo1Comments,
       }],
@@ -344,6 +344,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     [self.view setAlpha:0];
     [UIView animateWithDuration:0.2
                           delay:0.25
@@ -362,6 +363,7 @@
 - (IBAction)didSelectViewPhotos:(id)sender
 {    
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    photoPagesController.totalCount = 12;
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
@@ -396,7 +398,6 @@
         if(self.simulateLatency){
             sleep(arc4random_uniform(2)+arc4random_uniform(2));
         }
-        
         handler(photo.image);
     });
 }
@@ -443,7 +444,6 @@
         if(self.simulateLatency){
             sleep(arc4random_uniform(2)+arc4random_uniform(2));
         }
-        
         handler(photo.metaData);
     });
 }

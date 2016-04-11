@@ -54,7 +54,6 @@ static NSString *FrameKeyPath = @"frame";
 
 - (void)initialize
 {
-    
     UILabel *captionLabel = [self newCaptionLabel];
     [self setTextLabel:captionLabel];
     [self setDelegate:self];
@@ -65,13 +64,20 @@ static NSString *FrameKeyPath = @"frame";
     [self setShowsHorizontalScrollIndicator:NO];
     [self setShowsVerticalScrollIndicator:NO];
     [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-                              UIViewAutoresizingFlexibleHeight];
+     UIViewAutoresizingFlexibleHeight];
     [self beginObservations];
     [self loadContentViews];
+    UIDevice *device = [UIDevice currentDevice];
+    [device beginGeneratingDeviceOrientationNotifications];
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(orientationChanged:)        name:UIDeviceOrientationDidChangeNotification
+             object:device];
 }
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [self stopObservations];
 }
 
@@ -230,9 +236,22 @@ static NSString *FrameKeyPath = @"frame";
         subviewsRect = CGRectUnion(subviewsRect, view.frame);
     }
     
+    CGFloat contentHeight = subviewsRect.size.height + 30;
+    [self setContentSize:CGSizeMake(1, contentHeight)];
+    CGFloat topInset = self.bounds.size.height - contentHeight;
+    [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
+}
+
+- (void)setMaxContentSize
+{
+    CGRect subviewsRect = CGRectZero;
+    for(UIView *view in self.subviews){
+        subviewsRect = CGRectUnion(subviewsRect, view.frame);
+    }
+
     CGFloat contentHeight = subviewsRect.size.height + 10;
     [self setContentSize:CGSizeMake(1, contentHeight)];
-    CGFloat topInset = self.bounds.size.height - MIN(contentHeight, 65);
+    CGFloat topInset = self.bounds.size.height - contentHeight;
     [self setContentInset:UIEdgeInsetsMake(topInset, 0, 0, 0)];
 }
 
@@ -289,9 +308,6 @@ static NSString *FrameKeyPath = @"frame";
             }
         }
     }
-    
-    
-    
     return NO;
 }
 
@@ -308,5 +324,15 @@ static NSString *FrameKeyPath = @"frame";
     [label setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [label setShadowOffset:CGSizeMake(0, 1)];
     return label;
+}
+
+- (void)orientationChanged:(NSNotification *)note
+{
+    [self setFrameForLabel:self.textLabel
+                withString:self.textLabel.text
+               maximumSize:CGSizeMake(self.frame.size.width,
+                                      MaximumCaptionTextHeight)];
+    [self resetContentSize];
+    [self resetContentOffset];
 }
 @end

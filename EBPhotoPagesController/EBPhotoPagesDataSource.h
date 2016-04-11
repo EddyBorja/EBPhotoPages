@@ -73,7 +73,7 @@ shouldHandleLongPressGesture:(UILongPressGestureRecognizer *)recognizer
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
                 imageAtIndex:(NSInteger)index
-           completionHandler:(void(^)(UIImage *image))handler;
+           completionHandler:(void(^)(id image))handler;
 
 //Default value is FALSE
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
@@ -105,7 +105,10 @@ shouldAllowReportForPhotoAtIndex:(NSInteger)index;
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
       captionForPhotoAtIndex:(NSInteger)index
-           completionHandler:(void(^)(NSString *caption))handler;
+           completionHandler:(void (^)(NSString *caption))handler;
+
+- (NSString *)photoPagesController:(EBPhotoPagesController *)controller
+            counterForPhotoAtIndex:(NSInteger)index;
 
 
 #pragma mark - Metadata Datasource methods
@@ -212,11 +215,5 @@ numberOfcommentsForPhotoAtIndex:(NSInteger)index
 //Default value is TRUE
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController
     shouldShowCommentsForPhotoAtIndex:(NSInteger)index;
-
-
-
-
-
-
 
 @end

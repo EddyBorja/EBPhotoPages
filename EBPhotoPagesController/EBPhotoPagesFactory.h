@@ -60,6 +60,7 @@
 - (UIBarButtonItem *)cancelBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
 - (UIBarButtonItem *)tagBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
 - (UIBarButtonItem *)doneTaggingBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
+- (UIBarButtonItem *)counterBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
 
 
 - (UIActionSheet *)photoPagesController:(EBPhotoPagesController *)controller

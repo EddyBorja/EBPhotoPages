@@ -273,9 +273,12 @@ static NSString *ImageKeyPath = @"image";
 
 #pragma mark - Setters
 
-- (void)setImage:(UIImage *)image
+- (void)setImage:(id)image
 {
     NSAssert(image, @"Image cannot be nil");
+    for (UIView* subview in self.imageView.subviews) {
+        [subview removeFromSuperview];
+    }
     [self.imageView setAlpha:0];
     [UIView animateWithDuration:0.1
                           delay:0
@@ -283,9 +286,43 @@ static NSString *ImageKeyPath = @"image";
                      animations:^{
                          [self.imageView setAlpha:1];
                      }completion:nil];
-    
-    [self setContentModeForImageSize:image.size];
-    [self.imageView setImage:image];
+    if ([image isKindOfClass:[UIImage class]]) {
+        UIImage* img = (UIImage*) image;
+        [self setContentModeForImageSize:img.size];
+        [self.imageView setImage:img];
+        [self.imageView setUserInteractionEnabled:NO];
+    }
+    else {
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(300, 250), NO, 0.0);
+        UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        [self setContentModeForImageSize:img.size];
+        UIView* childView = (UIView*) image;
+        [self.imageView setImage:img];
+        [self.imageView addSubview:image];
+        [childView setTranslatesAutoresizingMaskIntoConstraints:NO];
+        NSLayoutConstraint *myConstraint =[NSLayoutConstraint
+                                           constraintWithItem:childView
+                                           attribute:NSLayoutAttributeCenterX
+                                           relatedBy:NSLayoutRelationEqual
+                                           toItem:self.imageView
+                                           attribute:NSLayoutAttributeCenterX
+                                           multiplier:1.0
+                                           constant:0];
+        NSLayoutConstraint *myConstraint2 =[NSLayoutConstraint
+                                            constraintWithItem:childView
+                                            attribute:NSLayoutAttributeCenterY
+                                            relatedBy:NSLayoutRelationEqual
+                                            toItem:self.imageView
+                                            attribute:NSLayoutAttributeCenterY
+                                            multiplier:1.0
+                                            constant:0];
+        
+        [self.imageView addConstraint:myConstraint];
+        [self.imageView addConstraint:myConstraint2];
+        [self.imageView setUserInteractionEnabled:YES];
+        //[self.imageView setContentMode:UIViewContentModeCenter];
+    }
 }
 
 - (void)setContentModeForImageSize:(CGSize)size
