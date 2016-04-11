@@ -185,7 +185,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     EBPhotoViewController *photoViewController = (EBPhotoViewController *)viewController;
     NSInteger nextIndex = photoViewController.photoIndex + 1;
     if (nextIndex > _totalCount) {
-        nextIndex = 1;
+        nextIndex = 0;
     }
     UIViewController *newController = [self pageViewController:pageViewController viewControllerAtIndex:nextIndex];
     return newController;
@@ -737,7 +737,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     if ([self.photosDataSource respondsToSelector:@selector(photoPagesController:counterForPhotoAtIndex:)]) {
         counterTitle = [self.photosDataSource photoPagesController:self counterForPhotoAtIndex:photoIndex];
     } else {
-        counterTitle = [NSString stringWithFormat:@"%ld/%ld", photoIndex+1, (long)_totalCount];
+        counterTitle = [NSString stringWithFormat:@"%ld/%ld", photoIndex+1, (long)_imageCount];
     }
 
     self.counterBarButtonItem.title = counterTitle;

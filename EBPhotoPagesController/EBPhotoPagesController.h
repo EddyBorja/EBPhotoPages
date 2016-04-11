@@ -21,6 +21,7 @@
 @interface EBPhotoPagesController : UIPageViewController <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UITextFieldDelegate, UIActionSheetDelegate, EBPhotoViewControllerDelegate>
 
 @property (readonly) NSInteger currentPhotoIndex;
+@property (nonatomic, assign) NSInteger imageCount;
 @property (nonatomic, assign) NSInteger totalCount;
 
 @property (nonatomic, strong) id<EBPhotoPagesStateDelegate> currentState;
