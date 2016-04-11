@@ -363,7 +363,7 @@
 - (IBAction)didSelectViewPhotos:(id)sender
 {    
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
-    photoPagesController.imageCount = 12;
+    photoPagesController.totalCount = 12;
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
