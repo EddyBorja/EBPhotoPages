@@ -39,7 +39,7 @@
        didSelectCancelButton:(id)sender{}
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
-       didSelectTagButton:(id)sender{}
+          didSelectTagButton:(id)sender{}
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
      didSelectActivityButton:(id)sender{}
@@ -82,7 +82,7 @@
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
           didFinishAddingTag:(EBTagPopover *)tagPopover
-            forPhotoAtIndex:(NSInteger)index{}
+             forPhotoAtIndex:(NSInteger)index{}
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
           textFieldDidReturn:(UITextField *)textField{}
@@ -280,16 +280,16 @@
 {
     id<EBPhotoPagesDataSource> datasource = controller.photosDataSource;
     if([datasource respondsToSelector:@selector(photoPagesController:
-                                                             didAddNewTagAtPoint:
-                                                             withText:
-                                                             forPhotoAtIndex:
-                                                             tagInfo:)]){
+                                                didAddNewTagAtPoint:
+                                                withText:
+                                                forPhotoAtIndex:
+                                                tagInfo:)]){
         
         [datasource  photoPagesController:controller
-                    didAddNewTagAtPoint:tagPopover.normalizedArrowPoint
-                               withText:tagPopover.text
-                        forPhotoAtIndex:index
-                                tagInfo:nil];
+                      didAddNewTagAtPoint:tagPopover.normalizedArrowPoint
+                                 withText:tagPopover.text
+                          forPhotoAtIndex:index
+                                  tagInfo:nil];
     }
     
     //[tagPopover removeFromSuperview];
@@ -319,10 +319,10 @@
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
  didTouchPhotoViewController:(EBPhotoViewController *)photoViewController
-        atNormalizedPoint:(CGPoint)normalizedTouchPoint
+           atNormalizedPoint:(CGPoint)normalizedTouchPoint
 {
     BOOL taggingIsAllowed = [controller.photosDataSource respondsToSelector:
-                         @selector(photoPagesController:shouldAllowTaggingForPhotoAtIndex:)] ?
+                             @selector(photoPagesController:shouldAllowTaggingForPhotoAtIndex:)] ?
     [controller.photosDataSource photoPagesController:controller
                     shouldAllowTaggingForPhotoAtIndex:photoViewController.photoIndex] : YES;
     
@@ -332,7 +332,7 @@
         [photoViewController tagPhotoAtNormalizedPoint:normalizedTouchPoint];
     }
     
- 
+    
 }
 
 - (void)photoPagesController:(EBPhotoPagesController *)controller
