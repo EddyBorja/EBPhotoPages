@@ -202,7 +202,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return nil;
 }
 
-
 //!!!: See comment below if bug is encountered
 - (void)pageViewController:(UIPageViewController *)pageViewController
         didFinishAnimating:(BOOL)finished
@@ -220,7 +219,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         [self updateToolbarsWithPhotoAtIndex:photoViewController.photoIndex];
     }
 }
-
 
 - (void)updateToolbarsWithPhotoAtIndex:(NSInteger)index
 {
@@ -323,7 +321,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         [self.toggleTagsBarButtonItem setImage:buttonImage];
     }
 }
-
 
 #pragma mark - Loading
 
@@ -489,7 +486,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [self setTaggingLabel:taggingLabel];
 }
 
-
 #pragma mark - View Lifecycle
 
 - (void)viewDidLoad
@@ -521,7 +517,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     [self.view setNeedsLayout];
 }
-
 
 #pragma mark - Notification and Key Value observing
 
@@ -599,8 +594,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
               options:NSKeyValueObservingOptionNew
               context:nil];
 }
-
-
 
 - (void)stopObservations
 {
@@ -782,7 +775,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
                      }completion:nil];*/
 }
 
-
 - (void)setPhotoDimLevel:(CGFloat)alpha
 {
     [self setAlpha:alpha forView:self.screenDimmer];
@@ -916,7 +908,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         [photoViewController setComments:comments];
     }
 }
-
 
 #pragma mark - Getters
 
@@ -1234,7 +1225,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 #pragma mark - Actions
 
-
 - (void)dismiss
 {
     [self.photoLoadingQueue cancelAllOperations];
@@ -1265,7 +1255,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 }
 
-
 - (void)presentActivitiesForPhotoViewController:(EBPhotoViewController *)photoViewController fromBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
     NSAssert([photoViewController isKindOfClass:[EBPhotoViewController class]], @"Expected EBPhotoViewController kind of class.");
@@ -1294,18 +1283,19 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
                                                                     caption:caption];
     }
     
-
-
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
     [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
-            
-#else
-    [activityViewController setCompletionWithItemsHandler:
-         ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
-#endif
         [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
         [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
     }];
+    
+#else
+    [activityViewController setCompletionWithItemsHandler:
+         ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError){
+             [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
+             [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
+    }];
+#endif
     
     if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
         activityViewController.popoverPresentationController.barButtonItem = barButtonItem;
@@ -1334,9 +1324,51 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [[NSNotificationCenter defaultCenter] postNotificationName:EBPhotoPagesControllerDidCancelCommentingNotification object:self];
 }
 
+#pragma mark - Tag Popover Action Sheet
+     
+- (void)showActionSheetForTagPopover:(EBTagPopover *)tagPopover
+                      inPhotoAtIndex:(NSInteger)index
+{
+    UIAlertController *actions = [self.photoPagesFactory
+                                  photoPagesController:self
+                                  actionSheetForTagPopover:tagPopover
+                                  inPhotoAtIndex:index];
+    
+    NSDictionary *targetInfo = @{kActionSheetTargetKey : tagPopover,
+                                 kActionSheetIndexKey : [NSNumber numberWithInteger:index]};
+    [self setActionSheetTargetInfo:targetInfo];
+    [self presentViewController:actions animated:YES completion:nil];
+    
+    [self setUpperBarAlpha:0];
+    [self setLowerBarAlpha:0];
+}
 
-#pragma mark - Action Sheet Delegate
-
+- (void)tagPopoverActionSheetClickedDeleteAction:(UIAlertAction *)action
+{
+    NSAssert([self.actionSheetTargetInfo isKindOfClass:[NSDictionary class]],
+             @"Expected action sheet target for tagActionSheet to be an NSDictionary kind of class!");
+    
+    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
+    NSNumber *indexNumber = self.actionSheetTargetInfo[kActionSheetIndexKey];
+    NSInteger index = [indexNumber integerValue];
+    
+    [self deleteTagPopover:tagPopover inPhotoAtIndex:index];
+    [self tagPopoverActionSheetDidDismiss:action];
+}
+     
+- (void)tagPopoverActionSheetClickedEditAction:(UIAlertAction *)action
+{
+    [self tagPopoverActionSheetDidDismiss:action];
+}
+     
+- (void)tagPopoverActionSheetDidDismiss:(UIAlertAction *)action
+{
+    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
+    NSAssert([tagPopover isKindOfClass:[EBTagPopover class]], @"Expected object with kActionSheetTargetKey to be EBTagPopover kind of class.");
+}
+     
+#pragma mark - Photo Action Sheet
+     
 - (void)showActionSheetForPhotoAtIndex:(NSInteger)index
 {
     BOOL showDefaultActionSheet = [self.photosDataSource respondsToSelector:@selector(photoPagesController:shouldAllowDeleteForPhotoAtIndex:)] ?
@@ -1345,82 +1377,20 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     
     
     if(showDefaultActionSheet){
-        UIActionSheet * actionSheet = [self.photoPagesFactory photoPagesController:self
-                                                        actionSheetForPhotoAtIndex:index];
+        UIAlertController * actionSheet = [self.photoPagesFactory photoPagesController:self
+                                                            actionSheetForPhotoAtIndex:index];
         NSDictionary *targetInfo = @{kActionSheetTargetKey:
                                          [self photoViewControllerWithIndex:index]};
         
-        [actionSheet setDelegate:self];
         [self setActionSheetTargetInfo:targetInfo];
-        [actionSheet showInView:self.view];
+        [self presentViewController:actionSheet animated:YES completion:nil];
         
         [self setUpperBarAlpha:0];
         [self setLowerBarAlpha:0];
     }
 }
 
-- (void)showActionSheetForTagPopover:(EBTagPopover *)tagPopover
-                      inPhotoAtIndex:(NSInteger)index
-{
-    UIActionSheet *actions = [self.photoPagesFactory
-                              photoPagesController:self
-                              actionSheetForTagPopover:tagPopover
-                              inPhotoAtIndex:index];
-    [actions setDelegate:self];
-    NSDictionary *targetInfo = @{kActionSheetTargetKey : tagPopover,
-                                 kActionSheetIndexKey : [NSNumber numberWithInteger:index]};
-    [self setActionSheetTargetInfo:targetInfo];
-    [actions showInView:self.view];
-    
-    [self setUpperBarAlpha:0];
-    [self setLowerBarAlpha:0];
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(actionSheet.tag == [self.photoPagesFactory tagIdForTagActionSheet]){
-        [self tagActionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
-    } else if (actionSheet.tag == [self.photoPagesFactory tagIdForPhotoActionSheet]) {
-        [self photoActionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
-    }
-}
-
-- (void)tagActionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSAssert([self.actionSheetTargetInfo isKindOfClass:[NSDictionary class]],
-            @"Expected action sheet target for tagActionSheet to be an NSDictionary kind of class!");
-    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
-    NSNumber *indexNumber = self.actionSheetTargetInfo[kActionSheetIndexKey];
-    NSInteger index = [indexNumber integerValue];
-    if(buttonIndex == actionSheet.destructiveButtonIndex){
-        [self deleteTagPopover:tagPopover inPhotoAtIndex:index];
-    }
-}
-
-- (void)photoActionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    //blank
-}
-
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if(actionSheet.tag == [self.photoPagesFactory tagIdForTagActionSheet]){
-        [self tagActionSheet:actionSheet didDismissWithButtonAtIndex:buttonIndex];
-    } else if (actionSheet.tag == [self.photoPagesFactory tagIdForPhotoActionSheet]) {
-        [self photoActionSheet:actionSheet didDismissWithButtonAtIndex:buttonIndex];
-    }
-}
-
-- (void)tagActionSheet:(UIActionSheet *)actionSheet didDismissWithButtonAtIndex:(NSInteger)buttonIndex
-{
-    EBTagPopover *tagPopover = self.actionSheetTargetInfo[kActionSheetTargetKey];
-    NSAssert([tagPopover isKindOfClass:[EBTagPopover class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
-    
-}
-
-- (void)photoActionSheet:(UIActionSheet *)actionSheet didDismissWithButtonAtIndex:(NSInteger)buttonIndex
+- (void)photoActionSheetClickedAction:(UIAlertAction *)action
 {
     NSAssert([self.actionSheetTargetInfo isKindOfClass:[NSDictionary class]],
              @"Expected action sheet target for photoActionSheet to be an NSDictionary kind of class!");
@@ -1428,11 +1398,11 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     EBPhotoViewController *photoViewController = self.actionSheetTargetInfo[kActionSheetTargetKey];
     NSAssert([photoViewController isKindOfClass:[EBPhotoViewController class]], @"Expected object with kActionSheetTargetKey to be EBPhotoViewController kind of class.");
     
-    if(buttonIndex == actionSheet.destructiveButtonIndex){
+    if(action.style == UIAlertActionStyleDestructive){
         [self deletePhotoAtIndex:photoViewController.photoIndex];
     }
     
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    NSString *buttonTitle = action.title;
     [self performActionOnPhotoAtIndex:photoViewController.photoIndex
                        forButtonTitle:buttonTitle];
     

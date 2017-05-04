@@ -558,9 +558,9 @@
                              @"A title appearing on a button that edits a tag in a photo.");
 }
 
-- (UIActionSheet *)photoPagesController:(EBPhotoPagesController *)controller
-               actionSheetForTagPopover:(EBTagPopover *)tagPopover
-                         inPhotoAtIndex:(NSInteger)index
+- (UIAlertController *)photoPagesController:(EBPhotoPagesController *)controller
+                   actionSheetForTagPopover:(EBTagPopover *)tagPopover
+                             inPhotoAtIndex:(NSInteger)index
 {
     NSString *title = [NSString stringWithFormat:@"“%@”", tagPopover.text];
     NSString *cancelTitle = [self actionSheetCancelButtonTitle];
@@ -585,19 +585,43 @@
         return nil;
     }
     
-    UIActionSheet *actionSheet =[[UIActionSheet alloc] initWithTitle:title
-                                                            delegate:nil
-                                                   cancelButtonTitle:cancelTitle
-                                              destructiveButtonTitle:deleteTitle
-                                                   otherButtonTitles:editTitle, nil];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:nil
+                                                                      preferredStyle: UIAlertControllerStyleActionSheet];
     
-    [actionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
-    [actionSheet setTag:[self tagIdForTagActionSheet]];
-    return actionSheet;
+    alertController.view.alpha = 0.90f;
+    
+    [alertController addAction:[UIAlertAction actionWithTitle:cancelTitle style:UIAlertActionStyleCancel handler:nil]];
+    
+    if (deleteTitle) {
+        __weak EBPhotoPagesController *weakController = controller;
+        [alertController addAction:
+        [UIAlertAction actionWithTitle:deleteTitle
+                                 style:UIAlertActionStyleDestructive
+                               handler:^(UIAlertAction * _Nonnull action) {
+                                   __strong EBPhotoPagesController *strongController = weakController;
+                                   [strongController tagPopoverActionSheetClickedDeleteAction:action];
+            
+                               }]];
+    }
+    
+    if (editTitle) {
+        __weak EBPhotoPagesController *weakController = controller;
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:editTitle
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * _Nonnull action) {
+                                    __strong EBPhotoPagesController *strongController = weakController;
+                                    [strongController tagPopoverActionSheetClickedEditAction:action];
+                                    
+                                }]];
+    }
+    
+    return alertController;
 }
 
-- (UIActionSheet *)photoPagesController:(EBPhotoPagesController *)controller
-             actionSheetForPhotoAtIndex:(NSInteger)index
+- (UIAlertController *)photoPagesController:(EBPhotoPagesController *)controller
+                 actionSheetForPhotoAtIndex:(NSInteger)index
 {
     BOOL allowTagging = [controller.photosDataSource respondsToSelector:@selector(photoPagesController:shouldAllowTaggingForPhotoAtIndex:)] ?
         [controller.photosDataSource photoPagesController:controller
@@ -611,51 +635,58 @@
     [controller.photosDataSource photoPagesController:controller
                      shouldAllowReportForPhotoAtIndex:index] : NO;
     
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIActionSheet *actionSheet = nil;
-    actionSheet =[[UIActionSheet alloc] initWithTitle:nil
-                                             delegate:nil
-                                    cancelButtonTitle:nil
-                               destructiveButtonTitle:nil
-                                    otherButtonTitles:nil];
+    alertController.view.alpha = 0.90f;
     
-    [actionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
+    __weak EBPhotoPagesController *weakController = controller;
     
-    [actionSheet setTag:[self tagIdForPhotoActionSheet]];
-    
-    if (allowTagging){
-        NSString *tagPhotoTitle = [self actionSheetTagPhotoButtonTitle];
-        [actionSheet addButtonWithTitle:tagPhotoTitle];
+    if (allowTagging) {
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:[self actionSheetTagPhotoButtonTitle]
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * _Nonnull action) {
+                                    __strong EBPhotoPagesController *strongController = weakController;
+                                    [strongController photoActionSheetClickedAction:action];
+                                    
+                                }]];
     }
     
-    if(allowReport){
-        NSString *reportTitle = [self actionSheetReportButtonTitle];
-        [actionSheet addButtonWithTitle:reportTitle];
+    if (allowReport) {
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:[self actionSheetReportButtonTitle]
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * _Nonnull action) {
+                                    __strong EBPhotoPagesController *strongController = weakController;
+                                    [strongController photoActionSheetClickedAction:action];
+                                    
+                                }]];
     }
     
-    if(allowDelete){
-        NSString *deleteTitle = [self actionSheetDeleteButtonTitle];
-        [actionSheet addButtonWithTitle:deleteTitle];
-        [actionSheet setDestructiveButtonIndex:actionSheet.numberOfButtons-1];
+    if (allowDelete) {
+        [alertController addAction:
+         [UIAlertAction actionWithTitle:[self actionSheetDeleteButtonTitle]
+                                  style:UIAlertActionStyleDestructive
+                                handler:^(UIAlertAction * _Nonnull action) {
+                                    __strong EBPhotoPagesController *strongController = weakController;
+                                    [strongController photoActionSheetClickedAction:action];
+                                    
+                                }]];
     }
     
-    NSString *cancelTitle = [self actionSheetCancelButtonTitle];
-    [actionSheet addButtonWithTitle:cancelTitle];
-    [actionSheet setCancelButtonIndex:actionSheet.numberOfButtons-1];
-
-    return actionSheet;
+    [alertController addAction:
+     [UIAlertAction actionWithTitle:[self actionSheetCancelButtonTitle]
+                              style:UIAlertActionStyleCancel
+                            handler:^(UIAlertAction * _Nonnull action) {
+                                __strong EBPhotoPagesController *strongController = weakController;
+                                [strongController photoActionSheetClickedAction:action];
+                                
+                            }]];
+    
+    return alertController;
 }
-
-- (NSInteger)tagIdForTagActionSheet
-{
-    return 32;
-}
-
-- (NSInteger)tagIdForPhotoActionSheet
-{
-    return 20;
-}
-
 
 #pragma mark - Tags
 

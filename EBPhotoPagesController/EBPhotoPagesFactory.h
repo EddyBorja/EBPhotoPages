@@ -61,14 +61,12 @@
 - (UIBarButtonItem *)tagBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
 - (UIBarButtonItem *)doneTaggingBarButtonItemForPhotoPagesController:(EBPhotoPagesController *)controller;
 
+- (UIAlertController *)photoPagesController:(EBPhotoPagesController *)controller
+                   actionSheetForTagPopover:(EBTagPopover *)tagPopover
+                             inPhotoAtIndex:(NSInteger)index;
+- (UIAlertController *)photoPagesController:(EBPhotoPagesController *)controller
+                 actionSheetForPhotoAtIndex:(NSInteger)index;
 
-- (UIActionSheet *)photoPagesController:(EBPhotoPagesController *)controller
-               actionSheetForTagPopover:(EBTagPopover *)tagPopover
-                         inPhotoAtIndex:(NSInteger)index;
-- (UIActionSheet *)photoPagesController:(EBPhotoPagesController *)controller
-             actionSheetForPhotoAtIndex:(NSInteger)index;
-- (NSInteger)tagIdForTagActionSheet;
-- (NSInteger)tagIdForPhotoActionSheet;
 - (NSString *)actionSheetReportButtonTitle;
 - (NSString *)actionSheetDeleteButtonTitle;
 - (NSString *)actionSheetCancelButtonTitle;

@@ -769,6 +769,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",
@@ -788,6 +789,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",

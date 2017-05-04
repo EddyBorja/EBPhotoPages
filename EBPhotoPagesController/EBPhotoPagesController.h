@@ -97,6 +97,11 @@
 
 - (void)showActionSheetForTagPopover:(EBTagPopover *)tagPopover inPhotoAtIndex:(NSInteger)index;
 
+- (void)tagPopoverActionSheetClickedDeleteAction:(UIAlertAction *)action;
+- (void)tagPopoverActionSheetClickedEditAction:(UIAlertAction *)action;
+- (void)tagPopoverActionSheetDidDismiss:(UIAlertAction *)action;
+- (void)photoActionSheetClickedAction:(UIAlertAction *)action;
+
 - (void)deletePhotoAtIndex:(NSInteger)index;
 - (void)deleteTagPopover:(EBTagPopover *)tagPopover inPhotoAtIndex:(NSInteger)index;
 

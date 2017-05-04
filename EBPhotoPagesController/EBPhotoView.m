@@ -412,6 +412,7 @@ static NSString *ImageKeyPath = @"image";
     CGRect photoDisplayedFrame;
     if(self.imageView.contentMode == UIViewContentModeScaleAspectFit){
         photoDisplayedFrame = AVMakeRectWithAspectRatioInsideRect(self.imageView.image.size, self.imageView.frame);
+        
     } else if(self.imageView.contentMode == UIViewContentModeCenter) {
         CGPoint photoOrigin = CGPointZero;
         photoOrigin.x = (self.imageView.frame.size.width - (self.imageView.image.size.width * self.zoomScale)) * 0.5;
@@ -421,6 +422,7 @@ static NSString *ImageKeyPath = @"image";
                                          self.imageView.image.size.width*self.zoomScale,
                                          self.imageView.image.size.height*self.zoomScale);
     } else {
+        photoDisplayedFrame = CGRectZero;
         NSAssert(0, @"Don't know how to generate frame for photo with current content mode.");
     }
 
