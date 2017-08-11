@@ -357,14 +357,6 @@
                                                         target:controller
                                                       selector:@selector(didSelectTagButton:)];
     
-    if ([[EBConfig sharedConfig] titleFont] != nil) {
-        [tagButton setTitleTextAttributes:
-         @{
-           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
-           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
-         } forState:UIControlStateNormal];
-    }
-    
     return tagButton;
 }
 
