@@ -86,8 +86,8 @@
 		8583A59118022E1400D694A5 /* EBTagPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 8583A58318022E1400D694A5 /* EBTagPopover.m */; };
 		8583A59818022FE500D694A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59718022FE500D694A5 /* AVFoundation.framework */; };
 		8583A59A18022FF400D694A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59918022FF400D694A5 /* QuartzCore.framework */; };
-		956FF9B11F3E0F1B007F7712 /* EBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 956FF9B01F3E0F1B007F7712 /* EBConfig.m */; };
-		956FF9B41F3E171C007F7712 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 956FF9B31F3E171C007F7712 /* NSDate+TimeAgo.m */; };
+		956FF9B71F3E1E5B007F7712 /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = 956FF9B61F3E1E5B007F7712 /* NSDate+TimeAgo.m */; };
+		956FF9BA1F3E1E64007F7712 /* EBConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 956FF9B91F3E1E64007F7712 /* EBConfig.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,10 +216,10 @@
 		8583A59718022FE500D694A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8583A59918022FF400D694A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8583A5A11802322900D694A5 /* EBPhotoPagesNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBPhotoPagesNotifications.h; path = EBPhotoPagesController/EBPhotoPagesNotifications.h; sourceTree = "<group>"; };
-		956FF9AF1F3E0F1B007F7712 /* EBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EBConfig.h; sourceTree = "<group>"; };
-		956FF9B01F3E0F1B007F7712 /* EBConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EBConfig.m; sourceTree = "<group>"; };
-		956FF9B21F3E171C007F7712 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
-		956FF9B31F3E171C007F7712 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
+		956FF9B51F3E1E5B007F7712 /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDate+TimeAgo.h"; path = "EBPhotoPagesController/NSDate+TimeAgo.h"; sourceTree = "<group>"; };
+		956FF9B61F3E1E5B007F7712 /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+TimeAgo.m"; path = "EBPhotoPagesController/NSDate+TimeAgo.m"; sourceTree = "<group>"; };
+		956FF9B81F3E1E64007F7712 /* EBConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBConfig.h; path = EBPhotoPagesController/EBConfig.h; sourceTree = "<group>"; };
+		956FF9B91F3E1E64007F7712 /* EBConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EBConfig.m; path = EBPhotoPagesController/EBConfig.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -500,8 +500,8 @@
 				8583A58018022E1400D694A5 /* EBShadedView.h */,
 				8583A58118022E1400D694A5 /* EBShadedView.m */,
 				8583A5A11802322900D694A5 /* EBPhotoPagesNotifications.h */,
-				956FF9B21F3E171C007F7712 /* NSDate+TimeAgo.h */,
-				956FF9B31F3E171C007F7712 /* NSDate+TimeAgo.m */,
+				956FF9B51F3E1E5B007F7712 /* NSDate+TimeAgo.h */,
+				956FF9B61F3E1E5B007F7712 /* NSDate+TimeAgo.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -509,8 +509,8 @@
 		956FF9AE1F3E0EEC007F7712 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				956FF9AF1F3E0F1B007F7712 /* EBConfig.h */,
-				956FF9B01F3E0F1B007F7712 /* EBConfig.m */,
+				956FF9B81F3E1E64007F7712 /* EBConfig.h */,
+				956FF9B91F3E1E64007F7712 /* EBConfig.m */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -659,7 +659,6 @@
 				8583A58D18022E1400D694A5 /* EBPhotoToolbar.m in Sources */,
 				8583A54318022D3800D694A5 /* DEMOPhoto.m in Sources */,
 				8583A58C18022E1400D694A5 /* EBPhotoPagesState.m in Sources */,
-				956FF9B11F3E0F1B007F7712 /* EBConfig.m in Sources */,
 				8583A58E18022E1400D694A5 /* EBPhotoView.m in Sources */,
 				8583A54518022D3800D694A5 /* DEMOComment.m in Sources */,
 				8583A58518022E1400D694A5 /* EBCaptionView.m in Sources */,
@@ -667,11 +666,12 @@
 				8583A58618022E1400D694A5 /* EBCommentCell.m in Sources */,
 				8583A58718022E1400D694A5 /* EBCommentsTableView.m in Sources */,
 				8583A58B18022E1400D694A5 /* EBPhotoPagesOperation.m in Sources */,
-				956FF9B41F3E171C007F7712 /* NSDate+TimeAgo.m in Sources */,
 				8583A54418022D3800D694A5 /* DEMOTag.m in Sources */,
 				8583A58918022E1400D694A5 /* EBPhotoPagesController.m in Sources */,
+				956FF9B71F3E1E5B007F7712 /* NSDate+TimeAgo.m in Sources */,
 				8583A54218022D3800D694A5 /* DEMOViewController.m in Sources */,
 				8583A58A18022E1400D694A5 /* EBPhotoPagesFactory.m in Sources */,
+				956FF9BA1F3E1E64007F7712 /* EBConfig.m in Sources */,
 				8583A54118022D3800D694A5 /* DEMOAppDelegate.m in Sources */,
 				8583A58818022E1400D694A5 /* EBCommentsView.m in Sources */,
 			);
