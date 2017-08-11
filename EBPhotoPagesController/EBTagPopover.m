@@ -9,7 +9,7 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+#import "EBConfig.h"
 #import "EBTagPopover.h"
 #import "EBPhotoPagesController.h"
 #import "EBPhotoPagesNotifications.h"
@@ -115,6 +115,7 @@
 {
     NSString *placeholderText = NSLocalizedString(@"New Tag",
                                                   @"Appears as placeholder text before a user enters text for a photo tag.");
+    
     UIFont *textFieldFont = [UIFont fontWithName:@"HelveticaNeue-Bold" size:12];
     CGSize tagSize = [placeholderText sizeWithAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Bold" size:12]}];
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, tagSize.width, tagSize.height)];

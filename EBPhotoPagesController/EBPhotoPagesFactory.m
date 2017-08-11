@@ -22,6 +22,7 @@
 #import "EBCommentsView.h"
 #import "EBCommentsTableView.h"
 #import "EBCommentCell.h"
+#import "EBConfig.h"
 #include <math.h>
 //static inline double radians (double degrees) {return degrees * M_PI/180;}
 
@@ -1056,26 +1057,47 @@
 
 - (NSString *)photoPagesDefaultFontName
 {
+    if ([[EBConfig sharedConfig] bodyFont] != nil) {
+        return [[EBConfig sharedConfig] bodyFont].fontName;
+    }
+    
     return @"HelveticaNeue-Light";
 }
 
 - (NSString *)photoPagesBoldFontName
 {
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        return [[EBConfig sharedConfig] titleFont].fontName;
+    }
+    
     return @"HelveticaNeue-Bold";
 }
 
 - (UIColor *)upperToolbarTintColor
 {
+    if ([[EBConfig sharedConfig] tintColor] != nil) {
+        return [[EBConfig sharedConfig] tintColor];
+    }
+    
     return [self photoPagesTintColor];
 }
 
 - (UIColor *)lowerToolbarTintColor
 {
+    
+    if ([[EBConfig sharedConfig] tintColor] != nil) {
+        return [[EBConfig sharedConfig] tintColor];
+    }
+    
     return [self photoPagesTintColor];
 }
 
 - (UIColor *)commentCellTintColor
 {
+    if ([[EBConfig sharedConfig] tintColor] != nil) {
+        return [[[EBConfig sharedConfig] tintColor] colorWithAlphaComponent:0.35];
+    }
+    
     UIColor *photoPagesColor = [self photoPagesTintColor];
     return [photoPagesColor colorWithAlphaComponent:0.35];
 }

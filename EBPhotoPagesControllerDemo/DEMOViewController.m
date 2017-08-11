@@ -21,6 +21,7 @@
 #import "EBPhotoPagesController.h"
 #import "EBPhotoPagesFactory.h"
 #import "EBTagPopover.h"
+#import "EBConfig.h"
 
 
 @interface DEMOViewController ()
@@ -332,6 +333,8 @@
     [photo setDisabledDeleteForTags:YES];
     [photo setDisabledActivities:YES];
     
+    [self customize];
+    
 }
 
 - (void)viewDidLoad
@@ -355,6 +358,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+    
+- (void) customize {
+    [[EBConfig sharedConfig] setBodyFont: [UIFont fontWithName:@"Avenir-Book" size:17]];
+    [[EBConfig sharedConfig] setShouldUseRelativeTimeFormatting:YES];
 }
 
 - (IBAction)didSelectViewPhotos:(id)sender

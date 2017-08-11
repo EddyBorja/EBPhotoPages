@@ -63,5 +63,9 @@
 {
     return self.image;
 }
+    
+- (NSURL *)authorAvatarURL {
+    return nil;
+}
 
 @end

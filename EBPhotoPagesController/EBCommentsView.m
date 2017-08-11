@@ -14,6 +14,7 @@
 #import "EBCommentsView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "EBCommentsTableView.h"
+#import "EBConfig.h"
 
 @interface EBCommentsView ()
 @property (weak, readwrite) EBCommentsTableView *tableView;
@@ -141,8 +142,15 @@
                                     buttonSize.height);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:buttonFrame];
-    [button setTitle:NSLocalizedString(@"post", @"Appears on a button that posts a comment when tapped.")
-            forState:UIControlStateNormal];
+    
+    if ([[EBConfig sharedConfig] postButtonTitle] != nil) {
+        [button setTitle:[[EBConfig sharedConfig] postButtonTitle]
+                forState:UIControlStateNormal];
+    } else {
+        [button setTitle:NSLocalizedString(@"Post", @"Appears on a button that posts a comment when tapped.")
+                forState:UIControlStateNormal];
+    }
+    
     [button addTarget:self
                action:@selector(didSelectPostButton:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -250,6 +258,10 @@
 
 - (UIColor *)postButtonColor
 {
+    if ([[EBConfig sharedConfig] tintColor] != nil) {
+        return [[EBConfig sharedConfig] tintColor];
+    }
+    
     return [UIColor colorWithRed:0 green:118/255.0 blue:1.0 alpha:1.0];
 }
 
