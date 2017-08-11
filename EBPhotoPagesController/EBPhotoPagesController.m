@@ -47,6 +47,17 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 @property (assign) NSInteger currentPhotoIndex;
 
+@property (nonatomic) UIBarButtonItem *doneBarButtonItem;
+@property (nonatomic) UIBarButtonItem *cancelBarButtonItem;
+@property (nonatomic) UIBarButtonItem *tagBarButtonItem;
+@property (nonatomic) UIBarButtonItem *doneTaggingBarButtonItem;
+@property (nonatomic) UIBarButtonItem *activityBarButtonItem;
+@property (nonatomic) UIBarButtonItem *miscBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsExitBarButtonItem;
+@property (nonatomic) UIBarButtonItem *hideCommentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *toggleTagsBarButtonItem;
+
 @end
 
 #pragma mark -

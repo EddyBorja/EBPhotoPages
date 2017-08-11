@@ -318,6 +318,15 @@
                                                          style:UIBarButtonItemStyleDone
                                                         target:controller
                                                       selector:@selector(didSelectDoneButton:)];
+    
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        [doneButton setTitleTextAttributes:
+         @{
+           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
+           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
+         } forState:UIControlStateNormal];
+    }
+    
     return doneButton;
 }
 
@@ -328,6 +337,15 @@
                                                           style:UIBarButtonItemStyleDone
                                                          target:controller
                                                        selector:@selector(didSelectCancelButton:)];
+    
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        [cancelButton setTitleTextAttributes:
+         @{
+           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
+           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
+         } forState:UIControlStateNormal];
+    }
+    
     return cancelButton;
 }
 
@@ -338,6 +356,15 @@
                                                         style:UIBarButtonItemStylePlain
                                                         target:controller
                                                       selector:@selector(didSelectTagButton:)];
+    
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        [tagButton setTitleTextAttributes:
+         @{
+           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
+           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
+         } forState:UIControlStateNormal];
+    }
+    
     return tagButton;
 }
 
@@ -348,6 +375,15 @@
                                                                 style:UIBarButtonItemStyleDone
                                                                target:controller
                                                              selector:@selector(didSelectTagDoneButton:)];
+    
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        [doneTaggingButton setTitleTextAttributes:
+         @{
+           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
+           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
+         } forState:UIControlStateNormal];
+    }
+    
     return doneTaggingButton;
 }
 
