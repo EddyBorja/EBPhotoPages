@@ -131,6 +131,22 @@
     [self setDateLabel:dateLabel];
     [self addSubview:dateLabel];
 }
+    
+    - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+    {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if ( !error )
+                                   {
+                                       UIImage *image = [[UIImage alloc] initWithData:data];
+                                       completionBlock(YES,image);
+                                   } else{
+                                       completionBlock(NO,nil);
+                                   }
+                               }];
+    }
 
 
 - (void)setComment:(id<EBPhotoCommentProtocol>)comment
@@ -147,7 +163,16 @@
     }
     
     if([comment respondsToSelector:@selector(authorAvatar)]){
-        [self.authorAvatar setImage:[comment authorAvatar]];
+        if (comment.authorAvatar != nil) {
+            [self.authorAvatar setImage:[comment authorAvatar]];
+        }
+        
+        if (comment.authorAvatarURL != nil) {
+            [self downloadImageWithURL:comment.authorAvatarURL completionBlock:^(BOOL succeeded, UIImage *image) {
+                [self.authorAvatar setImage:image];
+            }];
+        }
+        
         [self.authorAvatar.layer setMasksToBounds:YES];
         [self.authorAvatar.layer setRasterizationScale:[UIScreen mainScreen].scale];
         [self.authorAvatar.layer setShouldRasterize:YES];

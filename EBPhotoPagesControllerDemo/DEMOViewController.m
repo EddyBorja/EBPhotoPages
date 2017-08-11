@@ -208,8 +208,6 @@
                                                                      @"authorImage": [UIImage imageNamed:@"kerem.jpg"],
                                                                      @"authorName" : @"Kerem"}],
                                 ];
-    
-    
     [self setPhotos:@[
      [DEMOPhoto photoWithProperties:
       @{@"imageFile": @"photo1.jpg",
