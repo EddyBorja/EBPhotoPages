@@ -22,7 +22,6 @@
 @property (assign) BOOL simulateLatency;
 @property (strong, nonatomic) IBOutlet UIButton *viewPhotosButton;
 @property (strong) NSArray *photos;
-    @property NSArray *braclets;
 
 - (IBAction)didSelectViewPhotos:(id)sender;
 - (IBAction)didToggleLatency:(id)sender;
