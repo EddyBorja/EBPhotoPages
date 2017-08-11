@@ -27,16 +27,16 @@
 @property (strong) id<EBPhotoPagesDataSource> photosDataSource;
 @property (strong) EBPhotoPagesFactory *photoPagesFactory;
 
-@property (nonatomic, readonly) UIBarButtonItem *doneBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *cancelBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *tagBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *doneTaggingBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *activityBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *miscBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *commentsBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *commentsExitBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *hideCommentsBarButtonItem;
-@property (nonatomic, readonly) UIBarButtonItem *toggleTagsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *doneBarButtonItem;
+@property (nonatomic) UIBarButtonItem *cancelBarButtonItem;
+@property (nonatomic) UIBarButtonItem *tagBarButtonItem;
+@property (nonatomic) UIBarButtonItem *doneTaggingBarButtonItem;
+@property (nonatomic) UIBarButtonItem *activityBarButtonItem;
+@property (nonatomic) UIBarButtonItem *miscBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsExitBarButtonItem;
+@property (nonatomic) UIBarButtonItem *hideCommentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *toggleTagsBarButtonItem;
 
 
 //Set to NO to prevent tags from showing on photos

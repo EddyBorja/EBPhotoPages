@@ -16,8 +16,13 @@
 
 @property (nonatomic, retain) UIColor* textColor;
 @property (nonatomic, retain) UIColor* tintColor;
+
+@property (nonatomic, retain) UIBarButtonItem* doneBarButtonItem;
+
 @property (nonatomic, retain) NSString* postButtonTitle;
+
 @property (nonatomic, retain) NSDateFormatter* dateFormatter;
+
 @property BOOL shouldUseRelativeTimeFormatting;
     
 /// This is the font used for the captions and comments
