@@ -273,6 +273,15 @@
                                                                 style:UIBarButtonItemStyleDone
                                                                target:controller
                                                              selector:@selector(didSelectCancelButton:)];
+    
+    if ([[EBConfig sharedConfig] titleFont] != nil) {
+        [hideCommentsButton setTitleTextAttributes:
+         @{
+           NSFontAttributeName: [[EBConfig sharedConfig] titleFont],
+           NSForegroundColorAttributeName: [[EBConfig sharedConfig] textColor] != nil ? [[EBConfig sharedConfig] textColor] : [UIColor whiteColor]
+           } forState:UIControlStateNormal];
+    }
+    
     return hideCommentsButton;
 }
 

@@ -10,20 +10,30 @@
 
 @interface EBConfig : NSObject
     
+/// This is the font used for the captions and comments
 @property (nonatomic, retain) UIFont* bodyFont;
+    
+/// This is the font used for buttons and titles
 @property (nonatomic, retain) UIFont* titleFont;
+    
+/// This is the font used for the comment titles
 @property (nonatomic, retain) UIFont* commentTitleFont;
-
+    
+/// This is the colour for all of the titles
 @property (nonatomic, retain) UIColor* textColor;
+@property (nonatomic, retain) UIColor* postButtonBackgroundColor;
+    
+/// This is the color used for all of the excluding the post button
 @property (nonatomic, retain) UIColor* tintColor;
-
-@property (nonatomic, retain) UIBarButtonItem* doneBarButtonItem;
-
+    
+/// This is the title for the post button
 @property (nonatomic, retain) NSString* postButtonTitle;
-
+    
+/// This is the formatter used to format the dates for each comment
 @property (nonatomic, retain) NSDateFormatter* dateFormatter;
-
 @property BOOL shouldUseRelativeTimeFormatting;
+    
+    
     
 /// This is the font used for the captions and comments
 - (UIFont *)bodyFont;
@@ -49,10 +59,16 @@
 /// Sets the colour for all of the titles
 - (void)setTextColor: (UIColor *) textColor;
     
-/// This is the color used for all of the buttons
+/// This is the background color for the post button
+- (UIColor *)postButtonBackgroundColor;
+    
+/// Sets the background color for the post button
+- (void)setPostButtonBackgroundColor: (UIColor *) postButtonBackgroundColor;
+    
+/// This is the color used for all of the excluding the post button
 - (UIColor *)tintColor;
     
-/// Sets the color used for all of the buttons
+/// Sets the color used for all of the excluding the post button
 - (void)setTintColor: (UIColor *) tintColor;
     
 /// This is the title for the post button
@@ -67,10 +83,7 @@
 /// Sets the formatter used to format the dates for each comment
 - (void)setDateFormatter: (NSDateFormatter *) dateFormatter;
     
-/// This is the formatter used to format the dates for each comment
 - (BOOL)shouldUseRelativeTimeFormatting;
-    
-/// This is the formatter used to format the dates for each comment
 - (void)setShouldUseRelativeTimeFormatting: (BOOL) shouldUseRelativeTimeFormatting;
     
 /// Global configuration

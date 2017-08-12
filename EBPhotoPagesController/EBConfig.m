@@ -16,6 +16,7 @@
 
 @synthesize textColor = _textColor;
 @synthesize tintColor = _tintColor;
+@synthesize postButtonBackgroundColor = _postButtonBackgroundColor;
     
 @synthesize postButtonTitle = _postButtonTitle;
     
@@ -99,6 +100,15 @@
     
 - (void)setPostButtonTitle:(NSString *)postButtonTitle {
     _postButtonTitle = postButtonTitle;
+}
+    
+#pragma mark Post Button Background Color
+- (UIColor *)postButtonBackgroundColor {
+    return _postButtonBackgroundColor
+}
+    
+- (void)setPostButtonBackgroundColor:(UIColor *)postButtonBackgroundColor {
+    _postButtonBackgroundColor = postButtonBackgroundColor
 }
 
 #pragma mark Relative Timing
