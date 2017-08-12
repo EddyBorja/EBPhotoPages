@@ -104,11 +104,11 @@
     
 #pragma mark Post Button Background Color
 - (UIColor *)postButtonBackgroundColor {
-    return _postButtonBackgroundColor
+    return _postButtonBackgroundColor;
 }
     
 - (void)setPostButtonBackgroundColor:(UIColor *)postButtonBackgroundColor {
-    _postButtonBackgroundColor = postButtonBackgroundColor
+    _postButtonBackgroundColor = postButtonBackgroundColor;
 }
 
 #pragma mark Relative Timing
