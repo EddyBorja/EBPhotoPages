@@ -35,17 +35,6 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 @property (strong) NSDictionary *actionSheetTargetInfo; //info about the object the action sheet is currently handling
 @property (assign) BOOL originalStatusBarVisibility;
 
-@property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *cancelBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *tagBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *doneTaggingBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *activityBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *commentsBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *miscBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *commentsExitBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *hideCommentsBarButtonItem;
-@property (nonatomic, strong) UIBarButtonItem *toggleTagsBarButtonItem;
-
 @property (weak) UIToolbar *upperToolbar;
 @property (weak) UIToolbar *lowerToolbar;
 @property (weak) UIView *screenDimmer;
@@ -57,6 +46,17 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 @property (strong) NSOperationQueue *photoLoadingQueue;
 
 @property (assign) NSInteger currentPhotoIndex;
+
+@property (nonatomic) UIBarButtonItem *doneBarButtonItem;
+@property (nonatomic) UIBarButtonItem *cancelBarButtonItem;
+@property (nonatomic) UIBarButtonItem *tagBarButtonItem;
+@property (nonatomic) UIBarButtonItem *doneTaggingBarButtonItem;
+@property (nonatomic) UIBarButtonItem *activityBarButtonItem;
+@property (nonatomic) UIBarButtonItem *miscBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *commentsExitBarButtonItem;
+@property (nonatomic) UIBarButtonItem *hideCommentsBarButtonItem;
+@property (nonatomic) UIBarButtonItem *toggleTagsBarButtonItem;
 
 @end
 

@@ -14,6 +14,7 @@
 #import "EBCommentsView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "EBCommentsTableView.h"
+#import "EBConfig.h"
 
 @interface EBCommentsView ()
 @property (weak, readwrite) EBCommentsTableView *tableView;
@@ -98,7 +99,13 @@
     
     UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
     [textView setBackgroundColor:[UIColor clearColor]];
-    [textView setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
+    
+    if ([[EBConfig sharedConfig] bodyFont] != nil) {
+        [textView setFont:[[EBConfig sharedConfig] bodyFont]];
+    } else {
+        [textView setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
+    }
+    
     [textView setKeyboardAppearance:UIKeyboardAppearanceAlert];
     [textView setTextColor:[UIColor whiteColor]];
     //[self setAutoresizingMask:UIViewAutoresizingFlexibleTopMargin|  UIViewAutoresizingFlexibleWidth];
@@ -112,7 +119,13 @@
 {
     UILabel *label = [[UILabel alloc] initWithFrame:textView.frame];
     [label setTextAlignment:NSTextAlignmentLeft];
-    [label setFont:textView.font];
+    
+    if ([[EBConfig sharedConfig] bodyFont] != nil) {
+        [textView setFont:[[EBConfig sharedConfig] bodyFont]];
+    } else {
+        [label setFont:textView.font];
+    }
+    
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor colorWithWhite:0.5 alpha:1]];
     [textView.superview insertSubview:label belowSubview:textView];
@@ -141,8 +154,15 @@
                                     buttonSize.height);
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:buttonFrame];
-    [button setTitle:NSLocalizedString(@"post", @"Appears on a button that posts a comment when tapped.")
-            forState:UIControlStateNormal];
+    
+    if ([[EBConfig sharedConfig] postButtonTitle] != nil) {
+        [button setTitle:[[EBConfig sharedConfig] postButtonTitle]
+                forState:UIControlStateNormal];
+    } else {
+        [button setTitle:NSLocalizedString(@"Post", @"Appears on a button that posts a comment when tapped.")
+                forState:UIControlStateNormal];
+    }
+    
     [button addTarget:self
                action:@selector(didSelectPostButton:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -250,6 +270,10 @@
 
 - (UIColor *)postButtonColor
 {
+    if ([[EBConfig sharedConfig] postButtonBackgroundColor] != nil) {
+        return [[EBConfig sharedConfig] postButtonBackgroundColor];
+    }
+    
     return [UIColor colorWithRed:0 green:118/255.0 blue:1.0 alpha:1.0];
 }
 

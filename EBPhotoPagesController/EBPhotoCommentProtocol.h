@@ -34,6 +34,9 @@
 
 //This is an image of the person who posted the comment
 - (UIImage *)authorAvatar;
+    
+/// A URL that represents the image that is shown on the comment
+- (NSURL *)authorAvatarURL;
 
 //This may contain additional application specific information you want to provide about the comment.
 - (NSDictionary *)metaInfo;

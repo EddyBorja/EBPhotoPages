@@ -10,8 +10,9 @@
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-
+#import "EBConfig.h"
 #import "EBCommentCell.h"
+#import "NSDate+TimeAgo.h"
 
 @implementation EBCommentCell
 
@@ -81,7 +82,12 @@
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
+    if ([[EBConfig sharedConfig] commentTitleFont] != nil) {
+        [button.titleLabel setFont:[[EBConfig sharedConfig] commentTitleFont]];
+    } else {
+        [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
+    }
+    
     [button.titleLabel setTextColor:[UIColor colorWithWhite:0.8 alpha:1]];
     [button.titleLabel setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [button.titleLabel setShadowOffset:CGSizeMake(0, 1)];
@@ -102,7 +108,13 @@
     UILabel *textLabel = [UILabel new];
     [textLabel setBackgroundColor:[UIColor redColor]];
     [textLabel setAutoresizingMask:UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth];
-    [textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
+    
+    if ([[EBConfig sharedConfig] bodyFont] != nil) {
+        [textLabel setFont:[[EBConfig sharedConfig] bodyFont]];
+    } else {
+        [textLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:16]];
+    }
+    
     [textLabel setTextColor:[UIColor whiteColor]];
     [textLabel setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [textLabel setShadowOffset:CGSizeMake(0, 1)];
@@ -120,7 +132,13 @@
     UILabel *dateLabel = [UILabel new];
     
     [dateLabel setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin];
-    [dateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
+    
+    if ([[EBConfig sharedConfig] commentTitleFont] != nil) {
+        [dateLabel setFont:[[EBConfig sharedConfig] commentTitleFont]];
+    } else {
+        [dateLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:12]];
+    }
+    
     [dateLabel setTextColor:[UIColor colorWithWhite:0.8 alpha:1]];
     [dateLabel setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [dateLabel setShadowOffset:CGSizeMake(0, 1)];
@@ -131,6 +149,22 @@
     [self setDateLabel:dateLabel];
     [self addSubview:dateLabel];
 }
+    
+    - (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+    {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        [NSURLConnection sendAsynchronousRequest:request
+                                           queue:[NSOperationQueue mainQueue]
+                               completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                                   if ( !error )
+                                   {
+                                       UIImage *image = [[UIImage alloc] initWithData:data];
+                                       completionBlock(YES,image);
+                                   } else{
+                                       completionBlock(NO,nil);
+                                   }
+                               }];
+    }
 
 
 - (void)setComment:(id<EBPhotoCommentProtocol>)comment
@@ -147,7 +181,16 @@
     }
     
     if([comment respondsToSelector:@selector(authorAvatar)]){
-        [self.authorAvatar setImage:[comment authorAvatar]];
+        if (comment.authorAvatar != nil) {
+            [self.authorAvatar setImage:[comment authorAvatar]];
+        }
+        
+        if (comment.authorAvatarURL != nil) {
+            [self downloadImageWithURL:comment.authorAvatarURL completionBlock:^(BOOL succeeded, UIImage *image) {
+                [self.authorAvatar setImage:image];
+            }];
+        }
+        
         [self.authorAvatar.layer setMasksToBounds:YES];
         [self.authorAvatar.layer setRasterizationScale:[UIScreen mainScreen].scale];
         [self.authorAvatar.layer setShouldRasterize:YES];
@@ -167,9 +210,19 @@
     
     if([comment respondsToSelector:@selector(postDate)]){
         NSDate *postDate = [comment postDate];
-        NSDateFormatter *dateFormatter = [self dateFormatter];
-        NSString *dateString = [dateFormatter stringFromDate:postDate];
-        [self.dateLabel setText:dateString];
+        
+        if ([[EBConfig sharedConfig] dateFormatter] != nil) {
+            NSString *dateString = [[[EBConfig sharedConfig] dateFormatter] stringFromDate:postDate];
+            [self.dateLabel setText:dateString];
+        } else {
+            NSDateFormatter *dateFormatter = [self dateFormatter];
+            NSString *dateString = [dateFormatter stringFromDate:postDate];
+            [self.dateLabel setText:dateString];
+        }
+        
+        if ([[EBConfig sharedConfig] shouldUseRelativeTimeFormatting] == YES) {
+            [self.dateLabel setText:[postDate relativeDateString]];
+        }
     }
     
 }

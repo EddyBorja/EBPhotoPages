@@ -11,6 +11,7 @@
 
 
 #import "EBCaptionView.h"
+#import "EBConfig.h"
 #import <QuartzCore/QuartzCore.h>
 
 const NSInteger MaximumNumberOfCaptionLines = 1000000;
@@ -304,7 +305,13 @@ static NSString *FrameKeyPath = @"frame";
     [label setNumberOfLines:MaximumNumberOfCaptionLines];
     [label setBackgroundColor:[UIColor clearColor]];
     [label setTextColor:[UIColor whiteColor]];
-    [label setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15]];
+    
+    if ([[EBConfig sharedConfig] bodyFont] != nil) {
+        [label setFont:[[EBConfig sharedConfig] bodyFont]];
+    } else {
+        [label setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:15]];
+    }
+    
     [label setShadowColor:[UIColor colorWithWhite:0 alpha:0.5]];
     [label setShadowOffset:CGSizeMake(0, 1)];
     return label;
