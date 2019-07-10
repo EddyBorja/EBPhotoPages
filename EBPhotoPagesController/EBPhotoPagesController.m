@@ -461,8 +461,19 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)loadUpperToolbar
 {
     UIToolbar *toolbar = [self.photoPagesFactory  upperToolbarForPhotoPagesController:self];
+    
     [self.view addSubview:toolbar];
     [self setUpperToolbar:toolbar];
+    
+    if (@available(iOS 11, *)) {
+        toolbar.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addConstraints:@[
+                                    [NSLayoutConstraint constraintWithItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:toolbar attribute:NSLayoutAttributeLeft multiplier:1 constant:0],
+                                    [NSLayoutConstraint constraintWithItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeTop
+                                                                 relatedBy:NSLayoutRelationEqual toItem:toolbar attribute:NSLayoutAttributeTop multiplier:1 constant:0],
+                                    [NSLayoutConstraint constraintWithItem:self.view.safeAreaLayoutGuide attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:toolbar attribute:NSLayoutAttributeRight multiplier:1 constant:0]]];
+    }
+    
 }
 
 - (void)loadLowerToolbar
