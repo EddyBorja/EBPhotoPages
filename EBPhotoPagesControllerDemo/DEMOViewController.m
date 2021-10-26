@@ -353,6 +353,11 @@
                      }completion:nil];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -362,6 +367,7 @@
 - (IBAction)didSelectViewPhotos:(id)sender
 {    
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    photoPagesController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
