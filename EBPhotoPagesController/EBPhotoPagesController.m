@@ -502,14 +502,18 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     [self setIsStatusBarHidden: YES];
     [self setIsStatusBarAnimated: animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    [UIView animateWithDuration: 0.2 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self setIsStatusBarHidden: NO];
     [self setIsStatusBarAnimated: animated];
-    [self setNeedsStatusBarAppearanceUpdate];
+    [UIView animateWithDuration: 0.2 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 - (void)viewDidLayoutSubviews{
