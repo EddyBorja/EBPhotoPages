@@ -502,12 +502,14 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     [self setIsStatusBarHidden: YES];
     [self setIsStatusBarAnimated: animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self setIsStatusBarHidden: NO];
     [self setIsStatusBarAnimated: animated];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 #pragma mark - Rotation Handling
