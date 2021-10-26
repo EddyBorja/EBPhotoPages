@@ -513,9 +513,17 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return [self.currentState shouldAutorotatePhotoPagesController:self];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self.view setNeedsLayout];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+        [self.view setNeedsLayout];
+    }];
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - Notification and Key Value observing

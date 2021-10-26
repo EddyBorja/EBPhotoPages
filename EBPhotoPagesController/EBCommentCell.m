@@ -64,6 +64,7 @@
 
 - (void)prepareForReuse
 {
+    [super prepareForReuse];
     [self.authorNameButton setTitle:nil forState:UIControlStateNormal];
     [self.commentTextLabel setText:nil];
     [self.dateLabel setText:nil];

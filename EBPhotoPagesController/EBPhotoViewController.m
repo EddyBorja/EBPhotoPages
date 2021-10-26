@@ -344,21 +344,18 @@ static NSString *TagPopoversKeyPath = @"tagPopovers";
 
 #pragma mark - Rotation
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self.photoView setNeedsLayout];
-    [self.commentsView setNeedsLayout];
-}
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+        [self.photoView setNeedsLayout];
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+        [self.photoView setNeedsLayout];
+        [self.commentsView setNeedsLayout];
+    }];
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    [self.photoView setNeedsLayout];
-}
-
-
-- (BOOL)shouldAutomaticallyForwardRotationMethods
-{
-    return YES;
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 

@@ -639,17 +639,6 @@
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowMiscActionsForPhotoAtIndex:(NSInteger)index
 {
     return NO;
-    
-    if(!self.photos.count){
-        return NO;
-    }
-    
-    DEMOPhoto *photo = (DEMOPhoto *)self.photos[index];
-    if(photo.disabledMiscActions){
-        return NO;
-    } else {
-        return YES;
-    }
 }
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowDeleteForPhotoAtIndex:(NSInteger)index
