@@ -34,6 +34,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 @property (strong) NSDictionary *actionSheetTargetInfo; //info about the object the action sheet is currently handling
 @property (assign) BOOL originalStatusBarVisibility;
+@property (assign) BOOL isStatusBarHidden;
+@property (assign) BOOL isStatusBarAnimated;
 
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarButtonItem;
@@ -498,12 +500,14 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setStatusBarDisabled:YES withAnimation:animated];
+    [self setIsStatusBarHidden: YES];
+    [self setIsStatusBarAnimated: animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self setStatusBarDisabled:NO withAnimation:animated];
+    [self setIsStatusBarHidden: NO];
+    [self setIsStatusBarAnimated: animated];
 }
 
 #pragma mark - Rotation Handling
@@ -683,13 +687,14 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 #pragma mark - Setters
 
 
-- (void)setStatusBarDisabled:(BOOL)disabled withAnimation:(BOOL)animated
+-(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
-    UIStatusBarAnimation animation = animated ? UIStatusBarAnimationFade :
-    UIStatusBarAnimationNone;
-    BOOL statusBarHidden = disabled ? YES : self.originalStatusBarVisibility;
-    [[UIApplication sharedApplication] setStatusBarHidden:statusBarHidden
-                                            withAnimation:animation];
+    return self.isStatusBarAnimated ? UIStatusBarAnimationFade : UIStatusBarAnimationNone;
+}
+
+-(BOOL)prefersStatusBarHidden
+{
+    return self.isStatusBarHidden;
 }
 
 - (void)setCurrentState:(id<EBPhotoPagesStateDelegate>)nextState
