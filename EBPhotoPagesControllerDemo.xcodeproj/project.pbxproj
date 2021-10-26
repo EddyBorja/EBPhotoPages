@@ -216,6 +216,7 @@
 		8583A59918022FF400D694A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8583A5A11802322900D694A5 /* EBPhotoPagesNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBPhotoPagesNotifications.h; path = EBPhotoPagesController/EBPhotoPagesNotifications.h; sourceTree = "<group>"; };
 		A9B30C982728402C00BF1BC6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		A9B30CA1272840DF00BF1BC6 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +293,7 @@
 		8583A4FA18022CE600D694A5 = {
 			isa = PBXGroup;
 			children = (
+				A9B30CA1272840DF00BF1BC6 /* Package.swift */,
 				8583A56118022DA700D694A5 /* EBPhotoPagesController */,
 				8583A50C18022CE600D694A5 /* EBPhotoPagesControllerDemo */,
 				8583A52518022CE700D694A5 /* EBPhotoPagesControllerDemoTests */,
@@ -548,6 +550,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Eddy Borja";
 				TargetAttributes = {
+					8583A50218022CE600D694A5 = {
+						LastSwiftMigration = 1240;
+					};
 					8583A51D18022CE600D694A5 = {
 						TestTargetID = 8583A50218022CE600D694A5;
 					};
@@ -769,16 +774,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eddyborja.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -787,16 +796,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Prefix.pch";
 				INFOPLIST_FILE = "EBPhotoPagesControllerDemo/EBPhotoPagesControllerDemo-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EBPhotoPagesControllerDemo",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eddyborja.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
