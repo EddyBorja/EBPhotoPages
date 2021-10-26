@@ -519,17 +519,32 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     
-    if (@available(iOS 11, *)) {
-        CGFloat topInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
-        CGFloat bottomInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+        if (mainWindow.safeAreaInsets.top > 24.0) {
+            CGFloat topInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+            CGFloat bottomInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
 
-        CGRect upperFrame = self.upperToolbar.frame;
-        upperFrame.origin.y = topInset;
-        self.upperToolbar.frame = upperFrame;
- 
-        CGRect bottomFrame = self.lowerToolbar.frame;
-        bottomFrame.origin.y = self.view.frame.size.height - bottomInset - 44;
-        self.lowerToolbar.frame = bottomFrame;
+            CGRect upperFrame = self.upperToolbar.frame;
+            upperFrame.origin.y = topInset;
+            self.upperToolbar.frame = upperFrame;
+     
+            CGRect lowerToolbarFrame = self.lowerToolbar.frame;
+            lowerToolbarFrame.origin.y = self.view.frame.size.height - bottomInset - 44;
+            self.lowerToolbar.frame = lowerToolbarFrame;
+
+            CGRect lowerGradientFrame = self.lowerGradient.frame;
+            lowerGradientFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.lowerGradient.frame = lowerGradientFrame;
+
+            CGRect screenDimmerFrame = self.screenDimmer.frame;
+            screenDimmerFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.screenDimmer.frame = screenDimmerFrame;
+            
+            CGRect captionViewFrame = self.captionView.frame;
+            captionViewFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.captionView.frame = captionViewFrame;
+        }
     }
     
 }
