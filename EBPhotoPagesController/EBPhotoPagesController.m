@@ -512,6 +512,24 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    if (@available(iOS 11, *)) {
+        CGFloat topInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+        CGFloat bottomInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+
+        CGRect upperFrame = self.upperToolbar.frame;
+        upperFrame.origin.y = topInset;
+        self.upperToolbar.frame = upperFrame;
+ 
+        CGRect bottomFrame = self.lowerToolbar.frame;
+        bottomFrame.origin.y = self.view.frame.size.height - bottomInset - 44;
+        self.lowerToolbar.frame = bottomFrame;
+    }
+    
+}
+
 #pragma mark - Rotation Handling
 
 - (BOOL)shouldAutorotate
