@@ -133,6 +133,30 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return self;
 }
 
+#pragma mark - Utils method
+
+static inline uint32_t randomWithOptions(int lowerbound, int upperbound){
+    uint32_t randomValue = 0;
+    
+    int result = SecRandomCopyBytes(kSecRandomDefault, sizeof(int), (uint8_t*)&randomValue);
+    
+    if (result == errSecSuccess) {
+        return randomValue % upperbound + lowerbound;
+    }
+    
+    NSLog(@"Error while generating random number on randomWithOptions(%d, %d)", lowerbound, upperbound);
+    
+    return 0;
+}
+
+static inline uint32_t randomWithUpperBound(int upperbound){
+    return randomWithOptions(0, upperbound);
+}
+
+static inline uint32_t customRandom(){
+    return randomWithUpperBound(RAND_MAX);
+}
+
 #pragma mark - Initialization & Deallocation
 
 - (void)initialize
@@ -433,7 +457,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     [self setPhotoLoadingQueue:[NSOperationQueue new]];
     
-    NSString *queueName = [NSString stringWithFormat:@"Photo Loading Queue %i", arc4random()];
+    NSString *queueName = [NSString stringWithFormat:@"Photo Loading Queue %i", customRandom()];
     [self.photoLoadingQueue setName:queueName];
 }
 
