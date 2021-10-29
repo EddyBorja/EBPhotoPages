@@ -12,7 +12,7 @@ let package = Package(
     targets: [
         .target(
             name: "EBPhotoPagesController",
-            path: "EBPhotoPagesController"
+            path: "EBPhotoPagesController",
             publicHeadersPath: "./"
         )
     ]
