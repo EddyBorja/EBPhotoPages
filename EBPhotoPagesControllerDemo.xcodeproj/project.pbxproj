@@ -87,6 +87,29 @@
 		8583A59818022FE500D694A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59718022FE500D694A5 /* AVFoundation.framework */; };
 		8583A59A18022FF400D694A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59918022FF400D694A5 /* QuartzCore.framework */; };
 		A90880C9272AB00E0085B740 /* EBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A90880C8272AB00E0085B740 /* EBUtils.m */; };
+		A977150C272C367900FD4A65 /* EBPhotoPagesController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56D18022E1400D694A5 /* EBPhotoPagesController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977150D272C367900FD4A65 /* EBPhotoPagesDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56F18022E1400D694A5 /* EBPhotoPagesDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977150E272C367900FD4A65 /* EBPhotoPagesDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57018022E1400D694A5 /* EBPhotoPagesDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977150F272C367900FD4A65 /* EBPhotoPagesFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57118022E1400D694A5 /* EBPhotoPagesFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771510272C367900FD4A65 /* EBPhotoPagesOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57318022E1400D694A5 /* EBPhotoPagesOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771511272C367900FD4A65 /* EBPhotoToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57918022E1400D694A5 /* EBPhotoToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771512272C367900FD4A65 /* EBShadedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A58018022E1400D694A5 /* EBShadedView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771513272C367900FD4A65 /* EBPhotoPagesNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A5A11802322900D694A5 /* EBPhotoPagesNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771514272C367900FD4A65 /* EBPhotoPagesStateDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57718022E1400D694A5 /* EBPhotoPagesStateDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771515272C367900FD4A65 /* EBPhotoPagesState.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57518022E1400D694A5 /* EBPhotoPagesState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771516272C367900FD4A65 /* EBPhotoView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57B18022E1400D694A5 /* EBPhotoView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771517272C367900FD4A65 /* EBPhotoViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57D18022E1400D694A5 /* EBPhotoViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771518272C367900FD4A65 /* EBPhotoViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57F18022E1400D694A5 /* EBPhotoViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771519272C367900FD4A65 /* EBCaptionView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56318022E1400D694A5 /* EBCaptionView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151A272C367900FD4A65 /* EBPhotoTagProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57818022E1400D694A5 /* EBPhotoTagProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151B272C367900FD4A65 /* EBTagPopover.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A58218022E1400D694A5 /* EBTagPopover.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151C272C367900FD4A65 /* EBTagPopoverDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A58418022E1400D694A5 /* EBTagPopoverDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151D272C367900FD4A65 /* EBPhotoCommentProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56C18022E1400D694A5 /* EBPhotoCommentProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151E272C367900FD4A65 /* EBCommentCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56518022E1400D694A5 /* EBCommentCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A977151F272C367900FD4A65 /* EBCommentsTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56718022E1400D694A5 /* EBCommentsTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771520272C367900FD4A65 /* EBCommentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56918022E1400D694A5 /* EBCommentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771521272C367900FD4A65 /* EBCommentsViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56B18022E1400D694A5 /* EBCommentsViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771522272C367900FD4A65 /* EBUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A90880C7272AB00E0085B740 /* EBUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9B30C992728402C00BF1BC6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B30C982728402C00BF1BC6 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -517,11 +540,45 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		A977150B272C365100FD4A65 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A977150C272C367900FD4A65 /* EBPhotoPagesController.h in Headers */,
+				A977150D272C367900FD4A65 /* EBPhotoPagesDataSource.h in Headers */,
+				A977150E272C367900FD4A65 /* EBPhotoPagesDelegate.h in Headers */,
+				A977150F272C367900FD4A65 /* EBPhotoPagesFactory.h in Headers */,
+				A9771510272C367900FD4A65 /* EBPhotoPagesOperation.h in Headers */,
+				A9771511272C367900FD4A65 /* EBPhotoToolbar.h in Headers */,
+				A9771512272C367900FD4A65 /* EBShadedView.h in Headers */,
+				A9771513272C367900FD4A65 /* EBPhotoPagesNotifications.h in Headers */,
+				A9771514272C367900FD4A65 /* EBPhotoPagesStateDelegate.h in Headers */,
+				A9771515272C367900FD4A65 /* EBPhotoPagesState.h in Headers */,
+				A9771516272C367900FD4A65 /* EBPhotoView.h in Headers */,
+				A9771517272C367900FD4A65 /* EBPhotoViewController.h in Headers */,
+				A9771518272C367900FD4A65 /* EBPhotoViewControllerDelegate.h in Headers */,
+				A9771519272C367900FD4A65 /* EBCaptionView.h in Headers */,
+				A977151A272C367900FD4A65 /* EBPhotoTagProtocol.h in Headers */,
+				A977151B272C367900FD4A65 /* EBTagPopover.h in Headers */,
+				A977151C272C367900FD4A65 /* EBTagPopoverDelegate.h in Headers */,
+				A977151D272C367900FD4A65 /* EBPhotoCommentProtocol.h in Headers */,
+				A977151E272C367900FD4A65 /* EBCommentCell.h in Headers */,
+				A977151F272C367900FD4A65 /* EBCommentsTableView.h in Headers */,
+				A9771520272C367900FD4A65 /* EBCommentsView.h in Headers */,
+				A9771521272C367900FD4A65 /* EBCommentsViewDelegate.h in Headers */,
+				A9771522272C367900FD4A65 /* EBUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		8583A50218022CE600D694A5 /* EBPhotoPagesControllerDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8583A52F18022CE700D694A5 /* Build configuration list for PBXNativeTarget "EBPhotoPagesControllerDemo" */;
 			buildPhases = (
+				A977150B272C365100FD4A65 /* Headers */,
 				8583A4FF18022CE600D694A5 /* Sources */,
 				8583A50018022CE600D694A5 /* Frameworks */,
 				8583A50118022CE600D694A5 /* Resources */,

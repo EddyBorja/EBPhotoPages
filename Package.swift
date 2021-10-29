@@ -13,6 +13,7 @@ let package = Package(
         .target(
             name: "EBPhotoPagesController",
             path: "EBPhotoPagesController"
+            publicHeadersPath: "./"
         )
     ]
 )
