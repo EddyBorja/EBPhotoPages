@@ -6,6 +6,7 @@
 //  Copyright © 2021 Eddy Borja. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "EBUtils.h"
 
 @implementation EBUtils
