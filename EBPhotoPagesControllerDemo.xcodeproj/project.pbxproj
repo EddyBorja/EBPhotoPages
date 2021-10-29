@@ -545,6 +545,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9771522272C367900FD4A65 /* EBUtils.h in Headers */,
 				A977150C272C367900FD4A65 /* EBPhotoPagesController.h in Headers */,
 				A977150D272C367900FD4A65 /* EBPhotoPagesDataSource.h in Headers */,
 				A977150E272C367900FD4A65 /* EBPhotoPagesDelegate.h in Headers */,
@@ -567,7 +568,6 @@
 				A977151F272C367900FD4A65 /* EBCommentsTableView.h in Headers */,
 				A9771520272C367900FD4A65 /* EBCommentsView.h in Headers */,
 				A9771521272C367900FD4A65 /* EBCommentsViewDelegate.h in Headers */,
-				A9771522272C367900FD4A65 /* EBUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
