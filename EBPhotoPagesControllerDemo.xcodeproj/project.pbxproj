@@ -86,7 +86,6 @@
 		8583A59118022E1400D694A5 /* EBTagPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 8583A58318022E1400D694A5 /* EBTagPopover.m */; };
 		8583A59818022FE500D694A5 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59718022FE500D694A5 /* AVFoundation.framework */; };
 		8583A59A18022FF400D694A5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8583A59918022FF400D694A5 /* QuartzCore.framework */; };
-		A90880C9272AB00E0085B740 /* EBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A90880C8272AB00E0085B740 /* EBUtils.m */; };
 		A977150C272C367900FD4A65 /* EBPhotoPagesController.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56D18022E1400D694A5 /* EBPhotoPagesController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A977150D272C367900FD4A65 /* EBPhotoPagesDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56F18022E1400D694A5 /* EBPhotoPagesDataSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A977150E272C367900FD4A65 /* EBPhotoPagesDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A57018022E1400D694A5 /* EBPhotoPagesDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -109,7 +108,8 @@
 		A977151F272C367900FD4A65 /* EBCommentsTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56718022E1400D694A5 /* EBCommentsTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9771520272C367900FD4A65 /* EBCommentsView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56918022E1400D694A5 /* EBCommentsView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A9771521272C367900FD4A65 /* EBCommentsViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8583A56B18022E1400D694A5 /* EBCommentsViewDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A9771522272C367900FD4A65 /* EBUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A90880C7272AB00E0085B740 /* EBUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A9771530272C3AED00FD4A65 /* EBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A977152E272C3AED00FD4A65 /* EBUtils.m */; };
+		A9771531272C3AED00FD4A65 /* EBUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = A977152F272C3AED00FD4A65 /* EBUtils.h */; };
 		A9B30C992728402C00BF1BC6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A9B30C982728402C00BF1BC6 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -239,8 +239,8 @@
 		8583A59718022FE500D694A5 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8583A59918022FF400D694A5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8583A5A11802322900D694A5 /* EBPhotoPagesNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBPhotoPagesNotifications.h; path = EBPhotoPagesController/EBPhotoPagesNotifications.h; sourceTree = "<group>"; };
-		A90880C7272AB00E0085B740 /* EBUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EBUtils.h; sourceTree = "<group>"; };
-		A90880C8272AB00E0085B740 /* EBUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EBUtils.m; sourceTree = "<group>"; };
+		A977152E272C3AED00FD4A65 /* EBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EBUtils.m; path = EBPhotoPagesController/EBUtils.m; sourceTree = "<group>"; };
+		A977152F272C3AED00FD4A65 /* EBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EBUtils.h; path = EBPhotoPagesController/EBUtils.h; sourceTree = "<group>"; };
 		A9B30C982728402C00BF1BC6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A9B30CA1272840DF00BF1BC6 /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -532,8 +532,8 @@
 		A90880C6272AAFDE0085B740 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A90880C7272AB00E0085B740 /* EBUtils.h */,
-				A90880C8272AB00E0085B740 /* EBUtils.m */,
+				A977152F272C3AED00FD4A65 /* EBUtils.h */,
+				A977152E272C3AED00FD4A65 /* EBUtils.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -545,8 +545,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A9771522272C367900FD4A65 /* EBUtils.h in Headers */,
 				A977150C272C367900FD4A65 /* EBPhotoPagesController.h in Headers */,
+				A9771531272C3AED00FD4A65 /* EBUtils.h in Headers */,
 				A977150D272C367900FD4A65 /* EBPhotoPagesDataSource.h in Headers */,
 				A977150E272C367900FD4A65 /* EBPhotoPagesDelegate.h in Headers */,
 				A977150F272C367900FD4A65 /* EBPhotoPagesFactory.h in Headers */,
@@ -715,6 +715,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9771530272C3AED00FD4A65 /* EBUtils.m in Sources */,
 				8583A51318022CE600D694A5 /* main.m in Sources */,
 				8583A59118022E1400D694A5 /* EBTagPopover.m in Sources */,
 				8583A58F18022E1400D694A5 /* EBPhotoViewController.m in Sources */,
@@ -731,7 +732,6 @@
 				8583A54418022D3800D694A5 /* DEMOTag.m in Sources */,
 				8583A58918022E1400D694A5 /* EBPhotoPagesController.m in Sources */,
 				8583A54218022D3800D694A5 /* DEMOViewController.m in Sources */,
-				A90880C9272AB00E0085B740 /* EBUtils.m in Sources */,
 				8583A58A18022E1400D694A5 /* EBPhotoPagesFactory.m in Sources */,
 				8583A54118022D3800D694A5 /* DEMOAppDelegate.m in Sources */,
 				8583A58818022E1400D694A5 /* EBCommentsView.m in Sources */,
