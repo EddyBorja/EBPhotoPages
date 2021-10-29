@@ -671,10 +671,16 @@ static inline uint32_t customRandom(){
 - (void)stopObservations
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.captionView removeObserver:self forKeyPath:ContentOffsetKeyPath];
-    [self removeObserver:self forKeyPath:CurrentPhotoIndexKeyPath];
-    [self removeObserver:self forKeyPath:TagsHiddenKeyPath];
-    [self removeObserver:self forKeyPath:CommentsHiddenKeyPath];
+
+    @try {
+        [self.captionView removeObserver:self forKeyPath:ContentOffsetKeyPath];
+        [self removeObserver:self forKeyPath:CurrentPhotoIndexKeyPath];
+        [self removeObserver:self forKeyPath:TagsHiddenKeyPath];
+        [self removeObserver:self forKeyPath:CommentsHiddenKeyPath];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
