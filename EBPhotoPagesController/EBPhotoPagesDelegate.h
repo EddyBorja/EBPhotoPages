@@ -11,6 +11,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EBPhotoPagesStateDelegate.h"
+#import "EBPhotoCommentProtocol.h"
 
 @class EBCommentCell;
 @class EBPhotoComment;

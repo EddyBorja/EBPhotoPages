@@ -22,6 +22,7 @@
 #import "EBPhotoCommentProtocol.h"
 #import "EBCommentCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "EBUtils.h"
 
 static NSString *ContentOffsetKeyPath = @"contentOffset";
 static NSString *CurrentPhotoIndexKeyPath = @"currentPhotoIndex";
@@ -34,6 +35,8 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 @property (strong) NSDictionary *actionSheetTargetInfo; //info about the object the action sheet is currently handling
 @property (assign) BOOL originalStatusBarVisibility;
+@property (assign) BOOL isStatusBarHidden;
+@property (assign) BOOL isStatusBarAnimated;
 
 @property (nonatomic, strong) UIBarButtonItem *doneBarButtonItem;
 @property (nonatomic, strong) UIBarButtonItem *cancelBarButtonItem;
@@ -129,6 +132,30 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
         [self setOriginalStatusBarVisibility:[[UIApplication sharedApplication] isStatusBarHidden]];
     }
     return self;
+}
+
+#pragma mark - Utils method
+
+static inline uint32_t randomWithOptions(int lowerbound, int upperbound){
+    uint32_t randomValue = 0;
+    
+    int result = SecRandomCopyBytes(kSecRandomDefault, sizeof(int), (uint8_t*)&randomValue);
+    
+    if (result == errSecSuccess) {
+        return randomValue % upperbound + lowerbound;
+    }
+    
+    NSLog(@"Error while generating random number on randomWithOptions(%d, %d)", lowerbound, upperbound);
+    
+    return 0;
+}
+
+static inline uint32_t randomWithUpperBound(int upperbound){
+    return randomWithOptions(0, upperbound);
+}
+
+static inline uint32_t customRandom(){
+    return randomWithUpperBound(RAND_MAX);
 }
 
 #pragma mark - Initialization & Deallocation
@@ -431,7 +458,7 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 {
     [self setPhotoLoadingQueue:[NSOperationQueue new]];
     
-    NSString *queueName = [NSString stringWithFormat:@"Photo Loading Queue %i", arc4random()];
+    NSString *queueName = [NSString stringWithFormat:@"Photo Loading Queue %i", customRandom()];
     [self.photoLoadingQueue setName:queueName];
 }
 
@@ -498,12 +525,50 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self setStatusBarDisabled:YES withAnimation:animated];
+    [self setIsStatusBarHidden: YES];
+    [self setIsStatusBarAnimated: animated];
+    [UIView animateWithDuration: 0.2 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self setStatusBarDisabled:NO withAnimation:animated];
+    [self setIsStatusBarHidden: NO];
+    [self setIsStatusBarAnimated: animated];
+    [UIView animateWithDuration: 0.2 animations:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
+}
+
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    if (@available(iOS 11.0, *)) {
+        if ([EBUtils hasNotch]) {
+            CGFloat topInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.top;
+            CGFloat bottomInset = [UIApplication sharedApplication].keyWindow.safeAreaInsets.bottom;
+            
+            CGRect upperFrame = self.upperToolbar.frame;
+            upperFrame.origin.y = topInset;
+            self.upperToolbar.frame = upperFrame;
+            
+            CGRect lowerToolbarFrame = self.lowerToolbar.frame;
+            lowerToolbarFrame.origin.y = self.view.frame.size.height - bottomInset - 44;
+            self.lowerToolbar.frame = lowerToolbarFrame;
+            
+            CGRect lowerGradientFrame = self.lowerGradient.frame;
+            lowerGradientFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.lowerGradient.frame = lowerGradientFrame;
+            
+            CGRect screenDimmerFrame = self.screenDimmer.frame;
+            screenDimmerFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.screenDimmer.frame = screenDimmerFrame;
+            
+            CGRect captionViewFrame = self.captionView.frame;
+            captionViewFrame.size.height = self.view.frame.size.height - bottomInset - 44;
+            self.captionView.frame = captionViewFrame;
+        }
+    }
 }
 
 #pragma mark - Rotation Handling
@@ -513,9 +578,17 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
     return [self.currentState shouldAutorotatePhotoPagesController:self];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [self.view setNeedsLayout];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+
+    } completion:^(id<UIViewControllerTransitionCoordinatorContext> context)
+    {
+        [self.view setNeedsLayout];
+    }];
+
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 #pragma mark - Notification and Key Value observing
@@ -598,10 +671,16 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 - (void)stopObservations
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [self.captionView removeObserver:self forKeyPath:ContentOffsetKeyPath];
-    [self removeObserver:self forKeyPath:CurrentPhotoIndexKeyPath];
-    [self removeObserver:self forKeyPath:TagsHiddenKeyPath];
-    [self removeObserver:self forKeyPath:CommentsHiddenKeyPath];
+
+    @try {
+        [self.captionView removeObserver:self forKeyPath:ContentOffsetKeyPath];
+        [self removeObserver:self forKeyPath:CurrentPhotoIndexKeyPath];
+        [self removeObserver:self forKeyPath:TagsHiddenKeyPath];
+        [self removeObserver:self forKeyPath:CommentsHiddenKeyPath];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -675,13 +754,14 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
 #pragma mark - Setters
 
 
-- (void)setStatusBarDisabled:(BOOL)disabled withAnimation:(BOOL)animated
+-(UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
-    UIStatusBarAnimation animation = animated ? UIStatusBarAnimationFade :
-    UIStatusBarAnimationNone;
-    BOOL statusBarHidden = disabled ? YES : self.originalStatusBarVisibility;
-    [[UIApplication sharedApplication] setStatusBarHidden:statusBarHidden
-                                            withAnimation:animation];
+    return self.isStatusBarAnimated ? UIStatusBarAnimationFade : UIStatusBarAnimationNone;
+}
+
+-(BOOL)prefersStatusBarHidden
+{
+    return self.isStatusBarHidden;
 }
 
 - (void)setCurrentState:(id<EBPhotoPagesStateDelegate>)nextState
@@ -1283,19 +1363,11 @@ static NSString *kActionSheetIndexKey= @"actionSheetTargetIndex";
                                                                     caption:caption];
     }
     
-#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_8_0
-    [activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed){
-        [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
-        [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
-    }];
-    
-#else
     [activityViewController setCompletionWithItemsHandler:
          ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError){
              [self setUpperBarAlpha:[self.photoPagesFactory upperToolbarAlphaForPhotoPagesController:self]];
              [self setLowerBarAlpha:[self.photoPagesFactory lowerToolbarAlphaForPhotoPagesController:self]];
     }];
-#endif
     
     if ([activityViewController respondsToSelector:@selector(popoverPresentationController)]) {
         activityViewController.popoverPresentationController.barButtonItem = barButtonItem;

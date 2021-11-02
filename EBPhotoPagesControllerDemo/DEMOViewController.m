@@ -353,6 +353,11 @@
                      }completion:nil];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -362,6 +367,7 @@
 - (IBAction)didSelectViewPhotos:(id)sender
 {    
     EBPhotoPagesController *photoPagesController = [[EBPhotoPagesController alloc] initWithDataSource:self delegate:self];
+    photoPagesController.modalPresentationStyle = UIModalPresentationFullScreen;
     [self presentViewController:photoPagesController animated:YES completion:nil];
 }
 
@@ -639,17 +645,6 @@
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowMiscActionsForPhotoAtIndex:(NSInteger)index
 {
     return NO;
-    
-    if(!self.photos.count){
-        return NO;
-    }
-    
-    DEMOPhoto *photo = (DEMOPhoto *)self.photos[index];
-    if(photo.disabledMiscActions){
-        return NO;
-    } else {
-        return YES;
-    }
 }
 
 - (BOOL)photoPagesController:(EBPhotoPagesController *)photoPagesController shouldAllowDeleteForPhotoAtIndex:(NSInteger)index
